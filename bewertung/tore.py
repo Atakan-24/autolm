@@ -194,6 +194,7 @@ def pruefe_alle_tore(text: str) -> dict:
     ergebnis["tor1_json"] = ok1
     if not ok1:
         ergebnis["probleme"].append(f"Tor 1: {fehler1}")
+        ergebnis["alle_bestanden_ohne_import"] = False
         return ergebnis  # ohne gueltiges JSON koennen die anderen Tore nicht pruefen
 
     ok2, probleme2 = tor2_struktur(obj)
