@@ -6,7 +6,7 @@ deployten Modell, das Automations-Workflows schreibt.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut.
 
-> Status: **Schritt 2 von 6** — in Arbeit, öffentlich ab Schritt 3.
+> Status: **Schritt 3 von 7** — in Arbeit, öffentlich ab Schritt 3.
 
 ---
 
@@ -44,12 +44,13 @@ eigener Aufgabe** — gemessen mit demselben Validator, gegen GPT-4 und Claude.
 |---|---|---|
 | 1 | Backpropagation von Hand | ✅ `schritte/01_wie_lernt_ein_computer.py` |
 | 2 | Eigener Tokenizer (BPE) | ✅ `schritte/02_tokenizer.py` |
-| 3 | Decoder-only Transformer | offen |
-| 4 | Pretraining — **Funktionstest** auf öffentlichem Korpus | offen |
-| 5 | Training auf Workflow-Daten + Instruction-Tuning | offen |
-| 6 | Evaluation, Quantisierung, Web-Demo | offen |
+| 3 | Attention von Hand | ✅ `schritte/03_attention.py` |
+| 4 | Decoder-only Transformer (PyTorch) | offen |
+| 5 | Pretraining — **Funktionstest** auf öffentlichem Korpus | offen |
+| 6 | Training auf Workflow-Daten + Instruction-Tuning | offen |
+| 7 | Evaluation, Quantisierung, Web-Demo | offen |
 
-**Schritt 4 ist bewusst ein Funktionstest, kein Selbstzweck.** Ein
+**Schritt 5 ist bewusst ein Funktionstest, kein Selbstzweck.** Ein
 selbstgebauter Transformer muss erst auf einem Datensatz laufen, bei dem
 bewiesen ist, dass es klappt — sonst ist bei einem Fehlschlag nie
 unterscheidbar, ob der Code falsch ist oder die Daten zu schwer sind.
@@ -85,5 +86,5 @@ python schritte/01_wie_lernt_ein_computer.py
 
 ## Kosten
 
-0 € bis Schritt 6. Training auf Google Colab (kostenlose GPU-Kontingente,
+0 € bis Schritt 7. Training auf Google Colab (kostenlose GPU-Kontingente,
 Verfügbarkeit nicht garantiert).
