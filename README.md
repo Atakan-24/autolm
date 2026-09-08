@@ -7,9 +7,10 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen** — 288,5 Mio. echte Trainings-Token
-> vorbereitet, Eval-Harness gegen echtes n8n läuft. Fehlt: der eigentliche
-> GPU-Trainingslauf (Google Colab) und das Workflow-Modell (Stufe 4).
+> Status: **Stufe 0–3 abgeschlossen** — 384,8 Mio. echte Trainings-Token
+> vorbereitet (über dem Chinchilla-optimalen Ziel), Eval-Harness gegen
+> echtes n8n läuft. Fehlt: der eigentliche GPU-Trainingslauf (Google Colab)
+> und das Workflow-Modell (Stufe 4).
 
 ---
 
@@ -53,7 +54,7 @@ nicht behauptet, sobald der Eval-Harness steht (Stufe 3 unten).
 |---|---|---|
 | 1–4 | Backprop · Tokenizer · Attention · Transformer, alles von Hand | ✅ `schritte/01`–`04` |
 | **0** | Modell aus 04 herausgelöst, schneller Attention-Pfad, gegen Lehrpfad bewiesen gleich | ✅ `kern/` |
-| **1** | Datenpipeline: BPE-Encoder + -Trainer 39× beschleunigt, **288.504.524 echte TinyStories-Token** vortokenisiert (85 % vom 340M-Chinchilla-Ziel) | ✅ `kern/bpe_*`, `daten/vortokenisiere.py` |
+| **1** | Datenpipeline: BPE-Encoder + -Trainer 39× beschleunigt, **384.762.231 echte TinyStories-Token** vortokenisiert (über dem 340M-Chinchilla-Ziel) | ✅ `kern/bpe_*`, `daten/vortokenisiere.py` |
 | **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — Colab-Notebook liegt bereit | 🔶 Infrastruktur fertig, Training offen |
 | **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator. Vergleich gegen GPT-4/Claude noch nicht gefahren (kostet ~5 €) | ✅ `bewertung/` |
 | 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | offen — Community-Node-Scope noch zu klären |
@@ -127,9 +128,10 @@ Encoder:  13,3× (Heap) × 2,97× (4 Prozesse parallel) ≈ 39× gesamt
 Trainer:  711.000 Zeichen bei Vokabular 4096 — 28,5 s statt >5 Minuten
 ```
 
-**Ergebnis: 288.504.524 echte Token** aus 1.589.790 TinyStories-Geschichten,
-über zwei Server verteilt geladen (dieser Server + ein zweiter mit mehr
-freier Platte), 85 % des für ein 17M-Modell Chinchilla-optimalen Ziels.
+**Ergebnis: 384.762.231 echte Token** aus 2.119.719 TinyStories-Geschichten
+(alle 4 Shards), über zwei Server verteilt geladen (dieser Server + ein
+zweiter mit mehr freier Platte) — über dem für ein 17M-Modell
+Chinchilla-optimalen Ziel von 340 Mio. Token.
 
 ```bash
 python daten/vortokenisiere.py --hoechstens-token 340000000
