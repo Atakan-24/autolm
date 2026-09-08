@@ -144,6 +144,13 @@ def main():
     print(f"Tokenizer: {len(tok.vokabular)} Token, EOS-Marke = {eos_id}")
 
     meta = lade_meta()
+    # Wird von kern/trainiere.py gebraucht, um die Embedding-Tabelle des
+    # Modells richtig zu dimensionieren -- ohne diesen Wert muesste
+    # trainiere.py den Tokenizer selbst laden, nur um seine Groesse zu
+    # erfahren.
+    meta["vokabular_groesse"] = len(tok.vokabular)
+    meta["eos_id"] = eos_id
+    speichere_meta(meta)
     print(f"Bisheriger Stand: {meta['gesamt_token']:,} Token aus "
           f"{len(meta['verarbeitete_shards'])} Shard(s)\n")
 
