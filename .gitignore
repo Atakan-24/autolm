@@ -1,7 +1,23 @@
 __pycache__/
 *.pyc
 .venv/
-daten/
+
+# Datensaetze, Modelle, Checkpoints, Zwischendateien -- gross und/oder
+# in Sekunden aus Skripten neu erzeugbar, gehoeren nicht ins Repo.
+# Python-CODE unter daten/ (z.B. vortokenisiere.py) ist davon ausdruecklich
+# AUSGENOMMEN -- die Endungs-Ausnahme unten holt ihn zurueck.
+daten/*
+!daten/*.py
+daten/roh/
 modelle/
 *.pt
 *.ckpt
+*.bin
+*.parquet
+
+# Testartefakte, die Skripte selbst anlegen und wieder loeschen sollten,
+# aber zur Sicherheit auch hier ausgeschlossen
+_evaltest/
+bewertung/_wegwerf_n8n_db/
+kern/_test_checkpoint_lauf/
+kern/_trainingslauf_fuer_test.py
