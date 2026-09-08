@@ -1,0 +1,151 @@
+{
+  "zeit": "2026-09-08 22:24:48",
+  "anzahl_kandidaten": 15,
+  "je_modell": {
+    "nemotron-3-ultra-550b (gratis)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 1.0,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 1.0,
+      "gueltigkeitsquote_alle_vier": 1.0
+    }
+  },
+  "einzelergebnisse": {
+    "i01": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i02": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i03": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i04": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i05": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i06": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i07": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i08": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i09": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i10": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i11": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i12": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i13": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i14": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "i15": {
+      "modell": "nemotron-3-ultra-550b (gratis)",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    }
+  }
+}

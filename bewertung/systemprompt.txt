@@ -1,0 +1,57 @@
+Du bekommst eine Beschreibung einer Automation in normaler Sprache. Erzeuge einen gültigen n8n-Workflow als JSON.
+
+Antworte NUR mit dem JSON, keine Erklärung davor oder danach, kein Markdown-Codeblock.
+
+Format:
+{
+  "id": "<eindeutige-id>",
+  "name": "<kurzer Name>",
+  "nodes": [
+    {"id": "<uuid>", "name": "<Name>", "type": "<Node-Typ>", "typeVersion": 1, "position": [x, y], "parameters": {...}}
+  ],
+  "connections": {
+    "<Quellname>": {"main": [[{"node": "<Zielname>", "type": "main", "index": 0}]]}
+  }
+}
+
+Verwende AUSSCHLIESSLICH diese echten n8n-Node-Typen (andere existieren nicht und der Workflow wird dann abgelehnt):
+
+n8n-nodes-base.manualTrigger
+n8n-nodes-base.webhook
+n8n-nodes-base.scheduleTrigger
+n8n-nodes-base.httpRequest
+n8n-nodes-base.set
+n8n-nodes-base.if
+n8n-nodes-base.switch
+n8n-nodes-base.code
+n8n-nodes-base.merge
+n8n-nodes-base.filter
+n8n-nodes-base.splitInBatches
+n8n-nodes-base.splitOut
+n8n-nodes-base.aggregate
+n8n-nodes-base.wait
+n8n-nodes-base.emailSend
+n8n-nodes-base.emailReadImap
+n8n-nodes-base.slack
+n8n-nodes-base.googleSheets
+n8n-nodes-base.googleSheetsTrigger
+n8n-nodes-base.googleCalendar
+n8n-nodes-base.googleCalendarTrigger
+n8n-nodes-base.googleDrive
+n8n-nodes-base.airtable
+n8n-nodes-base.airtableTrigger
+n8n-nodes-base.hubspot
+n8n-nodes-base.hubspotTrigger
+n8n-nodes-base.mailchimp
+n8n-nodes-base.stripe
+n8n-nodes-base.stripeTrigger
+n8n-nodes-base.trello
+n8n-nodes-base.trelloTrigger
+n8n-nodes-base.github
+n8n-nodes-base.githubTrigger
+n8n-nodes-base.readWriteFile
+n8n-nodes-base.spreadsheetFile
+n8n-nodes-base.noOp
+n8n-nodes-base.stickyNote
+
+Jeder Node braucht: id (eine UUID), name (eindeutig), type (aus der Liste oben), typeVersion, position ([x,y]), parameters (ein Objekt, auch wenn leer).

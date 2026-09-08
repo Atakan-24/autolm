@@ -159,6 +159,30 @@ Tore sind nötig, keines ist redundant.
 python bewertung/vergleich.py --kandidaten <antworten.jsonl> --out <ergebnis.json>
 ```
 
+### Erster echter Lauf: Nemotron-3-Ultra (550B, kostenlos)
+
+15 handgeschriebene Test-Instruktionen (`bewertung/instruktionen.jsonl`),
+gegen `nvidia/nemotron-3-ultra-550b-a55b:free` über OpenRouter, alle vier
+Tore inklusive echtem n8n-Import:
+
+| Modell | n | Tor 1 | Tor 2 | Tor 3 | Tor 4 | Gültig | 95-%-KI |
+|---|---|---|---|---|---|---|---|
+| Nemotron-3-Ultra (gratis) | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+
+Rohdaten und Ergebnis liegen versioniert: `bewertung/nemotron_antworten.jsonl`,
+`bewertung/ergebnisse/nemotron-2026-09-08.json` — jede Zahl zeigt auf einen
+nachvollziehbaren Lauf.
+
+**Ehrliche Einordnung, nicht verschwiegen:** Der Systemprompt
+(`bewertung/systemprompt.txt`) gibt dem Modell bewusst eine **enge Auswahl
+von 36 gängigen Node-Typen** vor, nicht die vollen 439. Das erleichtert die
+Aufgabe spürbar — bei freier Wahl aus allen 439 Typen (oder gar keiner
+Vorgabe) wäre eine niedrigere Quote plausibler. Der GPT-4/Claude-Vergleich
+mit identischem Prompt steht noch aus (Stufe 3, ~5 € API-Kosten) — erst
+dann ist ein fairer Modellvergleich möglich. Dieser erste Lauf zeigt vor
+allem: **der Harness selbst funktioniert end-to-end**, inklusive echtem
+n8n-Import.
+
 ## Schritt 1 — was drinsteht
 
 `schritte/01_wie_lernt_ein_computer.py` — **keine Bibliothek, nur Python.**

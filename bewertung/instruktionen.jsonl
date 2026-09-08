@@ -1,0 +1,15 @@
+{"id": "i01", "text": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail."}
+{"id": "i02", "text": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal."}
+{"id": "i03", "text": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable."}
+{"id": "i04", "text": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail."}
+{"id": "i05", "text": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu."}
+{"id": "i06", "text": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle."}
+{"id": "i07", "text": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail."}
+{"id": "i08", "text": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um."}
+{"id": "i09", "text": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal."}
+{"id": "i10", "text": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang."}
+{"id": "i11", "text": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung."}
+{"id": "i12", "text": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an."}
+{"id": "i13", "text": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher."}
+{"id": "i14", "text": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht."}
+{"id": "i15", "text": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System."}
