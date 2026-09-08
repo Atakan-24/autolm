@@ -7,7 +7,9 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0 abgeschlossen** — Fundament fertig, Pretraining folgt.
+> Status: **Stufe 0–3 abgeschlossen** — 288,5 Mio. echte Trainings-Token
+> vorbereitet, Eval-Harness gegen echtes n8n läuft. Fehlt: der eigentliche
+> GPU-Trainingslauf (Google Colab) und das Workflow-Modell (Stufe 4).
 
 ---
 
@@ -50,11 +52,11 @@ nicht behauptet, sobald der Eval-Harness steht (Stufe 3 unten).
 | | Stufe | Ergebnis |
 |---|---|---|
 | 1–4 | Backprop · Tokenizer · Attention · Transformer, alles von Hand | ✅ `schritte/01`–`04` |
-| **0** | **Modell aus 04 herausgelöst, schneller Attention-Pfad, gegen Lehrpfad bewiesen gleich** | ✅ `kern/` |
-| 1 | Datenpipeline: Tokenizer-Durchsatz messen, TinyStories vortokenisieren | offen |
-| 2 | Pretraining, 17M Parameter, absturzsicheres Checkpointing | offen |
-| 3 | **Eval-Harness — vor dem eigenen Modell.** GPT-4/Claude/Groq gegen die vier Tore | offen |
-| 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | offen |
+| **0** | Modell aus 04 herausgelöst, schneller Attention-Pfad, gegen Lehrpfad bewiesen gleich | ✅ `kern/` |
+| **1** | Datenpipeline: BPE-Encoder + -Trainer 39× beschleunigt, **288.504.524 echte TinyStories-Token** vortokenisiert (85 % vom 340M-Chinchilla-Ziel) | ✅ `kern/bpe_*`, `daten/vortokenisiere.py` |
+| **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — Colab-Notebook liegt bereit | 🔶 Infrastruktur fertig, Training offen |
+| **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator. Vergleich gegen GPT-4/Claude noch nicht gefahren (kostet ~5 €) | ✅ `bewertung/` |
+| 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | offen — Community-Node-Scope noch zu klären |
 | 5 | Eingeschränkte Dekodierung (falls nötig) | offen |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
 | 7 | Quantisierung, Hugging-Face-Demo | offen |
@@ -106,6 +108,54 @@ Faktor: 1.84x
 Auf CPU ist der Gewinn moderat, weil dort ohnehin ein Kern nach dem
 anderen rechnet. Auf GPU ist der Aufruf-Overhead selbst der Engpass — die
 GPU-Zahl steht nach dem ersten Colab-Lauf hier.
+
+## Stufe 1 — die Datenpipeline, und warum sie zweimal gebaut wurde
+
+Der naive BPE-Encoder/-Trainer aus Schritt 2 schafft 0,018 MB/s — auf den
+2-GB-TinyStories-Korpus hochgerechnet wären das **31 Stunden**. Gemessen,
+nicht geraten, bevor irgendetwas anderes gebaut wurde.
+
+Der Fix ändert den Algorithmus nicht (Byte Pair Encoding bleibt exakt
+dasselbe Verfahren), nur die Datenstruktur: eine verkettete Liste + ein
+Min-Heap statt „nach jedem Merge die ganze Folge neu durchsuchen".
+`kern/bpe_schnell.py` (Encoder) und `kern/bpe_training_schnell.py`
+(Trainer) — beide mit eigenen Gleichheitstests gegen den langsamen
+Referenz-Encoder bewiesen, nicht nur behauptet schneller.
+
+```
+Encoder:  13,3× (Heap) × 2,97× (4 Prozesse parallel) ≈ 39× gesamt
+Trainer:  711.000 Zeichen bei Vokabular 4096 — 28,5 s statt >5 Minuten
+```
+
+**Ergebnis: 288.504.524 echte Token** aus 1.589.790 TinyStories-Geschichten,
+über zwei Server verteilt geladen (dieser Server + ein zweiter mit mehr
+freier Platte), 85 % des für ein 17M-Modell Chinchilla-optimalen Ziels.
+
+```bash
+python daten/vortokenisiere.py --hoechstens-token 340000000
+```
+
+## Stufe 3 — der Eval-Harness, und ein Fund dabei
+
+Vier Tore, `bewertung/tore.py` + `bewertung/importtest.py`:
+
+| Tor | Prüfung |
+|---|---|
+| 1 | Gültiges JSON? |
+| 2 | Struktur korrekt + **echte** Node-Typen (gegen 439 aus der lokalen n8n-Installation extrahierte Typen) |
+| 3 | Verbindungen konsistent? |
+| 4 | Importiert das echte, installierte n8n (2.25.6) den Workflow wirklich? |
+
+**Fund beim Bauen:** `n8n import:workflow` prüft nicht, ob die verwendeten
+Node-Typen überhaupt existieren — ein Workflow mit einem erfundenen Typ
+wurde anstandslos importiert. Tor 4 allein hätte also genau die Fälle
+übersehen, in denen ein großes Modell am ehesten halluziniert. Bewiesen mit
+einem Testfall: Tor 4 lässt ihn durch, Tor 2 verwirft ihn korrekt. Beide
+Tore sind nötig, keines ist redundant.
+
+```bash
+python bewertung/vergleich.py --kandidaten <antworten.jsonl> --out <ergebnis.json>
+```
 
 ## Schritt 1 — was drinsteht
 
