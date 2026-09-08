@@ -6,7 +6,7 @@ deployten Modell, das Automations-Workflows schreibt.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut.
 
-> Status: **Schritt 1 von 6** — in Arbeit, öffentlich ab Schritt 3.
+> Status: **Schritt 2 von 6** — in Arbeit, öffentlich ab Schritt 3.
 
 ---
 
@@ -43,7 +43,7 @@ eigener Aufgabe** — gemessen mit demselben Validator, gegen GPT-4 und Claude.
 | | Schritt | Ergebnis |
 |---|---|---|
 | 1 | Backpropagation von Hand | ✅ `schritte/01_wie_lernt_ein_computer.py` |
-| 2 | Eigener Tokenizer (BPE) | offen |
+| 2 | Eigener Tokenizer (BPE) | ✅ `schritte/02_tokenizer.py` |
 | 3 | Decoder-only Transformer | offen |
 | 4 | Pretraining — **Funktionstest** auf öffentlichem Korpus | offen |
 | 5 | Training auf Workflow-Daten + Instruction-Tuning | offen |
