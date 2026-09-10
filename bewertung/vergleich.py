@@ -70,6 +70,14 @@ def _extrahiere_json(text: str) -> str:
     return t.strip()
 
 
+def _schluessel(modell: str, kid: str) -> str:
+    """Eindeutig ueber Modell UND Instruktions-ID, und zugleich als n8n-
+    Workflow-ID und Dateiname brauchbar: nur [A-Za-z0-9_-], begrenzt lang."""
+    import re
+    slug = re.sub(r"[^A-Za-z0-9_-]+", "-", modell).strip("-")[:40]
+    return f"{slug}__{kid}"
+
+
 def bewerte_stapel(kandidaten: list[dict]) -> dict:
     """
     kandidaten: Liste von {"modell": str, "instruktion": str, "antwort_roh": str, ["id": str]}
@@ -79,6 +87,15 @@ def bewerte_stapel(kandidaten: list[dict]) -> dict:
     """
     for i, k in enumerate(kandidaten):
         k.setdefault("id", f"k{i:04d}")
+        # EINDEUTIGER Schluessel je Kandidat = Modell + Instruktions-ID.
+        # Gefunden am 10.09.2026 beim ersten Lauf mit VIER Modellen in einer
+        # Datei: alle vier hatten die Instruktions-IDs i01..i15. Mit der
+        # blossen "id" als Schluessel ueberschrieb jedes Modell das vorige --
+        # in `einzel` UND als Dateiname im Import-Ordner. Ergebnis: die
+        # Tabelle zeigte nur das letzte Modell (n=15 statt 60), und Tor 4
+        # haette fuer die drei ueberschriebenen Modelle "importiert" gemeldet,
+        # obwohl deren Workflows nie bei n8n ankamen -- ein falsches 100 %.
+        k["schluessel"] = _schluessel(k["modell"], k["id"])
 
     # --- Tore 1-3, lokal, kein n8n noetig ---
     einzel = {}
@@ -91,8 +108,9 @@ def bewerte_stapel(kandidaten: list[dict]) -> dict:
     for k in kandidaten:
         text = _extrahiere_json(k["antwort_roh"])
         ergebnis = tore.pruefe_alle_tore(text)
-        einzel[k["id"]] = {
+        einzel[k["schluessel"]] = {
             "modell": k["modell"],
+            "id": k["id"],
             "instruktion": k["instruktion"],
             "tor1_json": ergebnis["tor1_json"],
             "tor2_struktur": ergebnis["tor2_struktur"],
@@ -101,7 +119,7 @@ def bewerte_stapel(kandidaten: list[dict]) -> dict:
             "probleme": ergebnis["probleme"],
         }
         if ergebnis["alle_bestanden_ohne_import"]:
-            tor123_bestanden_ids.append(k["id"])
+            tor123_bestanden_ids.append(k["schluessel"])
             # Fuer Tor 4 braucht n8n eine gueltige "id" -- falls das
             # Modell selbst keine (oder eine unbrauchbare) mitgeliefert
             # hat, wird der Dateiname als Ersatz-ID verwendet, damit der
@@ -115,9 +133,9 @@ def bewerte_stapel(kandidaten: list[dict]) -> dict:
             # der Treffer bleibt aus, Tor 4 wird faelschlich als False
             # gemeldet, obwohl der Import erfolgreich war. Gefunden beim
             # ersten Testlauf mit synthetischen Kandidaten.
-            obj["id"] = k["id"]
-            obj.setdefault("name", k["id"])
-            (tempordner / f"{k['id']}.json").write_text(
+            obj["id"] = k["schluessel"]
+            obj.setdefault("name", k["schluessel"])
+            (tempordner / f"{k['schluessel']}.json").write_text(
                 json.dumps(obj), encoding="utf8"
             )
 

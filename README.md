@@ -7,10 +7,12 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen** — 384,8 Mio. echte Trainings-Token
-> vorbereitet (über dem Chinchilla-optimalen Ziel), Eval-Harness gegen
-> echtes n8n läuft. Fehlt: der eigentliche GPU-Trainingslauf (Google Colab)
-> und das Workflow-Modell (Stufe 4).
+> Status: **Stufe 0–3 abgeschlossen, Stufe 4 vermessen** — 384,8 Mio. echte
+> Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
+> Eval-Harness gegen echtes n8n läuft, fünf Modelle durchgemessen (alle
+> 100 % — der leichte Modus ist zu leicht, siehe Stufe 3), 2.012 gültige
+> Vorlagen ≈ 7,3 Mio. Token als Rohmaterial für Stufe 4 gezählt. Fehlt: der
+> GPU-Trainingslauf (Google Colab, läuft) und der Bau des Workflow-Modells.
 
 ---
 
@@ -144,7 +146,7 @@ Vier Tore, `bewertung/tore.py` + `bewertung/importtest.py`:
 | Tor | Prüfung |
 |---|---|
 | 1 | Gültiges JSON? |
-| 2 | Struktur korrekt + **echte** Node-Typen (gegen 439 aus der lokalen n8n-Installation extrahierte Typen) |
+| 2 | Struktur korrekt + **echte** Node-Typen (gegen 825 aus der lokalen n8n-Installation extrahierte Typen — `bewertung/extrahiere_node_typen.py`, siehe Stufe 4) |
 | 3 | Verbindungen konsistent? |
 | 4 | Importiert das echte, installierte n8n (2.25.6) den Workflow wirklich? |
 
@@ -159,29 +161,93 @@ Tore sind nötig, keines ist redundant.
 python bewertung/vergleich.py --kandidaten <antworten.jsonl> --out <ergebnis.json>
 ```
 
-### Erster echter Lauf: Nemotron-3-Ultra (550B, kostenlos)
+### Fünf Modelle, identischer Prompt, alle vier Tore (Stand 10.09.2026)
 
 15 handgeschriebene Test-Instruktionen (`bewertung/instruktionen.jsonl`),
-gegen `nvidia/nemotron-3-ultra-550b-a55b:free` über OpenRouter, alle vier
-Tore inklusive echtem n8n-Import:
+derselbe Systemprompt (`bewertung/systemprompt.txt`) für alle, kostenlose
+Modelle über OpenRouter, alle vier Tore inklusive echtem n8n-Import
+(`bewertung/sammle_antworten.sh <modell>` → `bewertung/vergleich.py`):
 
 | Modell | n | Tor 1 | Tor 2 | Tor 3 | Tor 4 | Gültig | 95-%-KI |
 |---|---|---|---|---|---|---|---|
-| Nemotron-3-Ultra (gratis) | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+| Nemotron-3-Ultra 550B | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+| DeepSeek-V4-Flash | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+| Llama-4-Maverick | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+| Gemma-4-31B-it | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+| MiniMax-M3 | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
 
-Rohdaten und Ergebnis liegen versioniert: `bewertung/nemotron_antworten.jsonl`,
-`bewertung/ergebnisse/nemotron-2026-09-08.json` — jede Zahl zeigt auf einen
-nachvollziehbaren Lauf.
+Rohdaten und Ergebnisse liegen versioniert (`bewertung/nemotron_antworten.jsonl`,
+`bewertung/gratis_modelle_antworten.jsonl`, `bewertung/ergebnisse/*.json`) —
+jede Zahl zeigt auf einen nachvollziehbaren Lauf, 75 echte Importe in n8n.
 
-**Ehrliche Einordnung, nicht verschwiegen:** Der Systemprompt
-(`bewertung/systemprompt.txt`) gibt dem Modell bewusst eine **enge Auswahl
-von 36 gängigen Node-Typen** vor, nicht die vollen 439. Das erleichtert die
-Aufgabe spürbar — bei freier Wahl aus allen 439 Typen (oder gar keiner
-Vorgabe) wäre eine niedrigere Quote plausibler. Der GPT-4/Claude-Vergleich
-mit identischem Prompt steht noch aus (Stufe 3, ~5 € API-Kosten) — erst
-dann ist ein fairer Modellvergleich möglich. Dieser erste Lauf zeigt vor
-allem: **der Harness selbst funktioniert end-to-end**, inklusive echtem
-n8n-Import.
+**Was fünfmal 100 % wirklich bedeutet — Deckeneffekt, nicht Gleichstand:**
+Der Systemprompt gibt bewusst eine **enge Auswahl von 36 gängigen
+Node-Typen** vor, nicht die vollen 825. In dieser Form ist die Aufgabe für
+aktuelle Modelle offenbar gelöst — fünf Modelle von 31B bis 550B Parametern
+liefern ohne einen einzigen Fehler importierbare Workflows. Ein Benchmark,
+auf dem alle 100 % erreichen, **unterscheidet nichts**. Die Messung ist damit
+nicht wertlos, sie hat eine klare Aussage: *der leichte Modus ist zu leicht.*
+Der nächste Lauf braucht die schwere Einstellung — freie Wahl aus allen 825
+Typen oder gar keine Liste — bevor ein Vergleich mit dem eigenen kleinen
+Modell (Stufe 4) etwas aussagen kann. Der GPT-4/Claude-Lauf (~5 € API-Kosten)
+lohnt erst dann.
+
+**Zweiter Fund, diesmal im eigenen Harness:** beim ersten Lauf mit vier
+Modellen in einer Datei zeigte die Tabelle nur *ein* Modell mit n = 15
+statt vier mit n = 60. Ursache: alle Modelle bekamen dieselben
+Instruktions-IDs (`i01`…`i15`), und `vergleich.py` benutzte die ID als
+alleinigen Schlüssel — jedes Modell überschrieb das vorige, in der
+Ergebnistabelle **und** im Import-Ordner für Tor 4. Die drei überschriebenen
+Modelle hätten „importiert" gemeldet, obwohl ihre Workflows nie bei n8n
+ankamen. Ein Fehler, der ein falsches 100 % erzeugt, ist der teuerste, den
+ein Messgerät haben kann. Behoben (Schlüssel = Modell + ID), Gegenprobe im
+Ergebnis-JSON: 60 eindeutige Kandidaten, 60 echte Importe.
+
+## Stufe 4 — erst gemessen, dann gebaut (Stand 10.09.2026)
+
+Bevor die Mutations-Pipeline für das Workflow-Modell entsteht, war eine
+Frage offen: *„Viele echte n8n-Vorlagen nutzen Node-Typen außerhalb unserer
+Liste — wie viele?"* Bis dahin eine Vermutung aus einer Metadaten-Stichprobe.
+`daten/vorlagen_messen.py` beantwortet sie gegen den vollen Bestand: die
+2.352 Vorlagen (mit komplettem Workflow-JSON) aus der Datenbank des
+`n8n-mcp`-Pakets.
+
+| Typenliste des Validators | Vorlagen, die Tor 2 vollständig annehmen würde |
+|---|---|
+| vorher: 439 Typen (nur `n8n-nodes-base`) | **682 / 2.352 = 29 %** |
+| jetzt: 825 Typen (`extrahiere_node_typen.py`) | **2.012 / 2.352 = 85,5 %** |
+
+**Die alte Liste war nicht nur klein, sie war falsch** — sie hätte echte
+Typen als „halluziniert" verworfen:
+
+- **38 % der Vorlagen nutzen `@n8n/n8n-nodes-langchain`** (Agent, LLM-Chat,
+  Output-Parser …). Das Paket ist Teil jeder n8n-Installation, stand aber
+  nicht in der Liste, weil nur `n8n-nodes-base` extrahiert worden war.
+- **601 Vorlagen nutzen `*Tool`-Varianten** (`httpRequestTool`, `gmailTool`,
+  `googleSheetsTool` …). Die stehen in **keiner** `known/nodes.json`: n8n
+  erzeugt sie zur Laufzeit für jeden Node mit `usableAsTool: true`. Und
+  `httpRequestTool` — der häufigste davon, 139 Vorlagen — kommt nicht einmal
+  daher, sondern ist in `n8n-core/dist/constants.js` hart verdrahtet.
+  Das Skript liest alle drei Quellen aus der **lokalen Installation**, nicht
+  aus den Vorlagen — sonst käme die Grundwahrheit aus genau den Daten, die
+  sie später bewerten soll.
+
+Gegenprobe, im Skript eingebaut: von 21.721 Typ-Vorkommen der beiden Pakete
+in echten Vorlagen deckt die neue Liste **21.713 (99,96 %)** ab. Die
+fehlenden 8 sind ein abgeschaffter Node (`start`) und drei Typen aus anderen
+n8n-Versionen — im Bericht benannt, nicht stillschweigend weggelassen.
+
+Die restlichen **14,5 % (340 Vorlagen)** nutzen echte Community-Pakete
+(`n8n-nodes-mcp`, `@apify/…`, `@tavily/…`, 40+ weitere). Die bleiben draußen:
+sie sind lokal nicht installiert, also kann Tor 4 sie nicht importieren —
+und ein Validator darf nichts als „echt" annehmen, was er nicht prüfen kann.
+
+Was das für den Bau bedeutet: **2.012 gültige Vorlagen ≈ 7,3 Mio. Token**
+Rohmaterial (Median 17 Knoten pro Workflow) — die Schätzung aus dem Plan
+(≈ 7 Mio.) hält. Und die `echte_node_typen.json` hat jetzt ein
+Erzeuger-Skript im Repo; vorher war sie ein einmal von Hand erzeugtes
+Artefakt — dieselbe Fehlerklasse wie der `tokenizer.pkl`, der beim ersten
+echten Colab-Lauf fehlte (Commit `3e7d1ce`).
 
 ## Schritt 1 — was drinsteht
 
