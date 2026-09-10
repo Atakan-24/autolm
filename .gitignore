@@ -6,8 +6,15 @@ __pycache__/
 # in Sekunden aus Skripten neu erzeugbar, gehoeren nicht ins Repo.
 # Python-CODE unter daten/ (z.B. vortokenisiere.py) ist davon ausdruecklich
 # AUSGENOMMEN -- die Endungs-Ausnahme unten holt ihn zurueck.
+#
+# tokenizer.pkl ist ebenfalls ausgenommen: er ist KEIN aus dem Code neu
+# erzeugbares Zwischenprodukt (kein Skript im Repo trainiert ihn), sondern
+# die eine feste Tokenisierung, mit der der gesamte 384,8-Mio.-Token-Korpus
+# bereits erzeugt wurde -- ohne ihn im Repo bricht jeder frische Clone
+# (z.B. Colab) an genau dieser Stelle ab. Klein genug fuers Repo (~87 KB).
 daten/*
 !daten/*.py
+!daten/tokenizer.pkl
 daten/roh/
 modelle/
 *.pt
