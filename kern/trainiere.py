@@ -80,7 +80,19 @@ def main():
     p.add_argument("--lr", type=float, default=3e-4)
     p.add_argument("--checkpoint-alle", type=int, default=500)
     p.add_argument("--log-alle", type=int, default=50)
+    # Stufe 4: freie Modellgroesse und ein Validierungs-Split. Ohne diese
+    # Schalter verhaelt sich das Skript exakt wie vorher (Stufe 2).
+    p.add_argument("--dim", type=int, default=None)
+    p.add_argument("--schichten", type=int, default=None)
+    p.add_argument("--koepfe", type=int, default=None)
+    p.add_argument("--block", type=int, default=None)
+    p.add_argument("--batch", type=int, default=None)
+    p.add_argument("--val-daten", type=Path, default=None,
+                    help="zweiter uint16-Strom; Verlust darauf bei jedem Log-Schritt")
+    p.add_argument("--val-stapel", type=int, default=8)
+    p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
+    torch.manual_seed(args.seed)
 
     meta = json.loads(args.meta.read_text(encoding="utf8"))
     vokabular_groesse = meta.get("vokabular_groesse")
@@ -91,6 +103,11 @@ def main():
         dim, koepfe, schichten, block, batch = 384, 6, 6, 256, 32
     else:
         dim, koepfe, schichten, block, batch = 128, 4, 3, 96, 16
+    dim = args.dim or dim
+    koepfe = args.koepfe or koepfe
+    schichten = args.schichten or schichten
+    block = args.block or block
+    batch = args.batch or batch
 
     geraet = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Geraet: {geraet}")
@@ -109,6 +126,26 @@ def main():
 
     optimierer = torch.optim.AdamW(modell.parameters(), lr=args.lr)
     ckpt = Checkpointer(args.checkpoint_ordner)
+    # Die Konfiguration neben die Checkpoints -- ein Checkpoint ohne sie ist
+    # nicht ladbar (dieselbe Fehlerklasse wie der fehlende tokenizer.pkl).
+    (args.checkpoint_ordner / "modell_konfig.json").write_text(json.dumps({
+        "vokabular": vokabular_groesse, "dim": dim, "koepfe": koepfe,
+        "schichten": schichten, "block": block, "batch": batch, "lr": args.lr,
+        "daten": str(args.daten), "seed": args.seed}, indent=2), encoding="utf8")
+    val_daten = lade_daten(args.val_daten) if args.val_daten else None
+    verlauf = open(args.checkpoint_ordner / "verlauf.jsonl", "a", encoding="utf8")
+
+    @torch.no_grad()
+    def val_verlust() -> float | None:
+        if val_daten is None:
+            return None
+        modell.eval()
+        pos, summe = 0, 0.0
+        for _ in range(args.val_stapel):
+            vx, vy, pos = hole_stapel(val_daten, pos, block, batch, geraet)
+            summe += modell(vx, vy)[1].item()
+        modell.train()
+        return summe / args.val_stapel
 
     start_schritt, position = ckpt.lade_neuesten(modell, optimierer)
     if start_schritt > 0:
@@ -129,8 +166,14 @@ def main():
 
         if schritt % args.log_alle == 0:
             dt = time.time() - t0
+            vv = val_verlust()
             print(f"  Schritt {schritt:>7,} | Verlust {verlust.item():.4f} | "
-                  f"{dt / max(1, schritt - start_schritt + 1):.3f}s/Schritt")
+                  + (f"Val {vv:.4f} | " if vv is not None else "")
+                  + f"{dt / max(1, schritt - start_schritt + 1):.3f}s/Schritt", flush=True)
+            verlauf.write(json.dumps({"schritt": schritt, "train": round(verlust.item(), 4),
+                                      "val": None if vv is None else round(vv, 4),
+                                      "zeit_s": round(dt)}) + "\n")
+            verlauf.flush()
 
         if schritt % args.checkpoint_alle == 0 and schritt > start_schritt:
             ckpt.speichere(modell, optimierer, schritt, position, verlust_log)
