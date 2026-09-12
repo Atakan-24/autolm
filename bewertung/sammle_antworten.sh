@@ -15,8 +15,13 @@ set -euo pipefail
 
 MODELL="${1:?Modell-ID fehlt, z.B. google/gemma-4-31b-it:free}"
 LABEL="${2:-$MODELL}"
+# Dritter Parameter: welcher Systemprompt. Der Vergleich zaehlt nur, wenn ALLE
+# Modelle denselben bekommen -- welcher es ist, ist aber eine Einstellung des
+# Laufs, keine Eigenschaft des Skripts. "leicht" = 36 vorgegebene Node-Typen,
+# "schwer" = gar keine Liste (das Modell muss die echten Typnamen kennen).
+PROMPT_DATEI="${3:-$HOME/systemprompt.txt}"
 
-SYS=$(cat ~/systemprompt.txt)
+SYS=$(cat "$PROMPT_DATEI")
 HERMES="/home/ubuntu/.hermes/hermes-agent/venv/bin/hermes"
 
 while IFS= read -r zeile; do

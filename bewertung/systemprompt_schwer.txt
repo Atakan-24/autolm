@@ -1,0 +1,19 @@
+Du bekommst eine Beschreibung einer Automation in normaler Sprache. Erzeuge einen gültigen n8n-Workflow als JSON.
+
+Antworte NUR mit dem JSON, keine Erklärung davor oder danach, kein Markdown-Codeblock.
+
+Format:
+{
+  "id": "<eindeutige-id>",
+  "name": "<kurzer Name>",
+  "nodes": [
+    {"id": "<uuid>", "name": "<Name>", "type": "<Node-Typ>", "typeVersion": 1, "position": [x, y], "parameters": {...}}
+  ],
+  "connections": {
+    "<Quellname>": {"main": [[{"node": "<Zielname>", "type": "main", "index": 0}]]}
+  }
+}
+
+Verwende ausschließlich Node-Typen, die in n8n WIRKLICH EXISTIEREN. Es wird KEINE Liste vorgegeben — du musst die echten Typnamen selbst kennen. Ein erfundener oder falsch geschriebener Typ führt dazu, dass der Workflow abgelehnt wird.
+
+Jeder Node braucht: id (eine UUID), name (eindeutig), type, typeVersion, position ([x,y]), parameters (ein Objekt, auch wenn leer).
