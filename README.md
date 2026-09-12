@@ -78,7 +78,7 @@ Offline-Betrieb).
 | **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — `kern/gpu_bootstrap.sh` startet ihn auf einer Miet-GPU ohne Browser | 🔶 Infrastruktur fertig, Training offen |
 | **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **neun Modelle gemessen (leicht + schwer, gratis + bezahlt), 2,41 $ tatsächliche API-Kosten** | ✅ `bewertung/` |
 | **4** | Workflow-Modell: Kurzschrift, Mutations-Pipeline (jede Mutante durch den Validator), Split nach Vorlagen-ID mit hartem Leck-Abbruch, eigener Tokenizer, **drei Fassungen auf CPU trainiert und auf 98 ungesehenen Vorlagen gemessen** | 🔶 `workflow/` — gebaut und gemessen (7M, CPU); GPU-Lauf und größeres Modell offen |
-| 5 | Eingeschränkte Dekodierung (falls nötig) | offen |
+| 5 | Eingeschränkte Dekodierung (falls nötig) | offen — jetzt mit gemessener Zielmarke: 3 erfundene Typen auf 15 fremd formulierten Instruktionen |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
 | 7 | Quantisierung, Hugging-Face-Demo | offen |
 
@@ -517,6 +517,71 @@ Buchstabendreher. Das Vokabular auswendig zu können ist die leichte Hälfte der
   Validierung/Test sind, fliegen raus (3). Ein Leck, das eine Warnung
   überlesen hätte — der Abbruch hat es erzwungen.
 
+
+### Die Gegenprobe zur Überanpassung — geteiltes Ergebnis (B8)
+
+V3 überpasst sich: Trainingsverlust 3,19 gegen Validierung 4,62, Plateau ab
+Schritt 1.600. Die naheliegende Erklärung war die Datenerzeugung — 20
+Mutanten je Vorlage, die einander zu ähnlich sind. Also ein Lauf, der genau
+das ändert und **sonst nichts**: gleicher Seed, gleiches Modell, gleiches
+Schrittbudget, gleicher Split.
+
+| | V3 | B8 |
+|---|---|---|
+| Mutanten je Vorlage | 20 | **8**, gestaffelt (1–3 Operationen) |
+| Instruktions-Varianten je Original | 3 | **6** |
+| Trainings-Token | 2,56 Mio. | **1,60 Mio.** |
+| bester Validierungsverlust | **4,55** (Schritt 1.850) | 4,59 (Schritt 1.150) |
+| Validierung am Ende (Schritt 2.350) | **4,62** | 5,11 |
+| Abstand Training↔Validierung | **1,42** | 2,70 |
+| lesbare Ausgabe (Tor 0) | 71 % | **84 %** |
+| gültig@1 | 36 % | **41 %** |
+| gültig@4 | 70 % | **84 %** |
+| ins Token-Limit gelaufen | 7 % | **0 %** |
+| **Typen-Jaccard** | **0,41** | 0,34 |
+| Kanten-Jaccard | 0,04 | 0,04 |
+| erfundene Typen | 1 Formatfehler | **0** |
+
+**Das Ergebnis geht auseinander, und genau das ist der Befund.** B8 schreibt
+**mehr gültige** Workflows — 84 % statt 70 % bestehen alle Tore, kein einziger
+läuft ins Token-Limit, kein einziger Typ ist erfunden. Und B8 trifft die
+**Sache schlechter**: Typen-Jaccard 0,34 statt 0,41.
+
+Die Erklärung, die zu beidem passt: weniger Mutanten heißt weniger gesehene
+Typen-Vielfalt. Das Modell weicht auf die Handvoll Typen aus, die es sicher
+kann — das ergibt saubere, kurze, gültige Workflows, die aber häufiger am
+Gewünschten vorbeigehen. **Gültigkeit und Treffsicherheit sind hier zwei
+Achsen, keine eine.** Wer nur die Gültigkeitsquote berichtet, verkauft einen
+Rückschritt als Fortschritt.
+
+**Die Überanpassungs-Hypothese ist widerlegt, und zwar in die andere
+Richtung.** Weniger, stärker gestaffelte Mutanten haben den Abstand zwischen
+Trainings- und Validierungsverlust nicht gedämpft, sondern von 1,42 auf
+2,70 **verdoppelt**, und B8 erreicht sein Optimum schon bei Schritt
+1.150 statt 1.850. Nicht die Ähnlichkeit der Mutanten war das Problem,
+sondern die **Menge**: 1,60 Mio. Token reichen diesem Modell nicht, auch wenn
+sie vielfältiger sind.
+
+Gegen die eigene Erwartung, deshalb hier: über die ersten rund 600 Schritte
+war B8 an **jedem** Messpunkt besser. Die zusätzlichen Instruktions-Varianten
+helfen also messbar — dem Lauf geht danach nur der Stoff aus.
+
+**Urteil nach der vorab festgelegten Regel: V3 bleibt die Basis.** Sie stand vor dem
+Lauf in `bewertung/ergebnisse/stufe4-b8-konfiguration-2026-09-12.json`
+(„nur als besser dokumentiert, wenn die Holdout-Messung mindestens V3 bei
+Gültigkeit@1 **und** Typen-Jaccard erreicht und die Validierungskurve nicht
+schlechter endet"). Von drei Bedingungen ist eine erfüllt. Genau dafür
+schreibt man die Regel vorher auf: die Gültigkeitsquote allein hätte eine
+Erfolgsmeldung hergegeben.
+
+**Was daraus folgt — und ein Fund über das eigene Werkzeug:** beide Modelle
+wurden bei Schritt 2.400 bewertet, obwohl **beide** ihr Optimum vorher hatten
+(V3 bei 1.850, B8 bei 1.150). Der Checkpointer hält bewusst nur zwei
+rotierende Stände — der beste Stand ist damit nicht mehr bewertbar, er ist
+überschrieben. Der nächste Schritt ist deshalb nicht noch eine Datenvariante,
+sondern: den Stand mit dem besten Validierungsverlust mitspeichern und **den**
+messen. Erst danach mehr Daten, und die kommen nicht aus mehr Mutanten,
+sondern aus mehr echten Vorlagen.
 
 ### Gegen die Frontier-Modelle — dieselben 15 Instruktionen, alle vier Tore, echter n8n-Import
 
