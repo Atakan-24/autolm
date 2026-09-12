@@ -28,3 +28,4 @@ _evaltest/
 bewertung/_wegwerf_n8n_db/
 kern/_test_checkpoint_lauf/
 kern/_trainingslauf_fuer_test.py
+.env*
