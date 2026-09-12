@@ -63,10 +63,11 @@ def pruefe_split(train: list[dict], val: list[dict], test: list[dict]) -> None:
             raise SystemExit(f"SPLIT-LECK: {len(doppelt)} {name}-Kurzschriften wortgleich im Training: {doppelt[:10]}")
 
 
-def baue_beispiele(vs: list[dict], kat: dict, varianten: int, seed: int) -> list[dict]:
+def baue_beispiele(vs: list[dict], kat: dict, varianten: int, seed: int,
+                   mit_namen: bool = False) -> list[dict]:
     aus = []
     for v in vs:
-        text = ks.serialisiere(v["wf"])
+        text = ks.serialisiere(v["wf"], mit_namen)
         for k in range(varianten):
             aus.append({
                 "quelle_id": v["id"],
@@ -118,6 +119,8 @@ def main():
     p.add_argument("--tokenizer-textmenge", type=int, default=1_500_000,
                    help="Zeichen, auf denen der BPE trainiert (Zeit ~ linear)")
     p.add_argument("--hoechstens", type=int, default=None, help="nur die ersten N Vorlagen (Rauchtest)")
+    p.add_argument("--mit-namen", action="store_true",
+                   help="Fassung 1 der Kurzschrift (mit Knotennamen) -- nur fuer den Vergleich")
     args = p.parse_args()
 
     t0 = time.time()
@@ -125,21 +128,42 @@ def main():
     kat = katalog.lade()
     vs = vorlagen.lade(args.db, args.hoechstens)
     rng = random.Random(args.seed)
-    rng.shuffle(vs)
     n = len(vs)
+
+    # STRUKTURGLEICHE VORLAGEN BLEIBEN ZUSAMMEN. Ohne Knotennamen haben
+    # verschiedene Vorlagen oft dieselbe Kurzschrift ("Manual Trigger ->
+    # Set -> HTTP Request" gibt es dutzendfach). Beim ersten Bau der
+    # Fassung 2 hat pruefe_split() genau das gefunden: 7 Val-Vorlagen
+    # wortgleich im Training. Deshalb wird nicht je Vorlage, sondern je
+    # Kurzschrift-Text gezogen -- alle Vorlagen mit demselben Text landen
+    # im selben Split.
+    gruppen_nach_text = {}
+    for v in vs:
+        gruppen_nach_text.setdefault(ks.serialisiere(v["wf"], args.mit_namen), []).append(v)
+    strukturgruppen = list(gruppen_nach_text.values())
+    rng.shuffle(strukturgruppen)
     n_val = max(1, int(n * 0.05))
     n_test = max(1, int(n * 0.05))
-    test_v, val_v, train_v = vs[:n_test], vs[n_test:n_test + n_val], vs[n_test + n_val:]
-    print(f"Vorlagen: {n}  ->  train {len(train_v)} / val {len(val_v)} / test {len(test_v)}")
+    test_v, val_v, train_v = [], [], []
+    for g in strukturgruppen:
+        if len(test_v) < n_test:
+            test_v.extend(g)
+        elif len(val_v) < n_val:
+            val_v.extend(g)
+        else:
+            train_v.extend(g)
+    print(f"Vorlagen: {n} in {len(strukturgruppen)} strukturverschiedenen Gruppen  ->  "
+          f"train {len(train_v)} / val {len(val_v)} / test {len(test_v)}")
 
     # Mutanten: nur Training. Versionen-Tabelle ebenfalls nur aus dem Training.
     gruppen = mu.tauschgruppen(kat)
     versionen = mu.versionen_je_typ(train_v)
-    train = baue_beispiele(train_v, kat, args.varianten_je_original, args.seed)
+    train = baue_beispiele(train_v, kat, args.varianten_je_original, args.seed, args.mit_namen)
     ops_zaehler, mutanten = {}, 0
     t1 = time.time()
     for v in train_v:
-        for m in mu.erzeuge_mutanten(v, args.mutanten_je_vorlage, args.seed, kat, gruppen, versionen):
+        for m in mu.erzeuge_mutanten(v, args.mutanten_je_vorlage, args.seed, kat, gruppen, versionen,
+                                     mit_namen=args.mit_namen):
             mutanten += 1
             for op in m["ops"]:
                 ops_zaehler[op] = ops_zaehler.get(op, 0) + 1
@@ -148,11 +172,20 @@ def main():
                 "ops": m["ops"],
                 "instruktion": instruktionen.erzeuge(m["wf"], None, kat,
                                                      f"{args.seed}:mut:{v['id']}:{mutanten}", False),
-                "kurzschrift": ks.serialisiere(m["wf"]),
+                "kurzschrift": ks.serialisiere(m["wf"], args.mit_namen),
             })
     print(f"Mutanten: {mutanten} ({time.time() - t1:.0f}s), Operationen: {ops_zaehler}")
-    val = baue_beispiele(val_v, kat, 1, args.seed)
-    test = baue_beispiele(test_v, kat, 1, args.seed)
+    val = baue_beispiele(val_v, kat, 1, args.seed, args.mit_namen)
+    test = baue_beispiele(test_v, kat, 1, args.seed, args.mit_namen)
+    # Eine Mutante kann zufaellig die Struktur einer Val-/Test-Vorlage
+    # treffen (Blatt entfernt -> dieselbe Kette wie eine andere Vorlage).
+    # Solche Trainingszeilen fliegen raus -- und pruefe_split() prueft das
+    # danach unabhaengig nach, statt dieser Filterung zu glauben.
+    gesperrt = {b["kurzschrift"] for b in val} | {b["kurzschrift"] for b in test}
+    vorher = len(train)
+    train = [b for b in train if b["kurzschrift"] not in gesperrt]
+    entfernt_wegen_leck = vorher - len(train)
+    print(f"Trainingszeilen textgleich mit Val/Test entfernt: {entfernt_wegen_leck}")
     pruefe_split(train, val, test)
     rng.shuffle(train)
 
@@ -194,8 +227,11 @@ def main():
     bericht = {
         "erzeugt_von": "workflow/baue_datensatz.py",
         "seed": args.seed,
+        "kurzschrift_fassung": "1 (mit Namen)" if args.mit_namen else "2 (ohne Namen)",
         "vorlagen": {"gesamt": n, "train": len(train_v), "val": len(val_v), "test": len(test_v)},
         "mutanten": mutanten,
+        "strukturgruppen": len(strukturgruppen),
+        "trainingszeilen_entfernt_wegen_leck": entfernt_wegen_leck,
         "mutanten_je_vorlage_ziel": args.mutanten_je_vorlage,
         "operationen": ops_zaehler,
         "varianten_je_original": args.varianten_je_original,

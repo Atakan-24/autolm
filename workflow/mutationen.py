@@ -187,10 +187,10 @@ OPERATIONEN = {
 }
 
 
-def ist_gueltig(wf: dict) -> bool:
+def ist_gueltig(wf: dict, mit_namen: bool = False) -> bool:
     """Kurzschrift-Rundlauf + Tor 1-3 -- exakt der Weg, den spaeter das Modell geht."""
     try:
-        text = ks.serialisiere(wf)
+        text = ks.serialisiere(wf, mit_namen)
         gerendert = ks.rendere(text)
     except ks.KurzschriftFehler:
         return False
@@ -198,40 +198,43 @@ def ist_gueltig(wf: dict) -> bool:
 
 
 def mutiere(wf: dict, rng: random.Random, katalog: dict, gruppen: dict,
-            versionen: dict, hoechstens_ops: int = 3) -> tuple[dict, list[str]] | None:
-    """1..hoechstens_ops zufaellige Operationen; None, wenn nichts Gueltiges entsteht."""
+            versionen: dict, hoechstens_ops: int = 3,
+            mit_namen: bool = False) -> tuple[dict, list[str]] | None:
+    """1..hoechstens_ops zufaellige Operationen; None, wenn nichts Gueltiges entsteht.
+    Ohne Namen in der Kurzschrift ist `umbenenne` wirkungslos und wird ausgelassen."""
     aktuell = wf
     angewandt = []
+    ops = list(OPERATIONEN) if mit_namen else [o for o in OPERATIONEN if o != "umbenenne"]
     for _ in range(rng.randint(1, hoechstens_ops)):
-        name = rng.choice(list(OPERATIONEN))
+        name = rng.choice(ops)
         ergebnis = OPERATIONEN[name](aktuell, rng, katalog=katalog,
                                      gruppen=gruppen, versionen=versionen)
         if ergebnis is None:
             continue
         aktuell = ergebnis
         angewandt.append(name)
-    if not angewandt or not ist_gueltig(aktuell):
+    if not angewandt or not ist_gueltig(aktuell, mit_namen):
         return None
     return aktuell, angewandt
 
 
 def erzeuge_mutanten(vorlage: dict, anzahl: int, seed: int, katalog: dict,
-                     gruppen: dict, versionen: dict) -> list[dict]:
+                     gruppen: dict, versionen: dict, mit_namen: bool = False) -> list[dict]:
     """
     Bis zu `anzahl` VERSCHIEDENE gueltige Mutanten einer Vorlage. Verschieden
     heisst: andere Kurzschrift als das Original und als jede andere Mutante --
     sonst zaehlt das Modell dasselbe Beispiel mehrfach.
     """
     rng = random.Random(f"{seed}:{vorlage['id']}")
-    gesehen = {ks.serialisiere(vorlage["wf"])}
+    gesehen = {ks.serialisiere(vorlage["wf"], mit_namen)}
     aus, versuche = [], 0
     while len(aus) < anzahl and versuche < anzahl * 6:
         versuche += 1
-        m = mutiere(vorlage["wf"], rng, katalog, gruppen, versionen)
+        m = mutiere(vorlage["wf"], rng, katalog, gruppen, versionen, mit_namen=mit_namen)
         if m is None:
             continue
         wf, ops = m
-        text = ks.serialisiere(wf)
+        text = ks.serialisiere(wf, mit_namen)
         if text in gesehen:
             continue
         gesehen.add(text)

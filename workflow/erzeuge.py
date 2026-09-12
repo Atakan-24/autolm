@@ -35,6 +35,9 @@ from pathlib import Path
 
 import torch
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(line_buffering=True)  # Fortschritt auch in einer Logdatei sichtbar
+
 WURZEL = Path(__file__).parent.parent
 sys.path.insert(0, str(WURZEL))
 sys.path.insert(0, str(WURZEL / "kern"))

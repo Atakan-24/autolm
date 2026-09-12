@@ -43,15 +43,26 @@ BEISPIEL = {
 
 class Kurzschrift(unittest.TestCase):
     def test_rundlauf_erhaelt_typen_und_kanten(self):
+        # Fassung 2 (Vorgabe): ohne Namen -- Kanten ueber Knoten-Index vergleichen
         text = ks.serialisiere(BEISPIEL)
+        self.assertNotIn("Erinnerung senden", text)
         wf = ks.rendere(text)
         self.assertEqual([n["type"] for n in wf["nodes"]], [n["type"] for n in BEISPIEL["nodes"]])
-        self.assertEqual(ks.kanten_menge(wf), ks.kanten_menge(BEISPIEL))
+        self.assertEqual(ks.kanten_index(wf), ks.kanten_index(BEISPIEL))
         self.assertEqual(wf["nodes"][0]["typeVersion"], 2.2)
+        self.assertEqual(wf["nodes"][2]["name"], "Send Email")   # Katalog-Anzeigename
+        self.assertTrue(pruefe_alle_tore(json.dumps(wf))["alle_bestanden_ohne_import"])
+        # Fassung 1: mit Namen, Kanten namensgleich
+        wf1 = ks.rendere(ks.serialisiere(BEISPIEL, mit_namen=True))
+        self.assertEqual(ks.kanten_menge(wf1), ks.kanten_menge(BEISPIEL))
+
+    def test_gleiche_typen_bekommen_eindeutige_namen(self):
+        wf = ks.rendere("wf\nn1 n8n-nodes-base.set@3.4\nn2 n8n-nodes-base.set@3.4\nn1 > n2")
+        self.assertEqual([n["name"] for n in wf["nodes"]], ["Set", "Set 2"])
         self.assertTrue(pruefe_alle_tore(json.dumps(wf))["alle_bestanden_ohne_import"])
 
     def test_ausgang_index_und_verbindungstyp(self):
-        text = ks.serialisiere(BEISPIEL)
+        text = ks.serialisiere(BEISPIEL, mit_namen=True)
         self.assertIn("n2 >1 n4", text)          # zweiter Ausgang
         self.assertIn("n1 > n2", text)           # main, Ausgang 0 -> kurz
         wf = ks.rendere("wf x\nn1 a.b@1 A\nn2 a.c@1 B\nn1 ai_tool> n2")
@@ -110,6 +121,13 @@ class Mutationen(unittest.TestCase):
                 self.assertEqual((a["kategorie"], a["ausloeser"], a["tool"]),
                                  (b["kategorie"], b["ausloeser"], b["tool"]))
             self.assertTrue(mu.ist_gueltig(neu))
+
+    def test_ohne_namen_wird_umbenennen_ausgelassen(self):
+        rng = random.Random(9)
+        for _ in range(20):
+            m = mu.mutiere(BEISPIEL, rng, self.kat, self.gruppen, self.versionen, mit_namen=False)
+            if m is not None:
+                self.assertNotIn("umbenenne", m[1])
 
     def test_blatt_entfernen_laesst_keine_haengende_kante(self):
         neu = mu.entferne_blatt(BEISPIEL, random.Random(1), self.kat)
@@ -176,9 +194,11 @@ class EchteVorlagen(unittest.TestCase):
             text = ks.serialisiere(v["wf"])
             wf = ks.rendere(text)
             self.assertEqual([n["type"] for n in wf["nodes"]], [n["type"] for n in v["wf"]["nodes"]])
-            self.assertEqual(ks.kanten_menge(wf), ks.kanten_menge(v["wf"]))
+            self.assertEqual(ks.kanten_index(wf), ks.kanten_index(v["wf"]))
             self.assertTrue(pruefe_alle_tore(json.dumps(wf))["alle_bestanden_ohne_import"])
             self.assertFalse(any(n["type"] == "n8n-nodes-base.stickyNote" for n in wf["nodes"]))
+            wf1 = ks.rendere(ks.serialisiere(v["wf"], mit_namen=True))
+            self.assertEqual(ks.kanten_menge(wf1), ks.kanten_menge(v["wf"]))
 
 
 if __name__ == "__main__":
