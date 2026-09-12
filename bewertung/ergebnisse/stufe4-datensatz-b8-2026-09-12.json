@@ -1,0 +1,57 @@
+{
+  "erzeugt_von": "workflow/baue_datensatz.py",
+  "seed": 7,
+  "kurzschrift_fassung": "3 (ohne Nummern, ohne Namen)",
+  "vorlagen": {
+    "gesamt": 1978,
+    "train": 1782,
+    "val": 98,
+    "test": 98
+  },
+  "mutanten": 14256,
+  "strukturgruppen": 1927,
+  "trainingszeilen_entfernt_wegen_leck": 1,
+  "mutanten_je_vorlage_ziel": 8,
+  "mutation_profil": "gestaffelt",
+  "mutation_max_ops": 3,
+  "operationen": {
+    "entferne_blatt": 6420,
+    "tausche_typ": 10247,
+    "permutiere": 10063
+  },
+  "mutationstiefen": {
+    "1": 5346,
+    "2": 5346,
+    "3": 3564
+  },
+  "varianten_je_original": 6,
+  "vokabular": 4096,
+  "zeichen_je_token": 13.05,
+  "splits": {
+    "train": {
+      "beispiele": 24947,
+      "token": 1599603,
+      "token_je_beispiel_median": 50,
+      "token_je_beispiel_p90": 110,
+      "token_je_beispiel_max": 748,
+      "datei": "train.bin"
+    },
+    "val": {
+      "beispiele": 98,
+      "token": 7120,
+      "token_je_beispiel_median": 53,
+      "token_je_beispiel_p90": 108,
+      "token_je_beispiel_max": 425,
+      "datei": "val.bin"
+    },
+    "test": {
+      "beispiele": 98,
+      "token": 7343,
+      "token_je_beispiel_median": 54,
+      "token_je_beispiel_p90": 113,
+      "token_je_beispiel_max": 990,
+      "datei": "test.bin"
+    }
+  },
+  "dauer_s": 96
+}

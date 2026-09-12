@@ -123,6 +123,10 @@ def main():
     p.add_argument("--out", type=Path, default=AUS_STANDARD)
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--mutanten-je-vorlage", type=int, default=12)
+    p.add_argument("--mutation-profil", choices=("zufaellig", "gestaffelt"), default="zufaellig",
+                   help="zufaellig wie bisher; gestaffelt verteilt 1..N Operationen gleichmaessig")
+    p.add_argument("--mutation-max-ops", type=int, default=3,
+                   help="maximale Operations-Tiefe einer Mutante")
     p.add_argument("--varianten-je-original", type=int, default=3,
                    help="verschiedene Instruktions-Formulierungen je Original im Training")
     p.add_argument("--vokabular", type=int, default=4096)
@@ -172,12 +176,15 @@ def main():
     versionen = mu.versionen_je_typ(train_v)
     train = baue_beispiele(train_v, kat, args.varianten_je_original, args.seed,
                            args.mit_namen, args.mit_nummern)
-    ops_zaehler, mutanten = {}, 0
+    ops_zaehler, tiefen_zaehler, mutanten = {}, {}, 0
     t1 = time.time()
     for v in train_v:
         for m in mu.erzeuge_mutanten(v, args.mutanten_je_vorlage, args.seed, kat, gruppen, versionen,
-                                     mit_namen=args.mit_namen, mit_nummern=args.mit_nummern):
+                                     mit_namen=args.mit_namen, mit_nummern=args.mit_nummern,
+                                     mutation_profil=args.mutation_profil, max_ops=args.mutation_max_ops):
             mutanten += 1
+            tiefe = len(m["ops"])
+            tiefen_zaehler[tiefe] = tiefen_zaehler.get(tiefe, 0) + 1
             for op in m["ops"]:
                 ops_zaehler[op] = ops_zaehler.get(op, 0) + 1
             train.append({
@@ -187,7 +194,8 @@ def main():
                                                      f"{args.seed}:mut:{v['id']}:{mutanten}", False),
                 "kurzschrift": ks.serialisiere(m["wf"], args.mit_namen, args.mit_nummern),
             })
-    print(f"Mutanten: {mutanten} ({time.time() - t1:.0f}s), Operationen: {ops_zaehler}")
+    print(f"Mutanten: {mutanten} ({time.time() - t1:.0f}s), Operationen: {ops_zaehler}, "
+          f"Tiefen: {tiefen_zaehler}")
     val = baue_beispiele(val_v, kat, 1, args.seed, args.mit_namen, args.mit_nummern)
     test = baue_beispiele(test_v, kat, 1, args.seed, args.mit_namen, args.mit_nummern)
     # Eine Mutante kann zufaellig die Struktur einer Val-/Test-Vorlage
@@ -248,7 +256,10 @@ def main():
         "strukturgruppen": len(strukturgruppen),
         "trainingszeilen_entfernt_wegen_leck": entfernt_wegen_leck,
         "mutanten_je_vorlage_ziel": args.mutanten_je_vorlage,
+        "mutation_profil": args.mutation_profil,
+        "mutation_max_ops": args.mutation_max_ops,
         "operationen": ops_zaehler,
+        "mutationstiefen": tiefen_zaehler,
         "varianten_je_original": args.varianten_je_original,
         "vokabular": tok.groesse,
         "zeichen_je_token": round(zeichen_je_token, 2),

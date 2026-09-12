@@ -165,6 +165,19 @@ class Mutationen(unittest.TestCase):
         for m in a:
             self.assertTrue(mu.ist_gueltig(m["wf"]))
 
+    def test_gestaffelte_mutanten_decken_alle_tiefen_ab(self):
+        ms = mu.erzeuge_mutanten(self.vorlage, 9, 17, self.kat, self.gruppen,
+                                 self.versionen, mutation_profil="gestaffelt", max_ops=3)
+        # Manche Operationen koennen fuer einen Graphen unmoeglich sein;
+        # mit neun Beispielen muss die kontrollierte Staffelung trotzdem
+        # wenigstens eine Variante jeder Tiefe liefern.
+        self.assertEqual({len(m["ops"]) for m in ms}, {1, 2, 3})
+
+    def test_ungueltiges_mutationsprofil_scheitert_frueh(self):
+        with self.assertRaises(ValueError):
+            mu.erzeuge_mutanten(self.vorlage, 1, 7, self.kat, self.gruppen,
+                                 self.versionen, mutation_profil="beliebig")
+
 
 class Split(unittest.TestCase):
     def test_leck_ueber_id_bricht_ab(self):

@@ -198,14 +198,27 @@ def ist_gueltig(wf: dict, mit_namen: bool = False, mit_nummern: bool = False) ->
 
 
 def mutiere(wf: dict, rng: random.Random, katalog: dict, gruppen: dict,
-            versionen: dict, hoechstens_ops: int = 3,
+            versionen: dict, hoechstens_ops: int = 3, op_anzahl: int | None = None,
             mit_namen: bool = False, mit_nummern: bool = False) -> tuple[dict, list[str]] | None:
     """1..hoechstens_ops zufaellige Operationen; None, wenn nichts Gueltiges entsteht.
     Ohne Namen in der Kurzschrift ist `umbenenne` wirkungslos und wird ausgelassen."""
     aktuell = wf
     angewandt = []
     ops = list(OPERATIONEN) if mit_namen else [o for o in OPERATIONEN if o != "umbenenne"]
-    for _ in range(rng.randint(1, hoechstens_ops)):
+    # Stufe 4B: Der Builder kann die Tiefe vorgeben. So bekommt ein
+    # Datensatz garantiert kurze, mittlere und tiefe Varianten, statt dass
+    # ein Zufallslauf fast nur Ein-Schritt-Mutanten zieht.
+    if op_anzahl is not None and not 1 <= op_anzahl <= hoechstens_ops:
+        raise ValueError("op_anzahl muss zwischen 1 und hoechstens_ops liegen")
+    ziel_ops = op_anzahl if op_anzahl is not None else rng.randint(1, hoechstens_ops)
+    # Eine nicht anwendbare Operation (z. B. Blatt entfernen in einem
+    # Blatt-losen Graphen) zaehlt nicht als Mutationstiefe. Fuer das
+    # gestaffelte Profil versuchen wir daher weitere Operationen, bis die
+    # Ziel-Tiefe erreicht ist; nur nach mehreren echten Fehlversuchen wird
+    # die Variante verworfen. So ist „Tiefe 3“ im Bericht wirklich Tiefe 3.
+    versuche = 0
+    while len(angewandt) < ziel_ops and versuche < ziel_ops * 6:
+        versuche += 1
         name = rng.choice(ops)
         ergebnis = OPERATIONEN[name](aktuell, rng, katalog=katalog,
                                      gruppen=gruppen, versionen=versionen)
@@ -213,25 +226,35 @@ def mutiere(wf: dict, rng: random.Random, katalog: dict, gruppen: dict,
             continue
         aktuell = ergebnis
         angewandt.append(name)
-    if not angewandt or not ist_gueltig(aktuell, mit_namen, mit_nummern):
+    if len(angewandt) != ziel_ops or not ist_gueltig(aktuell, mit_namen, mit_nummern):
         return None
     return aktuell, angewandt
 
 
 def erzeuge_mutanten(vorlage: dict, anzahl: int, seed: int, katalog: dict,
                      gruppen: dict, versionen: dict, mit_namen: bool = False,
-                     mit_nummern: bool = False) -> list[dict]:
+                     mit_nummern: bool = False, mutation_profil: str = "zufaellig",
+                     max_ops: int = 3) -> list[dict]:
     """
     Bis zu `anzahl` VERSCHIEDENE gueltige Mutanten einer Vorlage. Verschieden
     heisst: andere Kurzschrift als das Original und als jede andere Mutante --
     sonst zaehlt das Modell dasselbe Beispiel mehrfach.
     """
+    if mutation_profil not in {"zufaellig", "gestaffelt"}:
+        raise ValueError("mutation_profil muss 'zufaellig' oder 'gestaffelt' sein")
+    if max_ops < 1:
+        raise ValueError("max_ops muss mindestens 1 sein")
     rng = random.Random(f"{seed}:{vorlage['id']}")
     gesehen = {ks.serialisiere(vorlage["wf"], mit_namen, mit_nummern)}
     aus, versuche = [], 0
     while len(aus) < anzahl and versuche < anzahl * 6:
         versuche += 1
+        # 1,2,3,1,2,3 ...: jede Tiefe wird pro Vorlage gleich oft versucht.
+        # Die Zufallswahl betrifft weiterhin die konkreten Operationen und
+        # Knoten -- reichhaltig, aber nicht versehentlich schief verteilt.
+        tiefe = 1 + (len(aus) % max_ops) if mutation_profil == "gestaffelt" else None
         m = mutiere(vorlage["wf"], rng, katalog, gruppen, versionen,
+                    hoechstens_ops=max_ops, op_anzahl=tiefe,
                     mit_namen=mit_namen, mit_nummern=mit_nummern)
         if m is None:
             continue
