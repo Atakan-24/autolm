@@ -1,0 +1,698 @@
+{
+ "zusammenfassung": {
+  "modell": "baseline: naechster Nachbar (Wort-Jaccard der Instruktion)",
+  "n": 98,
+  "gueltig": 1.0,
+  "typen_jaccard_mittel": 0.513,
+  "typen_jaccard_median": 0.5,
+  "hinweis": "Gueltigkeit ist per Konstruktion 100 % -- die aussagekraeftige Zahl ist die Typen-Ueberdeckung."
+ },
+ "einzel": [
+  {
+   "id": "t5001",
+   "nachbar_quelle_id": 5069,
+   "instruktions_aehnlichkeit": 0.583,
+   "typen_jaccard": 0.25,
+   "gueltig": true
+  },
+  {
+   "id": "t3847",
+   "nachbar_quelle_id": 6508,
+   "instruktions_aehnlichkeit": 0.531,
+   "typen_jaccard": 0.364,
+   "gueltig": true
+  },
+  {
+   "id": "t10450",
+   "nachbar_quelle_id": 6532,
+   "instruktions_aehnlichkeit": 0.649,
+   "typen_jaccard": 0.385,
+   "gueltig": true
+  },
+  {
+   "id": "t4972",
+   "nachbar_quelle_id": 13012,
+   "instruktions_aehnlichkeit": 0.8,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t13030",
+   "nachbar_quelle_id": 13211,
+   "instruktions_aehnlichkeit": 0.633,
+   "typen_jaccard": 0.667,
+   "gueltig": true
+  },
+  {
+   "id": "t7544",
+   "nachbar_quelle_id": 7448,
+   "instruktions_aehnlichkeit": 0.667,
+   "typen_jaccard": 0.692,
+   "gueltig": true
+  },
+  {
+   "id": "t5308",
+   "nachbar_quelle_id": 9197,
+   "instruktions_aehnlichkeit": 0.71,
+   "typen_jaccard": 0.545,
+   "gueltig": true
+  },
+  {
+   "id": "t4900",
+   "nachbar_quelle_id": 4795,
+   "instruktions_aehnlichkeit": 0.571,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t11182",
+   "nachbar_quelle_id": 3836,
+   "instruktions_aehnlichkeit": 0.483,
+   "typen_jaccard": 0.25,
+   "gueltig": true
+  },
+  {
+   "id": "t7398",
+   "nachbar_quelle_id": 8042,
+   "instruktions_aehnlichkeit": 0.536,
+   "typen_jaccard": 0.6,
+   "gueltig": true
+  },
+  {
+   "id": "t3889",
+   "nachbar_quelle_id": 8604,
+   "instruktions_aehnlichkeit": 0.576,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t3904",
+   "nachbar_quelle_id": 5008,
+   "instruktions_aehnlichkeit": 0.677,
+   "typen_jaccard": 0.583,
+   "gueltig": true
+  },
+  {
+   "id": "t4739",
+   "nachbar_quelle_id": 4092,
+   "instruktions_aehnlichkeit": 0.722,
+   "typen_jaccard": 0.8,
+   "gueltig": true
+  },
+  {
+   "id": "t8237",
+   "nachbar_quelle_id": 4102,
+   "instruktions_aehnlichkeit": 0.625,
+   "typen_jaccard": 0.583,
+   "gueltig": true
+  },
+  {
+   "id": "t10142",
+   "nachbar_quelle_id": 10096,
+   "instruktions_aehnlichkeit": 0.608,
+   "typen_jaccard": 0.619,
+   "gueltig": true
+  },
+  {
+   "id": "t6638",
+   "nachbar_quelle_id": 3835,
+   "instruktions_aehnlichkeit": 0.652,
+   "typen_jaccard": 0.833,
+   "gueltig": true
+  },
+  {
+   "id": "t3954",
+   "nachbar_quelle_id": 4815,
+   "instruktions_aehnlichkeit": 0.581,
+   "typen_jaccard": 0.455,
+   "gueltig": true
+  },
+  {
+   "id": "t4856",
+   "nachbar_quelle_id": 5922,
+   "instruktions_aehnlichkeit": 0.533,
+   "typen_jaccard": 0.5,
+   "gueltig": true
+  },
+  {
+   "id": "t4084",
+   "nachbar_quelle_id": 8684,
+   "instruktions_aehnlichkeit": 0.481,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t4349",
+   "nachbar_quelle_id": 7113,
+   "instruktions_aehnlichkeit": 0.682,
+   "typen_jaccard": 0.667,
+   "gueltig": true
+  },
+  {
+   "id": "t8967",
+   "nachbar_quelle_id": 9736,
+   "instruktions_aehnlichkeit": 0.588,
+   "typen_jaccard": 0.385,
+   "gueltig": true
+  },
+  {
+   "id": "t4225",
+   "nachbar_quelle_id": 11428,
+   "instruktions_aehnlichkeit": 0.586,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t8212",
+   "nachbar_quelle_id": 3836,
+   "instruktions_aehnlichkeit": 0.474,
+   "typen_jaccard": 0.273,
+   "gueltig": true
+  },
+  {
+   "id": "t4659",
+   "nachbar_quelle_id": 5706,
+   "instruktions_aehnlichkeit": 0.778,
+   "typen_jaccard": 0.889,
+   "gueltig": true
+  },
+  {
+   "id": "t4444",
+   "nachbar_quelle_id": 5920,
+   "instruktions_aehnlichkeit": 0.481,
+   "typen_jaccard": 0.556,
+   "gueltig": true
+  },
+  {
+   "id": "t4896",
+   "nachbar_quelle_id": 4214,
+   "instruktions_aehnlichkeit": 0.609,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t4930",
+   "nachbar_quelle_id": 10096,
+   "instruktions_aehnlichkeit": 0.54,
+   "typen_jaccard": 0.308,
+   "gueltig": true
+  },
+  {
+   "id": "t4095",
+   "nachbar_quelle_id": 4747,
+   "instruktions_aehnlichkeit": 0.6,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t4712",
+   "nachbar_quelle_id": 9385,
+   "instruktions_aehnlichkeit": 0.59,
+   "typen_jaccard": 0.533,
+   "gueltig": true
+  },
+  {
+   "id": "t5553",
+   "nachbar_quelle_id": 5324,
+   "instruktions_aehnlichkeit": 0.719,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t5887",
+   "nachbar_quelle_id": 5109,
+   "instruktions_aehnlichkeit": 0.44,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t5400",
+   "nachbar_quelle_id": 5778,
+   "instruktions_aehnlichkeit": 0.5,
+   "typen_jaccard": 0.35,
+   "gueltig": true
+  },
+  {
+   "id": "t5355",
+   "nachbar_quelle_id": 5655,
+   "instruktions_aehnlichkeit": 0.762,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t4247",
+   "nachbar_quelle_id": 4860,
+   "instruktions_aehnlichkeit": 0.571,
+   "typen_jaccard": 0.471,
+   "gueltig": true
+  },
+  {
+   "id": "t12839",
+   "nachbar_quelle_id": 4501,
+   "instruktions_aehnlichkeit": 0.559,
+   "typen_jaccard": 0.214,
+   "gueltig": true
+  },
+  {
+   "id": "t8860",
+   "nachbar_quelle_id": 10459,
+   "instruktions_aehnlichkeit": 0.534,
+   "typen_jaccard": 0.391,
+   "gueltig": true
+  },
+  {
+   "id": "t4059",
+   "nachbar_quelle_id": 5711,
+   "instruktions_aehnlichkeit": 0.613,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t4948",
+   "nachbar_quelle_id": 8574,
+   "instruktions_aehnlichkeit": 0.571,
+   "typen_jaccard": 0.444,
+   "gueltig": true
+  },
+  {
+   "id": "t5403",
+   "nachbar_quelle_id": 5011,
+   "instruktions_aehnlichkeit": 0.5,
+   "typen_jaccard": 0.182,
+   "gueltig": true
+  },
+  {
+   "id": "t6910",
+   "nachbar_quelle_id": 6906,
+   "instruktions_aehnlichkeit": 0.818,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t12686",
+   "nachbar_quelle_id": 12792,
+   "instruktions_aehnlichkeit": 0.622,
+   "typen_jaccard": 0.7,
+   "gueltig": true
+  },
+  {
+   "id": "t4612",
+   "nachbar_quelle_id": 4231,
+   "instruktions_aehnlichkeit": 0.528,
+   "typen_jaccard": 0.357,
+   "gueltig": true
+  },
+  {
+   "id": "t7077",
+   "nachbar_quelle_id": 7251,
+   "instruktions_aehnlichkeit": 0.68,
+   "typen_jaccard": 0.625,
+   "gueltig": true
+  },
+  {
+   "id": "t10750",
+   "nachbar_quelle_id": 5215,
+   "instruktions_aehnlichkeit": 0.45,
+   "typen_jaccard": 0.316,
+   "gueltig": true
+  },
+  {
+   "id": "t8095",
+   "nachbar_quelle_id": 12901,
+   "instruktions_aehnlichkeit": 0.538,
+   "typen_jaccard": 0.429,
+   "gueltig": true
+  },
+  {
+   "id": "t12325",
+   "nachbar_quelle_id": 4863,
+   "instruktions_aehnlichkeit": 0.684,
+   "typen_jaccard": 0.571,
+   "gueltig": true
+  },
+  {
+   "id": "t8429",
+   "nachbar_quelle_id": 8004,
+   "instruktions_aehnlichkeit": 0.605,
+   "typen_jaccard": 0.615,
+   "gueltig": true
+  },
+  {
+   "id": "t5457",
+   "nachbar_quelle_id": 7113,
+   "instruktions_aehnlichkeit": 0.625,
+   "typen_jaccard": 0.571,
+   "gueltig": true
+  },
+  {
+   "id": "t4106",
+   "nachbar_quelle_id": 4646,
+   "instruktions_aehnlichkeit": 0.595,
+   "typen_jaccard": 0.429,
+   "gueltig": true
+  },
+  {
+   "id": "t11572",
+   "nachbar_quelle_id": 7510,
+   "instruktions_aehnlichkeit": 0.621,
+   "typen_jaccard": 0.636,
+   "gueltig": true
+  },
+  {
+   "id": "t5499",
+   "nachbar_quelle_id": 5654,
+   "instruktions_aehnlichkeit": 0.611,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t5284",
+   "nachbar_quelle_id": 6410,
+   "instruktions_aehnlichkeit": 0.586,
+   "typen_jaccard": 0.571,
+   "gueltig": true
+  },
+  {
+   "id": "t5206",
+   "nachbar_quelle_id": 5183,
+   "instruktions_aehnlichkeit": 0.588,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t12299",
+   "nachbar_quelle_id": 11617,
+   "instruktions_aehnlichkeit": 0.5,
+   "typen_jaccard": 0.375,
+   "gueltig": true
+  },
+  {
+   "id": "t5777",
+   "nachbar_quelle_id": 4365,
+   "instruktions_aehnlichkeit": 0.564,
+   "typen_jaccard": 0.538,
+   "gueltig": true
+  },
+  {
+   "id": "t5793",
+   "nachbar_quelle_id": 5044,
+   "instruktions_aehnlichkeit": 0.571,
+   "typen_jaccard": 0.5,
+   "gueltig": true
+  },
+  {
+   "id": "t3930",
+   "nachbar_quelle_id": 4905,
+   "instruktions_aehnlichkeit": 0.649,
+   "typen_jaccard": 0.583,
+   "gueltig": true
+  },
+  {
+   "id": "t4966",
+   "nachbar_quelle_id": 5819,
+   "instruktions_aehnlichkeit": 0.478,
+   "typen_jaccard": 0.158,
+   "gueltig": true
+  },
+  {
+   "id": "t10198",
+   "nachbar_quelle_id": 5996,
+   "instruktions_aehnlichkeit": 0.6,
+   "typen_jaccard": 0.625,
+   "gueltig": true
+  },
+  {
+   "id": "t6935",
+   "nachbar_quelle_id": 5647,
+   "instruktions_aehnlichkeit": 0.595,
+   "typen_jaccard": 0.455,
+   "gueltig": true
+  },
+  {
+   "id": "t4686",
+   "nachbar_quelle_id": 5194,
+   "instruktions_aehnlichkeit": 0.484,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t8916",
+   "nachbar_quelle_id": 6538,
+   "instruktions_aehnlichkeit": 0.6,
+   "typen_jaccard": 0.391,
+   "gueltig": true
+  },
+  {
+   "id": "t6090",
+   "nachbar_quelle_id": 5706,
+   "instruktions_aehnlichkeit": 0.575,
+   "typen_jaccard": 0.533,
+   "gueltig": true
+  },
+  {
+   "id": "t5091",
+   "nachbar_quelle_id": 5315,
+   "instruktions_aehnlichkeit": 0.667,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t4577",
+   "nachbar_quelle_id": 4578,
+   "instruktions_aehnlichkeit": 0.553,
+   "typen_jaccard": 0.462,
+   "gueltig": true
+  },
+  {
+   "id": "t4250",
+   "nachbar_quelle_id": 3846,
+   "instruktions_aehnlichkeit": 0.718,
+   "typen_jaccard": 0.583,
+   "gueltig": true
+  },
+  {
+   "id": "t5163",
+   "nachbar_quelle_id": 5012,
+   "instruktions_aehnlichkeit": 0.656,
+   "typen_jaccard": 0.6,
+   "gueltig": true
+  },
+  {
+   "id": "t5516",
+   "nachbar_quelle_id": 4213,
+   "instruktions_aehnlichkeit": 0.478,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t4326",
+   "nachbar_quelle_id": 3931,
+   "instruktions_aehnlichkeit": 0.583,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t4877",
+   "nachbar_quelle_id": 5324,
+   "instruktions_aehnlichkeit": 0.656,
+   "typen_jaccard": 0.7,
+   "gueltig": true
+  },
+  {
+   "id": "t3945",
+   "nachbar_quelle_id": 5821,
+   "instruktions_aehnlichkeit": 0.679,
+   "typen_jaccard": 0.8,
+   "gueltig": true
+  },
+  {
+   "id": "t4805",
+   "nachbar_quelle_id": 4628,
+   "instruktions_aehnlichkeit": 0.63,
+   "typen_jaccard": 0.636,
+   "gueltig": true
+  },
+  {
+   "id": "t8463",
+   "nachbar_quelle_id": 8289,
+   "instruktions_aehnlichkeit": 0.581,
+   "typen_jaccard": 0.667,
+   "gueltig": true
+  },
+  {
+   "id": "t8971",
+   "nachbar_quelle_id": 13461,
+   "instruktions_aehnlichkeit": 0.68,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t4030",
+   "nachbar_quelle_id": 4310,
+   "instruktions_aehnlichkeit": 0.667,
+   "typen_jaccard": 0.5,
+   "gueltig": true
+  },
+  {
+   "id": "t9292",
+   "nachbar_quelle_id": 5794,
+   "instruktions_aehnlichkeit": 0.594,
+   "typen_jaccard": 0.667,
+   "gueltig": true
+  },
+  {
+   "id": "t9262",
+   "nachbar_quelle_id": 9003,
+   "instruktions_aehnlichkeit": 0.704,
+   "typen_jaccard": 0.75,
+   "gueltig": true
+  },
+  {
+   "id": "t4218",
+   "nachbar_quelle_id": 4217,
+   "instruktions_aehnlichkeit": 0.655,
+   "typen_jaccard": 0.667,
+   "gueltig": true
+  },
+  {
+   "id": "t5354",
+   "nachbar_quelle_id": 5335,
+   "instruktions_aehnlichkeit": 0.6,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t5656",
+   "nachbar_quelle_id": 5042,
+   "instruktions_aehnlichkeit": 0.619,
+   "typen_jaccard": 0.688,
+   "gueltig": true
+  },
+  {
+   "id": "t5243",
+   "nachbar_quelle_id": 5277,
+   "instruktions_aehnlichkeit": 0.727,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t4596",
+   "nachbar_quelle_id": 4601,
+   "instruktions_aehnlichkeit": 0.6,
+   "typen_jaccard": 1.0,
+   "gueltig": true
+  },
+  {
+   "id": "t5028",
+   "nachbar_quelle_id": 3967,
+   "instruktions_aehnlichkeit": 0.49,
+   "typen_jaccard": 0.167,
+   "gueltig": true
+  },
+  {
+   "id": "t5670",
+   "nachbar_quelle_id": 4667,
+   "instruktions_aehnlichkeit": 0.682,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t7501",
+   "nachbar_quelle_id": 5052,
+   "instruktions_aehnlichkeit": 0.545,
+   "typen_jaccard": 0.6,
+   "gueltig": true
+  },
+  {
+   "id": "t4329",
+   "nachbar_quelle_id": 5668,
+   "instruktions_aehnlichkeit": 0.654,
+   "typen_jaccard": 0.429,
+   "gueltig": true
+  },
+  {
+   "id": "t3987",
+   "nachbar_quelle_id": 4938,
+   "instruktions_aehnlichkeit": 0.64,
+   "typen_jaccard": 0.625,
+   "gueltig": true
+  },
+  {
+   "id": "t7422",
+   "nachbar_quelle_id": 4467,
+   "instruktions_aehnlichkeit": 0.528,
+   "typen_jaccard": 0.25,
+   "gueltig": true
+  },
+  {
+   "id": "t5351",
+   "nachbar_quelle_id": 5325,
+   "instruktions_aehnlichkeit": 0.647,
+   "typen_jaccard": 0.333,
+   "gueltig": true
+  },
+  {
+   "id": "t5372",
+   "nachbar_quelle_id": 4794,
+   "instruktions_aehnlichkeit": 0.586,
+   "typen_jaccard": 0.556,
+   "gueltig": true
+  },
+  {
+   "id": "t10483",
+   "nachbar_quelle_id": 4503,
+   "instruktions_aehnlichkeit": 0.649,
+   "typen_jaccard": 0.571,
+   "gueltig": true
+  },
+  {
+   "id": "t4001",
+   "nachbar_quelle_id": 10760,
+   "instruktions_aehnlichkeit": 0.698,
+   "typen_jaccard": 0.467,
+   "gueltig": true
+  },
+  {
+   "id": "t5174",
+   "nachbar_quelle_id": 4599,
+   "instruktions_aehnlichkeit": 0.625,
+   "typen_jaccard": 0.429,
+   "gueltig": true
+  },
+  {
+   "id": "t4370",
+   "nachbar_quelle_id": 7604,
+   "instruktions_aehnlichkeit": 0.5,
+   "typen_jaccard": 0.143,
+   "gueltig": true
+  },
+  {
+   "id": "t3980",
+   "nachbar_quelle_id": 4754,
+   "instruktions_aehnlichkeit": 0.571,
+   "typen_jaccard": 0.286,
+   "gueltig": true
+  },
+  {
+   "id": "t13460",
+   "nachbar_quelle_id": 5226,
+   "instruktions_aehnlichkeit": 0.5,
+   "typen_jaccard": 0.4,
+   "gueltig": true
+  },
+  {
+   "id": "t4927",
+   "nachbar_quelle_id": 4847,
+   "instruktions_aehnlichkeit": 0.567,
+   "typen_jaccard": 0.273,
+   "gueltig": true
+  },
+  {
+   "id": "t5098",
+   "nachbar_quelle_id": 12950,
+   "instruktions_aehnlichkeit": 0.6,
+   "typen_jaccard": 0.556,
+   "gueltig": true
+  }
+ ]
+}
