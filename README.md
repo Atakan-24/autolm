@@ -550,6 +550,27 @@ Vokabular kennt. Genau die Lücke, die Stufe 5 (eingeschränkte Dekodierung
 über den 825 echten Typen) schließen würde — jetzt mit einer gemessenen
 Fehlerquote, gegen die sie antreten muss.
 
+### Lokale Demo — eine Anweisung hinein, Workflow-JSON hinaus
+
+`workflow/demo.py` ist der kleine, API-freie Einstieg für einen vorhandenen
+Checkpoint. Er gibt die erzeugte Kurzschrift, die Tor-1–3-Prüfung und bei
+lesbarer Ausgabe das gerenderte n8n-Workflow-JSON aus. `--k` ist transparent
+Best-of-k gegen den bestehenden Validator, **keine** Korrektur oder Reparatur
+der Modellantwort:
+
+```bash
+python workflow/demo.py \
+  --checkpoints daten/workflow3/ckpt \
+  --tokenizer daten/workflow3/tokenizer.pkl \
+  --instruktion "Wenn ein Formular eingeht, warte einen Tag und sende eine Mail" \
+  --k 1 --out workflow.json
+```
+
+Die Checkpoints und der abgeleitete Datensatz sind bewusst nicht im Git-Repo;
+der Befehl ist auf dem dokumentierten Trainingsserver nach einem Lauf direkt
+ausführbar. Ein ungültiger Versuch endet mit Exit-Code 1 und bleibt sichtbar,
+statt ihn stillschweigend in einen gültigen Workflow umzuschreiben.
+
 ### Was das Modell heute nicht kann — gemessen, nicht vermutet
 
 - **Es schlägt Nachschlagen nicht.** Typen-Überdeckung gegen die Referenz
