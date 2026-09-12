@@ -7,7 +7,7 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen, Stufe 4 vermessen** — 384,8 Mio. echte
+> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. Frühere Angabe: — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
 > Eval-Harness gegen echtes n8n läuft, **neun Modelle gemessen (fünf gratis,
 > vier bezahlt): 60–100 % gültige Workflows, und 89 % aller Fehler sind
@@ -15,7 +15,7 @@ Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 > `emailSend`). Ein kostenloses Modell schlägt dabei zwei bezahlte
 > Frontier-Modelle. Genau die Lücke, die ein kleines Spezialmodell schließen
 > können sollte. 2.012 gültige Vorlagen ≈ 7,3 Mio. Token für Stufe 4.
-> Fehlt: der GPU-Trainingslauf und der Bau des Workflow-Modells.
+> Weiterhin offen: der GPU-Trainingslauf (Stufe 2).
 
 ---
 
@@ -77,7 +77,7 @@ Offline-Betrieb).
 | **1** | Datenpipeline: BPE-Encoder + -Trainer 39× beschleunigt, **384.762.231 echte TinyStories-Token** vortokenisiert (über dem 340M-Chinchilla-Ziel) | ✅ `kern/bpe_*`, `daten/vortokenisiere.py` |
 | **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — `kern/gpu_bootstrap.sh` startet ihn auf einer Miet-GPU ohne Browser | 🔶 Infrastruktur fertig, Training offen |
 | **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **neun Modelle gemessen (leicht + schwer, gratis + bezahlt), 2,41 $ tatsächliche API-Kosten** | ✅ `bewertung/` |
-| 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | 🔶 vermessen (2.012 Vorlagen ≈ 7,3 Mio. Token), Bau offen |
+| **4** | Workflow-Modell: Kurzschrift, Mutations-Pipeline (jede Mutante durch den Validator), Split nach Vorlagen-ID mit hartem Leck-Abbruch, eigener Tokenizer, **drei Fassungen auf CPU trainiert und auf 98 ungesehenen Vorlagen gemessen** | 🔶 `workflow/` — gebaut und gemessen (7M, CPU); GPU-Lauf und größeres Modell offen |
 | 5 | Eingeschränkte Dekodierung (falls nötig) | offen |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
 | 7 | Quantisierung, Hugging-Face-Demo | offen |
@@ -358,6 +358,246 @@ Rohmaterial (Median 17 Knoten pro Workflow) — die Schätzung aus dem Plan
 Erzeuger-Skript im Repo; vorher war sie ein einmal von Hand erzeugtes
 Artefakt — dieselbe Fehlerklasse wie der `tokenizer.pkl`, der beim ersten
 echten Colab-Lauf fehlte (Commit `3e7d1ce`).
+
+## Stufe 4 — das Workflow-Modell: gebaut, trainiert, gemessen (12.09.2026)
+
+Code in `workflow/` (neun Dateien, je eine Aufgabe), 16 Tests in
+`workflow/test_workflow.py`. Alles Erzeugte liegt unter `daten/workflow/`
+(gitignored, in drei Minuten neu erzeugbar) — die Zahlen daraus in
+`bewertung/ergebnisse/stufe4-*.json`.
+
+```bash
+python workflow/katalog.py            # 825 Typen mit Anzeigename/Kategorie aus der lokalen DB
+python workflow/baue_datensatz.py     # Vorlagen → Split → Mutanten → Tokenizer → uint16-Strom
+python -m unittest workflow.test_workflow
+python kern/trainiere.py --daten daten/workflow/train.bin --meta daten/workflow/meta.json \
+    --val-daten daten/workflow/val.bin --checkpoint-ordner daten/workflow/ckpt \
+    --dim 256 --schichten 6 --koepfe 4 --block 512 --batch 16 --schritte 800
+python workflow/erzeuge.py --checkpoints daten/workflow/ckpt --test daten/workflow/test.jsonl
+```
+
+### Drei Entscheidungen, die man kennen muss
+
+**1. Das Modell lernt eine Kurzschrift, nicht das rohe JSON.** Gemessen
+über die gültigen Vorlagen: n8n-JSON hat selbst *ohne* Parameter median
+3.156 Zeichen (p90 7.522) — bei Kontext 512 sähe ein kleines Modell die
+Hälfte der Workflows nie am Stück. Und fast alle dieser Zeichen sind
+Wiederholung (Anführungszeichen, UUIDs, Positionen), an der laut Stufe 3
+kein einziges Frontier-Modell scheitert. Die Kurzschrift behält, woran sie
+scheitern — den exakten Typnamen — und die Struktur:
+
+```
+wf Lead-Erinnerung
+n1 n8n-nodes-base.formTrigger@2.2 Formular
+n2 n8n-nodes-base.wait@1.1 Warte 24h
+n3 n8n-nodes-base.emailSend@2.1 Erinnerung senden
+n1 > n2
+n2 > n3
+```
+
+`kurzschrift.rendere()` rechnet daraus deterministisch das vollständige
+n8n-JSON (IDs per uuid5, Positionen im Raster, `parameters: {}`), und
+dieses JSON geht durch **dieselben vier Tore** wie die Antworten der neun
+Frontier-Modelle. Rundlauf über alle 1.978 Vorlagen: Typen und Kanten
+exakt erhalten, 0 Fehler. Median 802 Zeichen statt 3.156; nach BPE median
+118 Token, p90 290.
+
+**2. Die Typnamen werden ausgeschrieben, nicht als ein Sondertoken kodiert.**
+Das wäre die naheliegende Abkürzung: 825 Sondertoken, und `sendEmail` statt
+`emailSend` ist konstruktionsbedingt unmöglich. Genau deshalb nicht — es
+hätte die Kernmessung entwertet. 89 % der Frontier-Fehler sind
+Rechtschreibung in einem geschlossenen Vokabular; ein Modell, das die
+Typen Byte für Byte schreiben muss, muss sie *wirklich* auswendig können.
+Der eigene BPE-Tokenizer (4.096 Token, 7,6 Zeichen/Token auf dem Korpus)
+lernt häufige Typen als wenige Token, seltene bleiben Stückwerk. Die
+Sondertoken-Variante bleibt als Ablationsarm für Stufe 6 offen.
+
+**3. Split nach Vorlagen-ID, nicht nach Zeile — mit hartem Abbruch.** 90 %
+Training, 5 % Validierung, 5 % Test, gezogen über die Vorlagen-ID. Mutanten
+entstehen **nur** im Trainings-Split; Validierung und Test sind
+unveränderte echte Vorlagen. `pruefe_split()` beendet den Bau, wenn eine ID
+in zwei Splits liegt oder eine Test-Kurzschrift wortgleich im Training
+vorkommt — eine Warnung würde überlesen. Das ist dieselbe Fehlerklasse wie
+das `ANSAGE:`-Leck im Anruf-Klassifikator von `tgcrm`: dort stand die
+Antwort im Eingabetext, hier stünde die Mutante im Training und ihr Original
+im Test.
+
+### Der Datensatz — Generator und Bewerter sind dasselbe Orakel
+
+| | |
+|---|---|
+| gültige Vorlagen (ohne Haftnotizen, ohne kaputte Exporte) | **1.978** → 1.782 / 98 / 98 |
+| Mutanten im Training (4 Operationen, jede durch `tore.py`) | **35.640** |
+| Trainingsbeispiele (3 Instruktions-Varianten je Original + Mutanten) | **40.986** |
+| Trainings-Token | **6,54 Mio.** |
+| Instruktionen | deterministisch aus `use_cases` + Katalog-Anzeigenamen, kein LLM, 0 € |
+
+Die vier Mutationen (`workflow/mutationen.py`): Knoten permutieren (Kanten
+hängen an Namen — der Graph bleibt gleich, die Nummerierung nicht),
+Knoten auf ihren Katalog-Anzeigenamen umbenennen (die Brücke Typ ↔
+„Send Email"), **Typ gegen einen gleichartigen tauschen** (gleiche
+Kategorie, gleiche Auslöser- und Tool-Eigenschaft, gleiches Paket — der
+Weg zu allen 825 Typen statt der 60 häufigsten), Blattknoten entfernen.
+Kanten werden bewusst **nicht** erfunden: eine `ai_languageModel`-Kante von
+Slack in einen Agenten wäre für Tor 3 gültig und inhaltlich Unsinn; was der
+Validator nicht prüfen kann, darf der Generator nicht zufällig erzeugen.
+
+Was das Geruest **nicht** enthält: Parameter. Ein gerenderter Workflow ist
+importierbar, aber nicht konfiguriert (`httpMethod`, `channel`, `path` fehlen).
+Das ist eine bewusste Grenze dieser Fassung, keine Nebensache — sie steht
+hier, damit niemand „100 % gültig" für „fertig einsetzbar" hält.
+
+### Kontrolle vor dem Modell: was Abschreiben schafft
+
+`workflow/baseline_naechster_nachbar.py`: für jede Test-Instruktion das
+Trainingsbeispiel mit der größten Wort-Überlappung, dessen Kurzschrift
+unverändert abgegeben. Gültigkeit per Konstruktion 100 % (sagt nichts);
+**Typen-Überdeckung gegen die Referenz (Jaccard): 0,51**. Unter diesem Wert
+hat ein Modell nichts gelernt, was Nachschlagen nicht könnte
+(`bewertung/ergebnisse/stufe4-baseline-nn-2026-09-12.json`).
+
+### Drei Fassungen an einem Tag — jede aus einer gemessenen Schwäche der vorigen
+
+Ein 7-Mio.-Parameter-Modell (dim 256, 6 Schichten, 4 Köpfe, Kontext 512),
+trainiert auf CPU (4 Kerne, 3,5 s/Schritt, 2.400 Schritte ≈ 2–3,7 h je Lauf),
+identische Konfiguration für alle drei Fassungen — es ändert sich **nur die
+Textform**, die das Modell lernt. Bewertet auf 98 Vorlagen, die das Modell
+nie gesehen hat, Best-of-4 gegen den Validator (Temperatur 0,7, top-k 40).
+
+| Fassung | was das Modell schreibt | Val-Verlust @2400 | gültig@1 | gültig@4 | Typen-Jaccard | erfundene Typen |
+|---|---|---|---|---|---|---|
+| 1 — mit Knotennamen | `n3 n8n-nodes-base.emailSend@2.1 Erinnerung senden` | 3,83 | 20 %* | 40 %* | 0,26* | **0** |
+| 2 — ohne Namen | `n3 n8n-nodes-base.emailSend@2.1` | 3,31 | 19 % | 42 % | 0,35 | 1 (`boxTool`) |
+| 3 — ohne Namen, ohne Nummern, Verlust nur auf der Kurzschrift | `n8n-nodes-base.emailSend@2.1` | 4,62† | 36 % | 70 % | 0,41 · Kanten 0,04 | 1 Formatfehler (`set@3.3@…`) |
+| Kontrolle: nächster Nachbar | Trainingsbeispiel abschreiben | — | 100 % (Konstruktion) | — | 0,52 | 0 |
+
+† Fassung 3 misst den Verlust nur auf Kurzschrift-Token (Maske) — nicht mit den
+Zeilen darüber vergleichbar, dort zählt die leichter vorhersagbare Instruktion mit.
+
+\* Fassung 1 bei Schritt 2.400 nur auf n = 30 gemessen (Erzeugung ohne
+KV-Cache ist bei den langen Fassung-1-Ausgaben zu langsam für alle 98).
+Rohdaten: `bewertung/ergebnisse/stufe4-v{1,2,3}-*.json`.
+
+**Was in allen drei Läufen gleich war — und der eigentliche Befund:** in
+**keiner** Bewertung, auch nicht in den unlesbarsten Ausgaben, hat das
+Modell je einen Node-Typ erfunden. `sendEmail`, `imapTrigger`,
+`hubSpotTrigger` — die Fehler, an denen 89 % der Frontier-Fehlschläge
+hängen — kommen bei einem 7-Mio.-Modell praktisch nicht vor: über alle
+Bewertungen (rund 700 erzeugte Workflows) genau **ein** erfundener Typ,
+`boxTool` — `box` gibt es, nur ohne Tool-Variante. Selbst dieser Fehler ist
+ein Regelfehler (Tool-Suffix auf einen Typ, der keins hat), kein
+Buchstabendreher. Das Vokabular auswendig zu können ist die leichte Hälfte der Aufgabe.
+
+**Woran es stattdessen scheitert, Fassung für Fassung:**
+
+- **Fassung 1:** die frei getippten Knotennamen („Answer- Get Flag", „GET -
+  DB - STE KE KE KE …") sind Rauschen, das kein Modell dieser Größe
+  vorhersagen kann. Greedy-Dekodierung lief darin in Wiederholungsschleifen
+  und verlor die Nummerierung; erst Sampling brachte 20 % / 40 %. Die Namen
+  tragen für Tor 1–4 nichts — weg damit, `rendere()` setzt den
+  Katalog-Anzeigenamen.
+- **Fassung 2:** ohne Namen sank der Val-Verlust schneller (3,31 statt 3,83)
+  und die Typen-Überdeckung stieg auf 0,35 — aber auch bei Schritt 2.400
+  scheitern 57 von 98 Ausgaben, davon 28 an einer **doppelten Knotennummer**
+  und 9 an einer Kante zu einer Nummer, die es nicht gibt; die Kanten-
+  Überdeckung liegt bei 0,03. Schon bei Schritt 800 war das Muster sichtbar — `n7 … n7 … n7`, `n11 n12 n11`: das Modell
+  kopiert die letzte Nummer statt hochzuzählen. Und es ignorierte die
+  Instruktion: für „Extract from File → Set → Code" kam eine Agenten-Kette.
+  Zwei Befunde, zwei Änderungen: Knotenzeilen ohne Nummer (die Nummer ist
+  die Zeilenposition; Kanten behalten absolute Nummern, ein Zählfehler dort
+  ist ein falscher Verweis, kein Abbruch — deshalb misst Fassung 3 zusätzlich
+  die **Kanten-Überdeckung**), und der Verlust zählt nur noch auf der
+  Kurzschrift, nicht auf der Instruktion (`--maske`; vorher kam ein Drittel
+  des Verlusts aus dem Vorhersagen der Instruktion selbst).
+- **Und ein Fund im eigenen Werkzeug:** beim ersten Bau von Fassung 2 hat
+  der harte Split-Check abgebrochen — 7 Validierungs-Kurzschriften standen
+  wortgleich im Training. Ohne Namen sind verschiedene Vorlagen oft
+  strukturgleich (1.978 Vorlagen = 1.927 verschiedene Texte). Der Split
+  zieht seitdem je Text-Gruppe, und Trainingszeilen, die textgleich mit
+  Validierung/Test sind, fliegen raus (3). Ein Leck, das eine Warnung
+  überlesen hätte — der Abbruch hat es erzwungen.
+
+
+### Gegen die Frontier-Modelle — dieselben 15 Instruktionen, alle vier Tore, echter n8n-Import
+
+Fassung 3, Schritt 2.400, die 15 deutschen Instruktionen aus Stufe 3 (die
+das Modell nie gesehen hat, und die anders formuliert sind als alles im
+Training), Ausgabe durch `bewertung/vergleich.py` — also derselbe Weg
+inklusive Tor 4 wie bei den neun großen Modellen:
+
+| | n | Tor 1 | Tor 2 | Tor 3 | Tor 4 | gültig | 95-%-KI |
+|---|---|---|---|---|---|---|---|
+| autolm 7M, **ein Versuch** (k = 1) | 15 | 67 % | 47 % | 67 % | 47 % | **47 %** | [20 %, 73 %] |
+| autolm 7M, Best-of-8 gegen den Validator | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+
+**Die ehrliche Lesart, beide Zeilen:** die Frontier-Modelle hatten *einen*
+Versuch — die Vergleichszahl ist also **47 %**, und damit liegt das
+7-Mio.-Modell **unter allen neun** (60–100 %). Die Best-of-8-Zeile ist kein
+Sieg, sondern die Messung aus dem Plan (Gültigkeit@1 gegen Gültigkeit@k):
+mit dem Validator in der Schleife — und der ist zugleich das Orakel, das
+die Trainingsdaten erzeugt hat — kommen alle 15 durch, inklusive Import in
+das echte n8n 2.25.6. Das ist die Bauart, die ein kleines Modell praktisch
+nutzbar macht, und sie steht den großen Modellen genauso offen.
+
+**Und der Befund, der die eigene These einschränkt:** auf diesen 15
+*fremd formulierten* Instruktionen hat das Modell **dreimal einen Typ
+erfunden** — `s@2Tool`, `herMapTool`, `googleAdsTrigger` (es gibt
+`googleAds`, aber keinen Trigger). Auf den 98 Test-Vorlagen, deren
+Instruktionen nach derselben Schablone gebaut sind wie das Training, war es
+einmal in rund 400 Ausgaben. Auswendigkönnen reicht also **innerhalb** der
+Verteilung; sobald die Formulierung fremd wird, rät auch ein Modell, das das
+Vokabular kennt. Genau die Lücke, die Stufe 5 (eingeschränkte Dekodierung
+über den 825 echten Typen) schließen würde — jetzt mit einer gemessenen
+Fehlerquote, gegen die sie antreten muss.
+
+### Lokale Demo — eine Anweisung hinein, Workflow-JSON hinaus
+
+`workflow/demo.py` ist der kleine, API-freie Einstieg für einen vorhandenen
+Checkpoint. Er gibt die erzeugte Kurzschrift, die Tor-1–3-Prüfung und bei
+lesbarer Ausgabe das gerenderte n8n-Workflow-JSON aus. `--k` ist transparent
+Best-of-k gegen den bestehenden Validator, **keine** Korrektur oder Reparatur
+der Modellantwort:
+
+```bash
+python workflow/demo.py \
+  --checkpoints daten/workflow3/ckpt \
+  --tokenizer daten/workflow3/tokenizer.pkl \
+  --instruktion "Wenn ein Formular eingeht, warte einen Tag und sende eine Mail" \
+  --k 1 --out workflow.json
+```
+
+Die Checkpoints und der abgeleitete Datensatz sind bewusst nicht im Git-Repo;
+der Befehl ist auf dem dokumentierten Trainingsserver nach einem Lauf direkt
+ausführbar. Ein ungültiger Versuch endet mit Exit-Code 1 und bleibt sichtbar,
+statt ihn stillschweigend in einen gültigen Workflow umzuschreiben.
+
+### Was das Modell heute nicht kann — gemessen, nicht vermutet
+
+- **Es schlägt Nachschlagen nicht.** Typen-Überdeckung gegen die Referenz
+  0,41 (Fassung 3), die Nächster-Nachbar-Kontrolle liegt bei 0,52; bei den
+  Kanten 0,04 gegen 0,20. Das Modell erzeugt gültige Gerüste, aber noch
+  nicht *die* Gerüste, die die Instruktion meint. Ein Modell, das unter der
+  Abschreib-Kontrolle liegt, hat auf dieser Achse nichts gelernt, was ein
+  Index nicht könnte — das steht hier, damit es nicht in einer Fußnote
+  verschwindet.
+- **Es überpasst sich an die Mutanten.** Trainingsverlust 3,19, Validierung
+  4,62 bei Schritt 2.400, Plateau ab 1.600 — 20 Mutanten je Vorlage sind
+  offenbar zu ähnlich. Weniger Mutanten mit mehr Varianz, oder mehr echte
+  Vorlagen, ist der nächste Hebel, nicht mehr Schritte.
+- **Kanten sind das schwächste Glied.** Absolute Nummern in `n3 > n5`
+  verlangen Zählen, und Zählen ist genau das, was das Modell in Fassung 2
+  nicht konnte. Die Kanten-Überdeckung von 0,04 sagt: die Knoten stimmen
+  oft, ihre Verdrahtung fast nie. Eine relative Kantenschreibweise
+  (Verweis „k Zeilen darüber") wurde gemessen und verworfen — 26 % der
+  Vorlagen haben Zyklen, und nur 59 % der Kanten liegen innerhalb von drei
+  Zeilen.
+- **7 Mio. Parameter auf CPU** sind die Untergrenze, nicht die Wahl. Die
+  14-Mio.-Konfiguration braucht 6,3 s/Schritt auf vier Kernen; der
+  GPU-Lauf (Stufe 2) hängt weiter an einem Miet-GPU-Zugang.
+
+Alle Zahlen: `bewertung/ergebnisse/stufe4-*.json`, die 15 gerenderten
+Kandidaten in `bewertung/eigenes_modell_v3_antworten.jsonl` (Best-of-8) und
+`bewertung/eigenes_modell_v3_k1_antworten.jsonl` (ein Versuch).
 
 ## Schritt 1 — was drinsteht
 

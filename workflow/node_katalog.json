@@ -1,0 +1,5783 @@
+{
+ "quelle": "nodes-Tabelle der n8n-mcp-Datenbank, gefiltert auf bewertung/echte_node_typen.json",
+ "erzeugt_von": "workflow/katalog.py",
+ "anzahl": 825,
+ "mit_kategorie": 825,
+ "typen": {
+  "@n8n/n8n-nodes-langchain.agent": {
+   "anzeige": "AI Agent",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.agentTool": {
+   "anzeige": "AI Agent Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.alibabaCloud": {
+   "anzeige": "Qwen Cloud",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.alibabaCloudTool": {
+   "anzeige": "Qwen Cloud Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.anthropic": {
+   "anzeige": "Anthropic",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.anthropicTool": {
+   "anzeige": "Anthropic Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chainLlm": {
+   "anzeige": "Basic LLM Chain",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chainRetrievalQa": {
+   "anzeige": "Question and Answer Chain",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chainSummarization": {
+   "anzeige": "Summarization Chain",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chat": {
+   "anzeige": "Chat",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chatHubVectorStorePGVector": {
+   "anzeige": "ChatHub PGVector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chatHubVectorStorePinecone": {
+   "anzeige": "ChatHub Pinecone Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chatHubVectorStoreQdrant": {
+   "anzeige": "ChatHub Qdrant Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chatTool": {
+   "anzeige": "Chat Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.chatTrigger": {
+   "anzeige": "Chat Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.code": {
+   "anzeige": "LangChain Code",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.documentBinaryInputLoader": {
+   "anzeige": "Binary Input Loader",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.documentDefaultDataLoader": {
+   "anzeige": "Default Data Loader",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.documentGithubLoader": {
+   "anzeige": "GitHub Document Loader",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.documentJsonInputLoader": {
+   "anzeige": "JSON Input Loader",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsAwsBedrock": {
+   "anzeige": "Embeddings AWS Bedrock",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsAzureOpenAi": {
+   "anzeige": "Embeddings Azure OpenAI",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsCohere": {
+   "anzeige": "Embeddings Cohere",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini": {
+   "anzeige": "Embeddings Google Gemini",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsGoogleVertex": {
+   "anzeige": "Embeddings Google Vertex",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference": {
+   "anzeige": "Embeddings Hugging Face Inference",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsLemonade": {
+   "anzeige": "Embeddings Lemonade",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsMistralCloud": {
+   "anzeige": "Embeddings Mistral Cloud",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsOllama": {
+   "anzeige": "Embeddings Ollama",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsOpenAi": {
+   "anzeige": "Embeddings OpenAI",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsOracleDb": {
+   "anzeige": "Embeddings Oracle Database",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.googleGemini": {
+   "anzeige": "Google Gemini",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.googleGeminiTool": {
+   "anzeige": "Google Gemini Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.guardrails": {
+   "anzeige": "Guardrails",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.informationExtractor": {
+   "anzeige": "Information Extractor",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAlibabaCloud": {
+   "anzeige": "Qwen Cloud Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAnthropic": {
+   "anzeige": "Anthropic Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAwsBedrock": {
+   "anzeige": "AWS Bedrock Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAzureOpenAi": {
+   "anzeige": "Azure OpenAI Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatCohere": {
+   "anzeige": "Cohere Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatDeepSeek": {
+   "anzeige": "DeepSeek Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatGoogleGemini": {
+   "anzeige": "Google Gemini Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatGoogleVertex": {
+   "anzeige": "Google Vertex Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatGroq": {
+   "anzeige": "Groq Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatLemonade": {
+   "anzeige": "Lemonade Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatMinimax": {
+   "anzeige": "MiniMax Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatMistralCloud": {
+   "anzeige": "Mistral Cloud Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatMoonshot": {
+   "anzeige": "Moonshot Kimi Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatNvidia": {
+   "anzeige": "NVIDIA Nemotron Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatOllama": {
+   "anzeige": "Ollama Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatOpenAi": {
+   "anzeige": "OpenAI Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatOpenRouter": {
+   "anzeige": "OpenRouter Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatVercelAiGateway": {
+   "anzeige": "Vercel AI Gateway Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmChatXAiGrok": {
+   "anzeige": "xAI Grok Chat Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmCohere": {
+   "anzeige": "Cohere Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmLemonade": {
+   "anzeige": "Lemonade Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmOllama": {
+   "anzeige": "Ollama Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmOpenAi": {
+   "anzeige": "OpenAI Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference": {
+   "anzeige": "Hugging Face Inference Model",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.manualChatTrigger": {
+   "anzeige": "Manual Chat Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.mcpClient": {
+   "anzeige": "MCP Client",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.mcpClientTool": {
+   "anzeige": "MCP Client Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.mcpRegistryClientTool": {
+   "anzeige": "MCP Registry Client (internal)",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.mcpTrigger": {
+   "anzeige": "MCP Server Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryBufferWindow": {
+   "anzeige": "Simple Memory",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryChatRetriever": {
+   "anzeige": "Chat Messages Retriever",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryManager": {
+   "anzeige": "Chat Memory Manager",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryMongoDbChat": {
+   "anzeige": "MongoDB Chat Memory",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryMotorhead": {
+   "anzeige": "Motorhead",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryPostgresChat": {
+   "anzeige": "Postgres Chat Memory",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryRedisChat": {
+   "anzeige": "Redis Chat Memory",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryXata": {
+   "anzeige": "Xata",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.memoryZep": {
+   "anzeige": "Zep",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.microsoftAgent365Trigger": {
+   "anzeige": "Microsoft Agent 365 Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.minimax": {
+   "anzeige": "MiniMax",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.minimaxTool": {
+   "anzeige": "MiniMax Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.modelSelector": {
+   "anzeige": "Model Selector",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.moonshot": {
+   "anzeige": "Moonshot Kimi",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.moonshotTool": {
+   "anzeige": "Moonshot Kimi Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.ollama": {
+   "anzeige": "Ollama",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.ollamaTool": {
+   "anzeige": "Ollama Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.openAi": {
+   "anzeige": "OpenAI",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.openAiAssistant": {
+   "anzeige": "OpenAI Assistant",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.outputParserAutofixing": {
+   "anzeige": "Auto-fixing Output Parser",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.outputParserItemList": {
+   "anzeige": "Item List Output Parser",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.outputParserStructured": {
+   "anzeige": "Structured Output Parser",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.rerankerCohere": {
+   "anzeige": "Reranker Cohere",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.retrieverContextualCompression": {
+   "anzeige": "Contextual Compression Retriever",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.retrieverMultiQuery": {
+   "anzeige": "MultiQuery Retriever",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.retrieverVectorStore": {
+   "anzeige": "Vector Store Retriever",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.retrieverWorkflow": {
+   "anzeige": "Workflow Retriever",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.sentimentAnalysis": {
+   "anzeige": "Sentiment Analysis",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.textClassifier": {
+   "anzeige": "Text Classifier",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter": {
+   "anzeige": "Character Text Splitter",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter": {
+   "anzeige": "Recursive Character Text Splitter",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter": {
+   "anzeige": "Token Splitter",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolCalculator": {
+   "anzeige": "Calculator",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolCode": {
+   "anzeige": "Code Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolExecutor": {
+   "anzeige": "Tool Executor",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolHttpRequest": {
+   "anzeige": "HTTP Request Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolSearXng": {
+   "anzeige": "SearXNG",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolSerpApi": {
+   "anzeige": "SerpApi (Google Search)",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolThink": {
+   "anzeige": "Think Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolVectorStore": {
+   "anzeige": "Vector Store Question Answer Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolWikipedia": {
+   "anzeige": "Wikipedia",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolWolframAlpha": {
+   "anzeige": "Wolfram|Alpha",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.toolWorkflow": {
+   "anzeige": "Call n8n Sub-Workflow Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreAzureAISearch": {
+   "anzeige": "Azure AI Search Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreChromaDB": {
+   "anzeige": "Chroma Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreInMemory": {
+   "anzeige": "Simple Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreInMemoryInsert": {
+   "anzeige": "In Memory Vector Store Insert",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreInMemoryLoad": {
+   "anzeige": "In Memory Vector Store Load",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreMilvus": {
+   "anzeige": "Milvus Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas": {
+   "anzeige": "MongoDB Atlas Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreOracleDBVector": {
+   "anzeige": "Oracle Database Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePGVector": {
+   "anzeige": "Postgres PGVector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePinecone": {
+   "anzeige": "Pinecone Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePineconeInsert": {
+   "anzeige": "Pinecone: Insert",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePineconeLoad": {
+   "anzeige": "Pinecone: Load",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreQdrant": {
+   "anzeige": "Qdrant Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreRedis": {
+   "anzeige": "Redis Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabase": {
+   "anzeige": "Supabase Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabaseInsert": {
+   "anzeige": "Supabase: Insert",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabaseLoad": {
+   "anzeige": "Supabase: Load",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreWeaviate": {
+   "anzeige": "Weaviate Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreZep": {
+   "anzeige": "Zep Vector Store",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreZepInsert": {
+   "anzeige": "Zep Vector Store: Insert",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreZepLoad": {
+   "anzeige": "Zep Vector Store: Load",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "@n8n/n8n-nodes-langchain"
+  },
+  "n8n-nodes-base.Brandfetch": {
+   "anzeige": "Brandfetch",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.BrandfetchTool": {
+   "anzeige": "Brandfetch Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.actionNetwork": {
+   "anzeige": "Action Network",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.actionNetworkTool": {
+   "anzeige": "Action Network Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.activeCampaign": {
+   "anzeige": "ActiveCampaign",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.activeCampaignTool": {
+   "anzeige": "ActiveCampaign Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.activeCampaignTrigger": {
+   "anzeige": "ActiveCampaign Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.acuitySchedulingTrigger": {
+   "anzeige": "Acuity Scheduling Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.adalo": {
+   "anzeige": "Adalo",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.adaloTool": {
+   "anzeige": "Adalo Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.affinity": {
+   "anzeige": "Affinity",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.affinityTool": {
+   "anzeige": "Affinity Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.affinityTrigger": {
+   "anzeige": "Affinity Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.aggregate": {
+   "anzeige": "Aggregate",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.agileCrm": {
+   "anzeige": "Agile CRM",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.agileCrmTool": {
+   "anzeige": "Agile CRM Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.aiTransform": {
+   "anzeige": "AI Transform",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.airtable": {
+   "anzeige": "Airtable",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.airtableTool": {
+   "anzeige": "Airtable Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.airtableTrigger": {
+   "anzeige": "Airtable Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.airtop": {
+   "anzeige": "Airtop",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.airtopTool": {
+   "anzeige": "Airtop Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.amqp": {
+   "anzeige": "AMQP Sender",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.amqpTool": {
+   "anzeige": "AMQP Sender Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.amqpTrigger": {
+   "anzeige": "AMQP Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.apiTemplateIo": {
+   "anzeige": "APITemplate.io",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.apiTemplateIoTool": {
+   "anzeige": "APITemplate.io Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.asana": {
+   "anzeige": "Asana",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.asanaTool": {
+   "anzeige": "Asana Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.asanaTrigger": {
+   "anzeige": "Asana Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.autopilot": {
+   "anzeige": "Autopilot",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.autopilotTool": {
+   "anzeige": "Autopilot Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.autopilotTrigger": {
+   "anzeige": "Autopilot Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsCertificateManager": {
+   "anzeige": "AWS Certificate Manager",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsCognito": {
+   "anzeige": "AWS Cognito",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsComprehend": {
+   "anzeige": "AWS Comprehend",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsDynamoDb": {
+   "anzeige": "AWS DynamoDB",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsElb": {
+   "anzeige": "AWS ELB",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsIam": {
+   "anzeige": "AWS IAM",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsLambda": {
+   "anzeige": "AWS Lambda",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsLambdaTool": {
+   "anzeige": "AWS Lambda Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsRekognition": {
+   "anzeige": "AWS Rekognition",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsS3": {
+   "anzeige": "AwsS3",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsS3Tool": {
+   "anzeige": "AwsS3 Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsSes": {
+   "anzeige": "AWS SES",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsSesTool": {
+   "anzeige": "AWS SES Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsSns": {
+   "anzeige": "AWS SNS",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsSnsTool": {
+   "anzeige": "AWS SNS Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsSnsTrigger": {
+   "anzeige": "AWS SNS Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsSqs": {
+   "anzeige": "AWS SQS",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsTextract": {
+   "anzeige": "AWS Textract",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsTextractTool": {
+   "anzeige": "AWS Textract Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsTranscribe": {
+   "anzeige": "AWS Transcribe",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.awsTranscribeTool": {
+   "anzeige": "AWS Transcribe Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.azureCosmosDb": {
+   "anzeige": "Azure Cosmos DB",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.azureStorage": {
+   "anzeige": "Azure Storage",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bambooHr": {
+   "anzeige": "BambooHR",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bambooHrTool": {
+   "anzeige": "BambooHR Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bannerbear": {
+   "anzeige": "Bannerbear",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.baserow": {
+   "anzeige": "Baserow",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.baserowTool": {
+   "anzeige": "Baserow Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.beeminder": {
+   "anzeige": "Beeminder",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.beeminderTool": {
+   "anzeige": "Beeminder Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bitbucketTrigger": {
+   "anzeige": "Bitbucket Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bitly": {
+   "anzeige": "Bitly",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bitlyTool": {
+   "anzeige": "Bitly Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bitwarden": {
+   "anzeige": "Bitwarden",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bitwardenTool": {
+   "anzeige": "Bitwarden Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.box": {
+   "anzeige": "Box",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.boxTrigger": {
+   "anzeige": "Box Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bubble": {
+   "anzeige": "Bubble",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.bubbleTool": {
+   "anzeige": "Bubble Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.calTrigger": {
+   "anzeige": "Cal.com Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.calendlyTrigger": {
+   "anzeige": "Calendly Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.chargebee": {
+   "anzeige": "Chargebee",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.chargebeeTool": {
+   "anzeige": "Chargebee Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.chargebeeTrigger": {
+   "anzeige": "Chargebee Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.circleCi": {
+   "anzeige": "CircleCI",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.circleCiTool": {
+   "anzeige": "CircleCI Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ciscoWebex": {
+   "anzeige": "Webex by Cisco",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ciscoWebexTool": {
+   "anzeige": "Webex by Cisco Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ciscoWebexTrigger": {
+   "anzeige": "Webex by Cisco Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.citrixAdc": {
+   "anzeige": "Netscaler ADC",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clearbit": {
+   "anzeige": "Clearbit",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clearbitTool": {
+   "anzeige": "Clearbit Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clickUp": {
+   "anzeige": "ClickUp",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clickUpTool": {
+   "anzeige": "ClickUp Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clickUpTrigger": {
+   "anzeige": "ClickUp Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clockify": {
+   "anzeige": "Clockify",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clockifyTool": {
+   "anzeige": "Clockify Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.clockifyTrigger": {
+   "anzeige": "Clockify Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cloudflare": {
+   "anzeige": "Cloudflare",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cloudflareTool": {
+   "anzeige": "Cloudflare Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cockpit": {
+   "anzeige": "Cockpit",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cockpitTool": {
+   "anzeige": "Cockpit Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.coda": {
+   "anzeige": "Coda",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.codaTool": {
+   "anzeige": "Coda Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.code": {
+   "anzeige": "Code",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.coinGecko": {
+   "anzeige": "CoinGecko",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.coinGeckoTool": {
+   "anzeige": "CoinGecko Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.compareDatasets": {
+   "anzeige": "Compare Datasets",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.compression": {
+   "anzeige": "Compression",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.compressionTool": {
+   "anzeige": "Compression Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.contentful": {
+   "anzeige": "Contentful",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.contentfulTool": {
+   "anzeige": "Contentful Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.convertKit": {
+   "anzeige": "ConvertKit",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.convertKitTool": {
+   "anzeige": "ConvertKit Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.convertKitTrigger": {
+   "anzeige": "ConvertKit Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.convertToFile": {
+   "anzeige": "Convert to File",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.copper": {
+   "anzeige": "Copper",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.copperTool": {
+   "anzeige": "Copper Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.copperTrigger": {
+   "anzeige": "Copper Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cortex": {
+   "anzeige": "Cortex",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.crateDb": {
+   "anzeige": "CrateDB",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.crateDbTool": {
+   "anzeige": "CrateDB Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cron": {
+   "anzeige": "Cron",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.crypto": {
+   "anzeige": "Crypto",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.cryptoTool": {
+   "anzeige": "Crypto Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.currents": {
+   "anzeige": "Currents",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.currentsTool": {
+   "anzeige": "Currents Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.currentsTrigger": {
+   "anzeige": "Currents Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.customerIo": {
+   "anzeige": "Customer.io",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.customerIoTool": {
+   "anzeige": "Customer.io Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.customerIoTrigger": {
+   "anzeige": "Customer.io Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dataTable": {
+   "anzeige": "Data table",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dataTableTool": {
+   "anzeige": "Data table Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.databricks": {
+   "anzeige": "Databricks",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.databricksTool": {
+   "anzeige": "Databricks Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dateTime": {
+   "anzeige": "Date & Time",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dateTimeTool": {
+   "anzeige": "Date & Time Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.debugHelper": {
+   "anzeige": "DebugHelper",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.deepL": {
+   "anzeige": "DeepL",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.deepLTool": {
+   "anzeige": "DeepL Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.demio": {
+   "anzeige": "Demio",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.demioTool": {
+   "anzeige": "Demio Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dhl": {
+   "anzeige": "DHL",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dhlTool": {
+   "anzeige": "DHL Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.discord": {
+   "anzeige": "Discord",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.discordTool": {
+   "anzeige": "Discord Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.discourse": {
+   "anzeige": "Discourse",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.discourseTool": {
+   "anzeige": "Discourse Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.disqus": {
+   "anzeige": "Disqus",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.drift": {
+   "anzeige": "Drift",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.driftTool": {
+   "anzeige": "Drift Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dropbox": {
+   "anzeige": "Dropbox",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dropboxTool": {
+   "anzeige": "Dropbox Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dropcontact": {
+   "anzeige": "Dropcontact",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dropcontactTool": {
+   "anzeige": "Dropcontact Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.dynamicCredentialCheck": {
+   "anzeige": "Check Credential Status",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.e2eTest": {
+   "anzeige": "E2E Test",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.e2eTestTool": {
+   "anzeige": "E2E Test Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.editImage": {
+   "anzeige": "Edit Image",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.egoi": {
+   "anzeige": "E-goi",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.egoiTool": {
+   "anzeige": "E-goi Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.elasticSecurity": {
+   "anzeige": "Elastic Security",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.elasticSecurityTool": {
+   "anzeige": "Elastic Security Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.elasticsearch": {
+   "anzeige": "Elasticsearch",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.elasticsearchTool": {
+   "anzeige": "Elasticsearch Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.emailReadImap": {
+   "anzeige": "Email Trigger (IMAP)",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.emailSend": {
+   "anzeige": "Send Email",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.emailSendTool": {
+   "anzeige": "Send Email Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.emelia": {
+   "anzeige": "Emelia",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.emeliaTool": {
+   "anzeige": "Emelia Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.emeliaTrigger": {
+   "anzeige": "Emelia Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.erpNext": {
+   "anzeige": "ERPNext",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.erpNextTool": {
+   "anzeige": "ERPNext Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.errorTrigger": {
+   "anzeige": "Error Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.evaluation": {
+   "anzeige": "Evaluation",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.evaluationTrigger": {
+   "anzeige": "Evaluation Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.eventbriteTrigger": {
+   "anzeige": "Eventbrite Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.executeCommand": {
+   "anzeige": "Execute Command",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.executeCommandTool": {
+   "anzeige": "Execute Command Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.executeWorkflow": {
+   "anzeige": "Execute Sub-workflow",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.executeWorkflowTrigger": {
+   "anzeige": "Execute Workflow Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.executionData": {
+   "anzeige": "Execution Data",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.extractFromFile": {
+   "anzeige": "Extract from File",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.facebookGraphApi": {
+   "anzeige": "Facebook Graph API",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.facebookGraphApiTool": {
+   "anzeige": "Facebook Graph API Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.facebookLeadAdsTrigger": {
+   "anzeige": "Facebook Lead Ads Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.facebookTrigger": {
+   "anzeige": "Facebook Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.figmaTrigger": {
+   "anzeige": "Figma Trigger (Beta)",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.filemaker": {
+   "anzeige": "FileMaker",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.filemakerTool": {
+   "anzeige": "FileMaker Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.filter": {
+   "anzeige": "Filter",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.flow": {
+   "anzeige": "Flow",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.flowTrigger": {
+   "anzeige": "Flow Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.form": {
+   "anzeige": "n8n Form",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.formIoTrigger": {
+   "anzeige": "Form.io Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.formTrigger": {
+   "anzeige": "n8n Form Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.formstackTrigger": {
+   "anzeige": "Formstack Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.freshdesk": {
+   "anzeige": "Freshdesk",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.freshdeskTool": {
+   "anzeige": "Freshdesk Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.freshservice": {
+   "anzeige": "Freshservice",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.freshserviceTool": {
+   "anzeige": "Freshservice Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.freshworksCrm": {
+   "anzeige": "Freshworks CRM",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.freshworksCrmTool": {
+   "anzeige": "Freshworks CRM Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ftp": {
+   "anzeige": "FTP",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.function": {
+   "anzeige": "Function",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.functionItem": {
+   "anzeige": "Function Item",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gSuiteAdmin": {
+   "anzeige": "Google Workspace Admin",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gSuiteAdminTool": {
+   "anzeige": "Google Workspace Admin Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.getResponse": {
+   "anzeige": "GetResponse",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.getResponseTool": {
+   "anzeige": "GetResponse Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.getResponseTrigger": {
+   "anzeige": "GetResponse Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ghost": {
+   "anzeige": "Ghost",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ghostTool": {
+   "anzeige": "Ghost Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.git": {
+   "anzeige": "Git",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gitTool": {
+   "anzeige": "Git Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.github": {
+   "anzeige": "GitHub",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.githubTool": {
+   "anzeige": "GitHub Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.githubTrigger": {
+   "anzeige": "Github Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gitlab": {
+   "anzeige": "GitLab",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gitlabTool": {
+   "anzeige": "GitLab Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gitlabTrigger": {
+   "anzeige": "GitLab Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gmail": {
+   "anzeige": "Gmail",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gmailTool": {
+   "anzeige": "Gmail Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gmailTrigger": {
+   "anzeige": "Gmail Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.goToWebinar": {
+   "anzeige": "GoToWebinar",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.goToWebinarTool": {
+   "anzeige": "GoToWebinar Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gong": {
+   "anzeige": "Gong",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gongTool": {
+   "anzeige": "Gong Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleAds": {
+   "anzeige": "Google Ads",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleAdsTool": {
+   "anzeige": "Google Ads Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleAnalytics": {
+   "anzeige": "Google Analytics",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleAnalyticsTool": {
+   "anzeige": "Google Analytics Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBigQuery": {
+   "anzeige": "Google BigQuery",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBigQueryTool": {
+   "anzeige": "Google BigQuery Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBooks": {
+   "anzeige": "Google Books",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBooksTool": {
+   "anzeige": "Google Books Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBusinessProfile": {
+   "anzeige": "Google Business Profile",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBusinessProfileTool": {
+   "anzeige": "Google Business Profile Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleBusinessProfileTrigger": {
+   "anzeige": "Google Business Profile Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCalendar": {
+   "anzeige": "Google Calendar",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCalendarTool": {
+   "anzeige": "Google Calendar Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCalendarTrigger": {
+   "anzeige": "Google Calendar Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleChat": {
+   "anzeige": "Google Chat",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleChatTool": {
+   "anzeige": "Google Chat Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCloudNaturalLanguage": {
+   "anzeige": "Google Cloud Natural Language",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCloudNaturalLanguageTool": {
+   "anzeige": "Google Cloud Natural Language Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCloudStorage": {
+   "anzeige": "Google Cloud Storage",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleCloudStorageTool": {
+   "anzeige": "Google Cloud Storage Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleContacts": {
+   "anzeige": "Google Contacts",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleContactsTool": {
+   "anzeige": "Google Contacts Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleDocs": {
+   "anzeige": "Google Docs",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleDocsTool": {
+   "anzeige": "Google Docs Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleDrive": {
+   "anzeige": "Google Drive",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleDriveTool": {
+   "anzeige": "Google Drive Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleDriveTrigger": {
+   "anzeige": "Google Drive Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleFirebaseCloudFirestore": {
+   "anzeige": "Google Cloud Firestore",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleFirebaseCloudFirestoreTool": {
+   "anzeige": "Google Cloud Firestore Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleFirebaseRealtimeDatabase": {
+   "anzeige": "Google Cloud Realtime Database",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleFirebaseRealtimeDatabaseTool": {
+   "anzeige": "Google Cloud Realtime Database Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googlePerspective": {
+   "anzeige": "Google Perspective",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googlePerspectiveTool": {
+   "anzeige": "Google Perspective Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleSheets": {
+   "anzeige": "Google Sheets",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleSheetsTool": {
+   "anzeige": "Google Sheets Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleSheetsTrigger": {
+   "anzeige": "Google Sheets Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleSlides": {
+   "anzeige": "Google Slides",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleSlidesTool": {
+   "anzeige": "Google Slides Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleTasks": {
+   "anzeige": "Google Tasks",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleTasksTool": {
+   "anzeige": "Google Tasks Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleTranslate": {
+   "anzeige": "Google Translate",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.googleTranslateTool": {
+   "anzeige": "Google Translate Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gotify": {
+   "anzeige": "Gotify",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gotifyTool": {
+   "anzeige": "Gotify Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.grafana": {
+   "anzeige": "Grafana",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.grafanaTool": {
+   "anzeige": "Grafana Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.graphql": {
+   "anzeige": "GraphQL",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.graphqlTool": {
+   "anzeige": "GraphQL Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.grist": {
+   "anzeige": "Grist",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gristTool": {
+   "anzeige": "Grist Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.gumroadTrigger": {
+   "anzeige": "Gumroad Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hackerNews": {
+   "anzeige": "Hacker News",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hackerNewsTool": {
+   "anzeige": "Hacker News Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.haloPSA": {
+   "anzeige": "HaloPSA",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.haloPSATool": {
+   "anzeige": "HaloPSA Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.harvest": {
+   "anzeige": "Harvest",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.harvestTool": {
+   "anzeige": "Harvest Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.helpScout": {
+   "anzeige": "Help Scout",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.helpScoutTool": {
+   "anzeige": "Help Scout Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.helpScoutTrigger": {
+   "anzeige": "Help Scout Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.highLevel": {
+   "anzeige": "HighLevel",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.highLevelTool": {
+   "anzeige": "HighLevel Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.homeAssistant": {
+   "anzeige": "Home Assistant",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.homeAssistantTool": {
+   "anzeige": "Home Assistant Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.html": {
+   "anzeige": "HTML",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.htmlExtract": {
+   "anzeige": "HTML Extract",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.httpRequest": {
+   "anzeige": "HTTP Request",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.httpRequestTool": {
+   "anzeige": "HTTP Request Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hubspot": {
+   "anzeige": "HubSpot",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hubspotTool": {
+   "anzeige": "HubSpot Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hubspotTrigger": {
+   "anzeige": "HubSpot Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.humanticAi": {
+   "anzeige": "Humantic AI",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.humanticAiTool": {
+   "anzeige": "Humantic AI Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hunter": {
+   "anzeige": "Hunter",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.hunterTool": {
+   "anzeige": "Hunter Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.iCal": {
+   "anzeige": "iCalendar",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.if": {
+   "anzeige": "If",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.intercom": {
+   "anzeige": "Intercom",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.intercomTool": {
+   "anzeige": "Intercom Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.interval": {
+   "anzeige": "Interval",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.invoiceNinja": {
+   "anzeige": "Invoice Ninja",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.invoiceNinjaTool": {
+   "anzeige": "Invoice Ninja Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.invoiceNinjaTrigger": {
+   "anzeige": "Invoice Ninja Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.itemLists": {
+   "anzeige": "Item Lists",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.iterable": {
+   "anzeige": "Iterable",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.iterableTool": {
+   "anzeige": "Iterable Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jenkins": {
+   "anzeige": "Jenkins",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jenkinsTool": {
+   "anzeige": "Jenkins Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jinaAi": {
+   "anzeige": "Jina AI",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jinaAiTool": {
+   "anzeige": "Jina AI Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jira": {
+   "anzeige": "Jira Software",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jiraTool": {
+   "anzeige": "Jira Software Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jiraTrigger": {
+   "anzeige": "Jira Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jotFormTrigger": {
+   "anzeige": "Jotform Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jwt": {
+   "anzeige": "JWT",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.jwtTool": {
+   "anzeige": "JWT Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.kafka": {
+   "anzeige": "Kafka",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.kafkaTool": {
+   "anzeige": "Kafka Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.kafkaTrigger": {
+   "anzeige": "Kafka Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.keap": {
+   "anzeige": "Keap",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.keapTool": {
+   "anzeige": "Keap Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.keapTrigger": {
+   "anzeige": "Keap Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.koBoToolbox": {
+   "anzeige": "KoBoToolbox",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.koBoToolboxTool": {
+   "anzeige": "KoBoToolbox Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.koBoToolboxTrigger": {
+   "anzeige": "KoBoToolbox Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ldap": {
+   "anzeige": "Ldap",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ldapTool": {
+   "anzeige": "Ldap Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.lemlist": {
+   "anzeige": "Lemlist",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.lemlistTool": {
+   "anzeige": "Lemlist Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.lemlistTrigger": {
+   "anzeige": "Lemlist Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.limit": {
+   "anzeige": "Limit",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.line": {
+   "anzeige": "Line",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.lineTool": {
+   "anzeige": "Line Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.linear": {
+   "anzeige": "Linear",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.linearTool": {
+   "anzeige": "Linear Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.linearTrigger": {
+   "anzeige": "Linear Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.lingvaNex": {
+   "anzeige": "LingvaNex",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.lingvaNexTool": {
+   "anzeige": "LingvaNex Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.linkedIn": {
+   "anzeige": "LinkedIn",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.linkedInTool": {
+   "anzeige": "LinkedIn Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.localFileTrigger": {
+   "anzeige": "Local File Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.loneScale": {
+   "anzeige": "LoneScale",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.loneScaleTool": {
+   "anzeige": "LoneScale Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.loneScaleTrigger": {
+   "anzeige": "LoneScale Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.magento2": {
+   "anzeige": "Magento 2",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.magento2Tool": {
+   "anzeige": "Magento 2 Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailcheck": {
+   "anzeige": "Mailcheck",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailcheckTool": {
+   "anzeige": "Mailcheck Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailchimp": {
+   "anzeige": "Mailchimp",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailchimpTool": {
+   "anzeige": "Mailchimp Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailchimpTrigger": {
+   "anzeige": "Mailchimp Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailerLite": {
+   "anzeige": "MailerLite",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailerLiteTool": {
+   "anzeige": "MailerLite Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailerLiteTrigger": {
+   "anzeige": "MailerLite Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailgun": {
+   "anzeige": "Mailgun",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailgunTool": {
+   "anzeige": "Mailgun Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailjet": {
+   "anzeige": "Mailjet",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailjetTool": {
+   "anzeige": "Mailjet Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mailjetTrigger": {
+   "anzeige": "Mailjet Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mandrill": {
+   "anzeige": "Mandrill",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mandrillTool": {
+   "anzeige": "Mandrill Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.manualTrigger": {
+   "anzeige": "Manual Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.markdown": {
+   "anzeige": "Markdown",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.marketstack": {
+   "anzeige": "Marketstack",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.marketstackTool": {
+   "anzeige": "Marketstack Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.matrix": {
+   "anzeige": "Matrix",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.matrixTool": {
+   "anzeige": "Matrix Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mattermost": {
+   "anzeige": "Mattermost",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mattermostTool": {
+   "anzeige": "Mattermost Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mautic": {
+   "anzeige": "Mautic",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mauticTool": {
+   "anzeige": "Mautic Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mauticTrigger": {
+   "anzeige": "Mautic Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.medium": {
+   "anzeige": "Medium",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mediumTool": {
+   "anzeige": "Medium Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.merge": {
+   "anzeige": "Merge",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.messageAnAgent": {
+   "anzeige": "Message an Agent",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.messageAnAgentTool": {
+   "anzeige": "Message an Agent Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.messageBird": {
+   "anzeige": "MessageBird",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.messageBirdTool": {
+   "anzeige": "MessageBird Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.metabase": {
+   "anzeige": "Metabase",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.metabaseTool": {
+   "anzeige": "Metabase Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftDynamicsCrm": {
+   "anzeige": "Microsoft Dynamics CRM",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftDynamicsCrmTool": {
+   "anzeige": "Microsoft Dynamics CRM Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftEntra": {
+   "anzeige": "Microsoft Entra ID",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftEntraTool": {
+   "anzeige": "Microsoft Entra ID Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftExcel": {
+   "anzeige": "Microsoft Excel (OneDrive)",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftExcelTool": {
+   "anzeige": "Microsoft Excel (OneDrive) Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftGraphSecurity": {
+   "anzeige": "Microsoft Graph Security",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftGraphSecurityTool": {
+   "anzeige": "Microsoft Graph Security Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftOneDrive": {
+   "anzeige": "Microsoft OneDrive",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftOneDriveTool": {
+   "anzeige": "Microsoft OneDrive Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftOneDriveTrigger": {
+   "anzeige": "Microsoft OneDrive Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftOutlook": {
+   "anzeige": "Microsoft Outlook",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftOutlookTrigger": {
+   "anzeige": "Microsoft Outlook Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftSharePoint": {
+   "anzeige": "Microsoft SharePoint",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftSharePointTool": {
+   "anzeige": "Microsoft SharePoint Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftSql": {
+   "anzeige": "Microsoft SQL",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftSqlTool": {
+   "anzeige": "Microsoft SQL Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftTeams": {
+   "anzeige": "Microsoft Teams",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftTeamsTool": {
+   "anzeige": "Microsoft Teams Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftTeamsTrigger": {
+   "anzeige": "Microsoft Teams Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftToDo": {
+   "anzeige": "Microsoft To Do",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.microsoftToDoTool": {
+   "anzeige": "Microsoft To Do Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mindee": {
+   "anzeige": "Mindee",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.misp": {
+   "anzeige": "MISP",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mispTool": {
+   "anzeige": "MISP Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mistralAi": {
+   "anzeige": "Mistral AI",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mistralAiTool": {
+   "anzeige": "Mistral AI Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mocean": {
+   "anzeige": "Mocean",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.moceanTool": {
+   "anzeige": "Mocean Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mondayCom": {
+   "anzeige": "Monday.com",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mondayComTool": {
+   "anzeige": "Monday.com Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mongoDb": {
+   "anzeige": "MongoDB",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mongoDbTool": {
+   "anzeige": "MongoDB Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.monicaCrm": {
+   "anzeige": "Monica CRM",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.monicaCrmTool": {
+   "anzeige": "Monica CRM Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.moveBinaryData": {
+   "anzeige": "Convert to/from binary data",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mqtt": {
+   "anzeige": "MQTT",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mqttTool": {
+   "anzeige": "MQTT Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mqttTrigger": {
+   "anzeige": "MQTT Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.msg91": {
+   "anzeige": "MSG91",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.msg91Tool": {
+   "anzeige": "MSG91 Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mySql": {
+   "anzeige": "MySQL",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.mySqlTool": {
+   "anzeige": "MySQL Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.n8n": {
+   "anzeige": "n8n",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.n8nTrainingCustomerDatastore": {
+   "anzeige": "Customer Datastore (n8n training)",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.n8nTrainingCustomerMessenger": {
+   "anzeige": "Customer Messenger (n8n training)",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.n8nTrigger": {
+   "anzeige": "n8n Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.nasa": {
+   "anzeige": "NASA",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.nasaTool": {
+   "anzeige": "NASA Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.netlify": {
+   "anzeige": "Netlify",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.netlifyTool": {
+   "anzeige": "Netlify Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.netlifyTrigger": {
+   "anzeige": "Netlify Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.nextCloud": {
+   "anzeige": "Nextcloud",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.nextCloudTool": {
+   "anzeige": "Nextcloud Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.noOp": {
+   "anzeige": "No Operation, do nothing",
+   "kategorie": "organization",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.nocoDb": {
+   "anzeige": "NocoDB",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.nocoDbTool": {
+   "anzeige": "NocoDB Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.notion": {
+   "anzeige": "Notion",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.notionTool": {
+   "anzeige": "Notion Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.notionTrigger": {
+   "anzeige": "Notion Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.npm": {
+   "anzeige": "Npm",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.npmTool": {
+   "anzeige": "Npm Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.odoo": {
+   "anzeige": "Odoo",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.odooTool": {
+   "anzeige": "Odoo Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.okta": {
+   "anzeige": "Okta",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.oktaTool": {
+   "anzeige": "Okta Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.oneSimpleApi": {
+   "anzeige": "One Simple API",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.oneSimpleApiTool": {
+   "anzeige": "One Simple API Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.onfleet": {
+   "anzeige": "Onfleet",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.onfleetTool": {
+   "anzeige": "Onfleet Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.onfleetTrigger": {
+   "anzeige": "Onfleet Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.openAi": {
+   "anzeige": "OpenAI",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.openThesaurus": {
+   "anzeige": "OpenThesaurus",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.openThesaurusTool": {
+   "anzeige": "OpenThesaurus Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.openWeatherMap": {
+   "anzeige": "OpenWeatherMap",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.openWeatherMapTool": {
+   "anzeige": "OpenWeatherMap Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.oracleDatabase": {
+   "anzeige": "Oracle Database",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.oracleDatabaseTool": {
+   "anzeige": "Oracle Database Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.orbit": {
+   "anzeige": "Orbit",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.oura": {
+   "anzeige": "Oura",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ouraTool": {
+   "anzeige": "Oura Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.paddle": {
+   "anzeige": "Paddle",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.paddleTool": {
+   "anzeige": "Paddle Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pagerDuty": {
+   "anzeige": "PagerDuty",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pagerDutyTool": {
+   "anzeige": "PagerDuty Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.payPal": {
+   "anzeige": "PayPal",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.payPalTrigger": {
+   "anzeige": "PayPal Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.peekalink": {
+   "anzeige": "Peekalink",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.peekalinkTool": {
+   "anzeige": "Peekalink Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.perplexity": {
+   "anzeige": "Perplexity",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.perplexityTool": {
+   "anzeige": "Perplexity Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.phantombuster": {
+   "anzeige": "Phantombuster",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.phantombusterTool": {
+   "anzeige": "Phantombuster Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.philipsHue": {
+   "anzeige": "Philips Hue",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.philipsHueTool": {
+   "anzeige": "Philips Hue Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pipedrive": {
+   "anzeige": "Pipedrive",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pipedriveTool": {
+   "anzeige": "Pipedrive Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pipedriveTrigger": {
+   "anzeige": "Pipedrive Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.plivo": {
+   "anzeige": "Plivo",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.plivoTool": {
+   "anzeige": "Plivo Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postBin": {
+   "anzeige": "PostBin",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postBinTool": {
+   "anzeige": "PostBin Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postHog": {
+   "anzeige": "PostHog",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postHogTool": {
+   "anzeige": "PostHog Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postgres": {
+   "anzeige": "Postgres",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postgresTool": {
+   "anzeige": "Postgres Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postgresTrigger": {
+   "anzeige": "Postgres Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.postmarkTrigger": {
+   "anzeige": "Postmark Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.profitWell": {
+   "anzeige": "ProfitWell",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.profitWellTool": {
+   "anzeige": "ProfitWell Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushbullet": {
+   "anzeige": "Pushbullet",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushbulletTool": {
+   "anzeige": "Pushbullet Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushcut": {
+   "anzeige": "Pushcut",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushcutTool": {
+   "anzeige": "Pushcut Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushcutTrigger": {
+   "anzeige": "Pushcut Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushover": {
+   "anzeige": "Pushover",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.pushoverTool": {
+   "anzeige": "Pushover Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.questDb": {
+   "anzeige": "QuestDB",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.questDbTool": {
+   "anzeige": "QuestDB Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.quickChart": {
+   "anzeige": "QuickChart",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.quickChartTool": {
+   "anzeige": "QuickChart Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.quickbase": {
+   "anzeige": "Quick Base",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.quickbaseTool": {
+   "anzeige": "Quick Base Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.quickbooks": {
+   "anzeige": "QuickBooks Online",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.quickbooksTool": {
+   "anzeige": "QuickBooks Online Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rabbitmq": {
+   "anzeige": "RabbitMQ",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rabbitmqTool": {
+   "anzeige": "RabbitMQ Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rabbitmqTrigger": {
+   "anzeige": "RabbitMQ Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.raindrop": {
+   "anzeige": "Raindrop",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.raindropTool": {
+   "anzeige": "Raindrop Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.readBinaryFile": {
+   "anzeige": "Read Binary File",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.readBinaryFiles": {
+   "anzeige": "Read Binary Files",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.readPDF": {
+   "anzeige": "Read PDF",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.readWriteFile": {
+   "anzeige": "Read/Write Files from Disk",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.reddit": {
+   "anzeige": "Reddit",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.redditTool": {
+   "anzeige": "Reddit Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.redis": {
+   "anzeige": "Redis",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.redisTool": {
+   "anzeige": "Redis Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.redisTrigger": {
+   "anzeige": "Redis Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.removeDuplicates": {
+   "anzeige": "Remove Duplicates",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.renameKeys": {
+   "anzeige": "Rename Keys",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.respondToWebhook": {
+   "anzeige": "Respond to Webhook",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rocketchat": {
+   "anzeige": "RocketChat",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rocketchatTool": {
+   "anzeige": "RocketChat Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rssFeedRead": {
+   "anzeige": "RSS Read",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rssFeedReadTool": {
+   "anzeige": "RSS Read Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rssFeedReadTrigger": {
+   "anzeige": "RSS Feed Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rundeck": {
+   "anzeige": "Rundeck",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.rundeckTool": {
+   "anzeige": "Rundeck Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.s3": {
+   "anzeige": "S3",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.s3Tool": {
+   "anzeige": "S3 Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.salesforce": {
+   "anzeige": "Salesforce",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.salesforceTool": {
+   "anzeige": "Salesforce Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.salesforceTrigger": {
+   "anzeige": "Salesforce Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.salesmate": {
+   "anzeige": "Salesmate",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.salesmateTool": {
+   "anzeige": "Salesmate Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.scheduleTrigger": {
+   "anzeige": "Schedule Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.seaTable": {
+   "anzeige": "SeaTable",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.seaTableTool": {
+   "anzeige": "SeaTable Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.seaTableTrigger": {
+   "anzeige": "SeaTable Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.securityScorecard": {
+   "anzeige": "SecurityScorecard",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.securityScorecardTool": {
+   "anzeige": "SecurityScorecard Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.segment": {
+   "anzeige": "Segment",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.segmentTool": {
+   "anzeige": "Segment Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendGrid": {
+   "anzeige": "SendGrid",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendGridTool": {
+   "anzeige": "SendGrid Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendInBlue": {
+   "anzeige": "Brevo",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendInBlueTool": {
+   "anzeige": "Brevo Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendInBlueTrigger": {
+   "anzeige": "Brevo Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendy": {
+   "anzeige": "Sendy",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sendyTool": {
+   "anzeige": "Sendy Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sentryIo": {
+   "anzeige": "Sentry.io",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sentryIoTool": {
+   "anzeige": "Sentry.io Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.serviceNow": {
+   "anzeige": "ServiceNow",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.serviceNowTool": {
+   "anzeige": "ServiceNow Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.set": {
+   "anzeige": "Set",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.shopify": {
+   "anzeige": "Shopify",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.shopifyTool": {
+   "anzeige": "Shopify Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.shopifyTrigger": {
+   "anzeige": "Shopify Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.signl4": {
+   "anzeige": "SIGNL4",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.signl4Tool": {
+   "anzeige": "SIGNL4 Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.simulate": {
+   "anzeige": "Simulate",
+   "kategorie": "organization",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.simulateTrigger": {
+   "anzeige": "Simulate Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.slack": {
+   "anzeige": "Slack",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.slackTool": {
+   "anzeige": "Slack Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.slackTrigger": {
+   "anzeige": "Slack Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sms77": {
+   "anzeige": "seven",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sms77Tool": {
+   "anzeige": "seven Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.snowflake": {
+   "anzeige": "Snowflake",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.snowflakeTool": {
+   "anzeige": "Snowflake Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sort": {
+   "anzeige": "Sort",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.splitInBatches": {
+   "anzeige": "Split In Batches",
+   "kategorie": "organization",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.splitOut": {
+   "anzeige": "Split Out",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.splunk": {
+   "anzeige": "Splunk",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.splunkTool": {
+   "anzeige": "Splunk Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.spotify": {
+   "anzeige": "Spotify",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.spotifyTool": {
+   "anzeige": "Spotify Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.spreadsheetFile": {
+   "anzeige": "Spreadsheet File",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.sseTrigger": {
+   "anzeige": "SSE Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.ssh": {
+   "anzeige": "SSH",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stackby": {
+   "anzeige": "Stackby",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stackbyTool": {
+   "anzeige": "Stackby Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stickyNote": {
+   "anzeige": "Sticky Note",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stopAndError": {
+   "anzeige": "Stop and Error",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.storyblok": {
+   "anzeige": "Storyblok",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.storyblokTool": {
+   "anzeige": "Storyblok Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.strapi": {
+   "anzeige": "Strapi",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.strapiTool": {
+   "anzeige": "Strapi Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.strava": {
+   "anzeige": "Strava",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stravaTool": {
+   "anzeige": "Strava Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stravaTrigger": {
+   "anzeige": "Strava Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stripe": {
+   "anzeige": "Stripe",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stripeTool": {
+   "anzeige": "Stripe Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.stripeTrigger": {
+   "anzeige": "Stripe Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.summarize": {
+   "anzeige": "Summarize",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.supabase": {
+   "anzeige": "Supabase",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.supabaseTool": {
+   "anzeige": "Supabase Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.surveyMonkeyTrigger": {
+   "anzeige": "SurveyMonkey Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.switch": {
+   "anzeige": "Switch",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.syncroMsp": {
+   "anzeige": "SyncroMSP",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.syncroMspTool": {
+   "anzeige": "SyncroMSP Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.taiga": {
+   "anzeige": "Taiga",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.taigaTool": {
+   "anzeige": "Taiga Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.taigaTrigger": {
+   "anzeige": "Taiga Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.tapfiliate": {
+   "anzeige": "Tapfiliate",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.tapfiliateTool": {
+   "anzeige": "Tapfiliate Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.telegram": {
+   "anzeige": "Telegram",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.telegramTool": {
+   "anzeige": "Telegram Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.telegramTrigger": {
+   "anzeige": "Telegram Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.theHive": {
+   "anzeige": "TheHive",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.theHiveProject": {
+   "anzeige": "TheHive 5",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.theHiveProjectTrigger": {
+   "anzeige": "TheHive 5 Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.theHiveTool": {
+   "anzeige": "TheHive Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.theHiveTrigger": {
+   "anzeige": "TheHive Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.timeSaved": {
+   "anzeige": "Track Time Saved",
+   "kategorie": "organization",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.timescaleDb": {
+   "anzeige": "TimescaleDB",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.timescaleDbTool": {
+   "anzeige": "TimescaleDB Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.todoist": {
+   "anzeige": "Todoist",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.todoistTool": {
+   "anzeige": "Todoist Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.togglTrigger": {
+   "anzeige": "Toggl Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.totp": {
+   "anzeige": "TOTP",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.totpTool": {
+   "anzeige": "TOTP Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.travisCi": {
+   "anzeige": "TravisCI",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.travisCiTool": {
+   "anzeige": "TravisCI Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.trello": {
+   "anzeige": "Trello",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.trelloTool": {
+   "anzeige": "Trello Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.trelloTrigger": {
+   "anzeige": "Trello Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twake": {
+   "anzeige": "Twake",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twakeTool": {
+   "anzeige": "Twake Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twilio": {
+   "anzeige": "Twilio",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twilioTool": {
+   "anzeige": "Twilio Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twilioTrigger": {
+   "anzeige": "Twilio Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twist": {
+   "anzeige": "Twist",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twistTool": {
+   "anzeige": "Twist Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twitter": {
+   "anzeige": "X (Formerly Twitter)",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.twitterTool": {
+   "anzeige": "X (Formerly Twitter) Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.typeformTrigger": {
+   "anzeige": "Typeform Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.unleashedSoftware": {
+   "anzeige": "Unleashed Software",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.unleashedSoftwareTool": {
+   "anzeige": "Unleashed Software Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.uplead": {
+   "anzeige": "Uplead",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.upleadTool": {
+   "anzeige": "Uplead Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.uproc": {
+   "anzeige": "uProc",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.uprocTool": {
+   "anzeige": "uProc Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.uptimeRobot": {
+   "anzeige": "UptimeRobot",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.uptimeRobotTool": {
+   "anzeige": "UptimeRobot Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.urlScanIo": {
+   "anzeige": "urlscan.io",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.urlScanIoTool": {
+   "anzeige": "urlscan.io Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.venafiTlsProtectCloud": {
+   "anzeige": "Venafi TLS Protect Cloud",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.venafiTlsProtectCloudTool": {
+   "anzeige": "Venafi TLS Protect Cloud Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.venafiTlsProtectCloudTrigger": {
+   "anzeige": "Venafi TLS Protect Cloud Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.venafiTlsProtectDatacenter": {
+   "anzeige": "Venafi TLS Protect Datacenter",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.venafiTlsProtectDatacenterTool": {
+   "anzeige": "Venafi TLS Protect Datacenter Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.vero": {
+   "anzeige": "Vero",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.veroTool": {
+   "anzeige": "Vero Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.vonage": {
+   "anzeige": "Vonage",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.vonageTool": {
+   "anzeige": "Vonage Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wait": {
+   "anzeige": "Wait",
+   "kategorie": "organization",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.webflow": {
+   "anzeige": "Webflow",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.webflowTool": {
+   "anzeige": "Webflow Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.webflowTrigger": {
+   "anzeige": "Webflow Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.webhook": {
+   "anzeige": "Webhook",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wekan": {
+   "anzeige": "Wekan",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wekanTool": {
+   "anzeige": "Wekan Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.whatsApp": {
+   "anzeige": "WhatsApp Business Cloud",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.whatsAppTool": {
+   "anzeige": "WhatsApp Business Cloud Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.whatsAppTrigger": {
+   "anzeige": "WhatsApp Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wise": {
+   "anzeige": "Wise",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wiseTrigger": {
+   "anzeige": "Wise Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wooCommerce": {
+   "anzeige": "WooCommerce",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wooCommerceTool": {
+   "anzeige": "WooCommerce Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wooCommerceTrigger": {
+   "anzeige": "WooCommerce Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wordpress": {
+   "anzeige": "Wordpress",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wordpressTool": {
+   "anzeige": "Wordpress Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.workableTrigger": {
+   "anzeige": "Workable Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.workflowTrigger": {
+   "anzeige": "Workflow Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.writeBinaryFile": {
+   "anzeige": "Write Binary File",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.wufooTrigger": {
+   "anzeige": "Wufoo Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.xero": {
+   "anzeige": "Xero",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.xeroTool": {
+   "anzeige": "Xero Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.xml": {
+   "anzeige": "XML",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.youTube": {
+   "anzeige": "YouTube",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.youTubeTool": {
+   "anzeige": "YouTube Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.yourls": {
+   "anzeige": "Yourls",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.yourlsTool": {
+   "anzeige": "Yourls Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zammad": {
+   "anzeige": "Zammad",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zammadTool": {
+   "anzeige": "Zammad Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zendesk": {
+   "anzeige": "Zendesk",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zendeskTool": {
+   "anzeige": "Zendesk Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zendeskTrigger": {
+   "anzeige": "Zendesk Trigger",
+   "kategorie": "trigger",
+   "ausloeser": true,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zohoCrm": {
+   "anzeige": "Zoho CRM",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zohoCrmTool": {
+   "anzeige": "Zoho CRM Tool",
+   "kategorie": "transform",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zoom": {
+   "anzeige": "Zoom",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zoomTool": {
+   "anzeige": "Zoom Tool",
+   "kategorie": "input",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zulip": {
+   "anzeige": "Zulip",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": false,
+   "paket": "n8n-nodes-base"
+  },
+  "n8n-nodes-base.zulipTool": {
+   "anzeige": "Zulip Tool",
+   "kategorie": "output",
+   "ausloeser": false,
+   "tool": true,
+   "paket": "n8n-nodes-base"
+  }
+ }
+}

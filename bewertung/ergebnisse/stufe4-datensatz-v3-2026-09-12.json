@@ -1,0 +1,50 @@
+{
+  "erzeugt_von": "workflow/baue_datensatz.py",
+  "seed": 7,
+  "kurzschrift_fassung": "3 (ohne Nummern, ohne Namen)",
+  "vorlagen": {
+    "gesamt": 1978,
+    "train": 1782,
+    "val": 98,
+    "test": 98
+  },
+  "mutanten": 35640,
+  "strukturgruppen": 1927,
+  "trainingszeilen_entfernt_wegen_leck": 3,
+  "mutanten_je_vorlage_ziel": 20,
+  "operationen": {
+    "tausche_typ": 26470,
+    "permutiere": 25900,
+    "entferne_blatt": 17109
+  },
+  "varianten_je_original": 3,
+  "vokabular": 4096,
+  "zeichen_je_token": 13.2,
+  "splits": {
+    "train": {
+      "beispiele": 40983,
+      "token": 2559038,
+      "token_je_beispiel_median": 48,
+      "token_je_beispiel_p90": 108,
+      "token_je_beispiel_max": 828,
+      "datei": "train.bin"
+    },
+    "val": {
+      "beispiele": 98,
+      "token": 7411,
+      "token_je_beispiel_median": 57,
+      "token_je_beispiel_p90": 113,
+      "token_je_beispiel_max": 452,
+      "datei": "val.bin"
+    },
+    "test": {
+      "beispiele": 98,
+      "token": 7575,
+      "token_je_beispiel_median": 57,
+      "token_je_beispiel_p90": 116,
+      "token_je_beispiel_max": 971,
+      "datei": "test.bin"
+    }
+  },
+  "dauer_s": 199
+}
