@@ -1,0 +1,846 @@
+{
+  "zeit": "2026-09-12 00:33:27",
+  "anzahl_kandidaten": 75,
+  "je_modell": {
+    "deepseek-v4-flash (schwer)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 0.8,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 0.8,
+      "gueltigkeitsquote_alle_vier": 0.8
+    },
+    "gemma-4-31b-it (schwer)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 0.6666666666666666,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 0.6666666666666666,
+      "gueltigkeitsquote_alle_vier": 0.6666666666666666
+    },
+    "llama-4-maverick (schwer)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 0.6,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 0.6,
+      "gueltigkeitsquote_alle_vier": 0.6
+    },
+    "minimax-m3 (schwer)": {
+      "n": 15,
+      "tor1_json_quote": 0.9333333333333333,
+      "tor2_struktur_quote": 0.6,
+      "tor3_verbindungen_quote": 0.9333333333333333,
+      "tor4_import_quote": 0.6,
+      "gueltigkeitsquote_alle_vier": 0.6
+    },
+    "nemotron-3-ultra-550b (schwer)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 0.7333333333333333,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 0.7333333333333333,
+      "gueltigkeitsquote_alle_vier": 0.7333333333333333
+    }
+  },
+  "einzelergebnisse": {
+    "deepseek-v4-flash-schwer__i01": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i02": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i03": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i04": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "deepseek-v4-flash-schwer__i05": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i06": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i07": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Confirmation Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "deepseek-v4-flash-schwer__i08": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i09": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i10": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i11": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i12": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (IMAP Email Trigger): unbekannter Node-Typ 'n8n-nodes-base.imapTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "deepseek-v4-flash-schwer__i13": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i14": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "deepseek-v4-flash-schwer__i15": {
+      "modell": "deepseek-v4-flash (schwer)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i01": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gemma-4-31b-it-schwer__i02": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i03": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i04": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gemma-4-31b-it-schwer__i05": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i06": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i07": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Confirmation Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gemma-4-31b-it-schwer__i08": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i09": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i10": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gemma-4-31b-it-schwer__i11": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i12": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (Email Trigger): unbekannter Node-Typ 'n8n-nodes-base.imapTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gemma-4-31b-it-schwer__i13": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i14": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gemma-4-31b-it-schwer__i15": {
+      "modell": "gemma-4-31b-it (schwer)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i01": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "llama-4-maverick-schwer__i02": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i03": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i04": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "llama-4-maverick-schwer__i05": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (HubSpot Trigger): unbekannter Node-Typ 'n8n-nodes-base.hubSpotTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "llama-4-maverick-schwer__i06": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i07": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i08": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i09": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i10": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 3 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "llama-4-maverick-schwer__i11": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i12": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (IMAP Email Trigger): unbekannter Node-Typ 'n8n-nodes-base.imapTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "llama-4-maverick-schwer__i13": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 4 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "llama-4-maverick-schwer__i14": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "llama-4-maverick-schwer__i15": {
+      "modell": "llama-4-maverick (schwer)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i01": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "minimax-m3-schwer__i02": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i03": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i04": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "minimax-m3-schwer__i05": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "minimax-m3-schwer__i06": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i07": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i08": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i09": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i10": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 3 (Send Email with Attachment): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "minimax-m3-schwer__i11": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i12": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (IMAP Email Trigger): unbekannter Node-Typ 'n8n-nodes-base.imapTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "minimax-m3-schwer__i13": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "minimax-m3-schwer__i14": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "minimax-m3-schwer__i15": {
+      "modell": "minimax-m3 (schwer)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i01": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i02": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i03": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i04": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "nemotron-3-ultra-550b-schwer__i05": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i06": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i07": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i08": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i09": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i10": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "nemotron-3-ultra-550b-schwer__i11": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i12": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (IMAP Email Trigger): unbekannter Node-Typ 'n8n-nodes-base.imap' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "nemotron-3-ultra-550b-schwer__i13": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 3 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "nemotron-3-ultra-550b-schwer__i14": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "nemotron-3-ultra-550b-schwer__i15": {
+      "modell": "nemotron-3-ultra-550b (schwer)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    }
+  }
+}

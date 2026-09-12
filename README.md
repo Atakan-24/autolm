@@ -9,10 +9,12 @@ Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
 > Status: **Stufe 0–3 abgeschlossen, Stufe 4 vermessen** — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
-> Eval-Harness gegen echtes n8n läuft, fünf Modelle durchgemessen (alle
-> 100 % — der leichte Modus ist zu leicht, siehe Stufe 3), 2.012 gültige
-> Vorlagen ≈ 7,3 Mio. Token als Rohmaterial für Stufe 4 gezählt. Fehlt: der
-> GPU-Trainingslauf (Google Colab, läuft) und der Bau des Workflow-Modells.
+> Eval-Harness gegen echtes n8n läuft, **fünf große Modelle gemessen: 68 %
+> gültige Workflows, und 96 % aller Fehler sind derselbe Fehlertyp** —
+> erfundene Node-Typnamen (`sendEmail` statt `emailSend`). Genau die Lücke,
+> die ein kleines Spezialmodell schließen können sollte. 2.012 gültige
+> Vorlagen ≈ 7,3 Mio. Token als Rohmaterial für Stufe 4 gezählt.
+> Fehlt: der GPU-Trainingslauf und der Bau des Workflow-Modells.
 
 ---
 
@@ -41,14 +43,23 @@ Hier ist die Bewertung **eine Maschine, kein Gefühl**, über vier Tore:
 | 3 | Validiert n8n den Workflow? | `n8n-mcp`s `validate_workflow` |
 | 4 | Lässt er sich importieren und starten? | `n8n import:workflow`, echter Exit-Code |
 
-**Offene, noch nicht gemessene Frage — bewusst als Frage formuliert, nicht
-als Behauptung:** wie nah kommt ein kleines, für ~0 € trainiertes
-Spezialmodell an GPT-4/Claude auf dieser engen Aufgabe, und auf welchen
-Achsen (Gültigkeitsquote, Latenz, Kosten je 1.000 Anfragen, Offline-Betrieb)
-gewinnt es, auf welchen verliert es? Die einzige Achse, auf der ein kleines
-Modell plausibel gewinnen kann, ist die **Gültigkeitsquote** — große Modelle
-erfinden zuverlässig Node-Typen, die es nicht gibt. Das wird gemessen,
-nicht behauptet, sobald der Eval-Harness steht (Stufe 3 unten).
+**Die Frage, die das Projekt trägt — und die halbe Antwort, die inzwischen
+gemessen ist:** wie nah kommt ein kleines, für ~0 € trainiertes
+Spezialmodell an große Allzweckmodelle auf dieser engen Aufgabe? Die einzige
+Achse, auf der ein kleines Modell plausibel gewinnen kann, ist die
+**Gültigkeitsquote** — die Vermutung war, dass große Modelle zuverlässig
+Node-Typen erfinden, die es nicht gibt.
+
+**Gemessen (12.09.2026, fünf Modelle, 75 Antworten, ohne Typenliste im
+Prompt): die Vermutung stimmt, und zwar schärfer als erwartet.** 68 %
+gültige Workflows — aber **96 % aller Fehlschläge sind genau ein Fehlertyp**:
+ein erfundener Bezeichner bei ansonsten korrekter Struktur (`sendEmail`
+statt `emailSend`, `hubSpotTrigger` statt `hubspotTrigger`). Struktur und
+Verdrahtung sitzen bei ~99 %. Damit ist die Zielmarke für Stufe 4 keine
+Vermutung mehr, sondern eine Zahl. Details: [Stufe 3](#schwerer-modus--und-damit-der-fund-der-das-ganze-projekt-begründet).
+
+Offen bleibt der Rest der Achsen (Latenz, Kosten je 1.000 Anfragen,
+Offline-Betrieb) und der Vergleich gegen GPT-4/Claude selbst (~5 € API).
 
 ## Aufbau
 
@@ -57,9 +68,9 @@ nicht behauptet, sobald der Eval-Harness steht (Stufe 3 unten).
 | 1–4 | Backprop · Tokenizer · Attention · Transformer, alles von Hand | ✅ `schritte/01`–`04` |
 | **0** | Modell aus 04 herausgelöst, schneller Attention-Pfad, gegen Lehrpfad bewiesen gleich | ✅ `kern/` |
 | **1** | Datenpipeline: BPE-Encoder + -Trainer 39× beschleunigt, **384.762.231 echte TinyStories-Token** vortokenisiert (über dem 340M-Chinchilla-Ziel) | ✅ `kern/bpe_*`, `daten/vortokenisiere.py` |
-| **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — Colab-Notebook liegt bereit | 🔶 Infrastruktur fertig, Training offen |
-| **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator. Vergleich gegen GPT-4/Claude noch nicht gefahren (kostet ~5 €) | ✅ `bewertung/` |
-| 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | offen — Community-Node-Scope noch zu klären |
+| **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — `kern/gpu_bootstrap.sh` startet ihn auf einer Miet-GPU ohne Browser | 🔶 Infrastruktur fertig, Training offen |
+| **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **fünf Modelle gemessen (68 % gültig, leicht + schwer)**. GPT-4/Claude noch nicht gefahren (~5 €) | ✅ `bewertung/` |
+| 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | 🔶 vermessen (2.012 Vorlagen ≈ 7,3 Mio. Token), Bau offen |
 | 5 | Eingeschränkte Dekodierung (falls nötig) | offen |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
 | 7 | Quantisierung, Hugging-Face-Demo | offen |
@@ -191,6 +202,55 @@ Der nächste Lauf braucht die schwere Einstellung — freie Wahl aus allen 825
 Typen oder gar keine Liste — bevor ein Vergleich mit dem eigenen kleinen
 Modell (Stufe 4) etwas aussagen kann. Der GPT-4/Claude-Lauf (~5 € API-Kosten)
 lohnt erst dann.
+
+### Schwerer Modus — und damit der Fund, der das ganze Projekt begründet
+
+Konsequenz aus dem Deckeneffekt: derselbe Lauf nochmal, aber mit
+`bewertung/systemprompt_schwer.txt` — **gar keine Typenliste**. Das Modell
+muss die echten n8n-Typnamen selbst kennen. Fünf Modelle, dieselben 15
+Instruktionen, 75 Antworten, wieder alle vier Tore:
+
+| Modell | n | Tor 1 (JSON) | Tor 2 (Typen) | Tor 3 (Graph) | Tor 4 (Import) | Gültig | 95-%-KI |
+|---|---|---|---|---|---|---|---|
+| DeepSeek-V4-Flash | 15 | 100 % | 80 % | 100 % | 80 % | **80 %** | [60 %, 100 %] |
+| Nemotron-3-Ultra 550B | 15 | 100 % | 73 % | 100 % | 73 % | **73 %** | [47 %, 93 %] |
+| Gemma-4-31B-it | 15 | 100 % | 67 % | 100 % | 67 % | **67 %** | [40 %, 87 %] |
+| Llama-4-Maverick | 15 | 100 % | 60 % | 100 % | 60 % | **60 %** | [33 %, 87 %] |
+| MiniMax-M3 | 15 | 93 % | 60 % | 93 % | 60 % | **60 %** | [33 %, 87 %] |
+
+**Der Benchmark unterscheidet jetzt** — 60 % bis 80 % statt fünfmal 100 %.
+Aber das Interessante ist nicht die Rangfolge, sondern **woran** sie
+scheitern. Von 24 Fehlschlägen sind **23 (96 %) ein und derselbe Fehlertyp**:
+
+| erfunden | Vorkommen | tatsächlich heißt es |
+|---|---|---|
+| `n8n-nodes-base.sendEmail` | 17 | `n8n-nodes-base.emailSend` |
+| `n8n-nodes-base.imapTrigger` | 4 | `n8n-nodes-base.emailReadImap` |
+| `n8n-nodes-base.imap` | 1 | `n8n-nodes-base.emailReadImap` |
+| `n8n-nodes-base.hubSpotTrigger` | 1 | `n8n-nodes-base.hubspotTrigger` |
+
+Das sind **vier** verschiedene Fehlgriffe, mehr nicht. `sendEmail` statt
+`emailSend` — dieselben zwei Wörter, vertauscht. `hubSpotTrigger` statt
+`hubspotTrigger` — **ein einziger Großbuchstabe**.
+
+**Warum das die Kernthese des Projekts stützt:** Tor 1 (gültiges JSON) und
+Tor 3 (konsistenter Verbindungsgraph) liegen bei ~99 %. Die Modelle verstehen
+die Aufgabe, bauen die richtige Struktur und verdrahten die Knoten korrekt.
+Sie scheitern ausschließlich am **exakten Abruf eines geschlossenen
+Vokabulars** — und genau das ist keine Denkleistung, sondern Auswendiglernen.
+Ein 550-Milliarden-Parameter-Modell hat keinen strukturellen Vorteil beim
+Auswendiglernen von 825 Bezeichnern; ein 17-Mio.-Parameter-Modell, das auf
+nichts anderem als echten n8n-Workflows trainiert wurde, sollte hier
+prinzipiell **100 %** erreichen können.
+
+Das ist die Achse, auf der ein winziges Spezialmodell ein großes
+Allzweckmodell schlagen kann — und sie ist jetzt **gemessen statt behauptet**.
+Genau diese Behauptung stand ursprünglich ungedeckt im README und wurde vor
+der Messung zu einer Frage umformuliert (siehe *Nicht-Ziele*); sie hat jetzt
+eine Zahl, gegen die Stufe 4 antreten muss: **68 % über alle fünf Modelle.**
+
+Rohdaten: `bewertung/schwer_antworten.jsonl`,
+`bewertung/ergebnisse/schwer-2026-09-12.json`.
 
 **Zweiter Fund, diesmal im eigenen Harness:** beim ersten Lauf mit vier
 Modellen in einer Datei zeigte die Tabelle nur *ein* Modell mit n = 15
