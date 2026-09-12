@@ -1,0 +1,669 @@
+{
+  "zeit": "2026-09-12 00:56:24",
+  "anzahl_kandidaten": 60,
+  "je_modell": {
+    "gpt-5.2-chat (bezahlt)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 0.6,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 0.6,
+      "gueltigkeitsquote_alle_vier": 0.6
+    },
+    "claude-opus-5 (bezahlt)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 0.6666666666666666,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 0.6666666666666666,
+      "gueltigkeitsquote_alle_vier": 0.6666666666666666
+    },
+    "claude-sonnet-5 (bezahlt)": {
+      "n": 15,
+      "tor1_json_quote": 1.0,
+      "tor2_struktur_quote": 1.0,
+      "tor3_verbindungen_quote": 1.0,
+      "tor4_import_quote": 1.0,
+      "gueltigkeitsquote_alle_vier": 1.0
+    },
+    "gpt-5.6-terra-pro (bezahlt)": {
+      "n": 15,
+      "tor1_json_quote": 0.8,
+      "tor2_struktur_quote": 0.8,
+      "tor3_verbindungen_quote": 0.8,
+      "tor4_import_quote": 0.8,
+      "gueltigkeitsquote_alle_vier": 0.8
+    }
+  },
+  "einzelergebnisse": {
+    "gpt-5-2-chat-bezahlt__i01": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gpt-5-2-chat-bezahlt__i02": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i03": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i04": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gpt-5-2-chat-bezahlt__i05": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (HubSpot Trigger): unbekannter Node-Typ 'n8n-nodes-base.hubSpotTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gpt-5-2-chat-bezahlt__i06": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i07": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i08": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i09": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i10": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 3 (Send Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gpt-5-2-chat-bezahlt__i11": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i12": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (IMAP Email Trigger): unbekannter Node-Typ 'n8n-nodes-base.imap' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gpt-5-2-chat-bezahlt__i13": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "gpt-5-2-chat-bezahlt__i14": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-2-chat-bezahlt__i15": {
+      "modell": "gpt-5.2-chat (bezahlt)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i01": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "claude-opus-5-bezahlt__i02": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i03": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i04": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i05": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i06": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i07": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Confirmation Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "claude-opus-5-bezahlt__i08": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 1 (CSV-Datei lesen): unbekannter Node-Typ 'n8n-nodes-base.readWriteFromFile' -- existiert nicht in n8n 2.25.6",
+        "Tor 2: Node 2 (CSV parsen): unbekannter Node-Typ 'n8n-nodes-base.csv' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "claude-opus-5-bezahlt__i09": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i10": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i11": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i12": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 0 (IMAP Trigger): unbekannter Node-Typ 'n8n-nodes-base.imapTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "claude-opus-5-bezahlt__i13": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (Send Reminder Email): unbekannter Node-Typ 'n8n-nodes-base.sendEmail' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "claude-opus-5-bezahlt__i14": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-opus-5-bezahlt__i15": {
+      "modell": "claude-opus-5 (bezahlt)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i01": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i02": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i03": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i04": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i05": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i06": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i07": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i08": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i09": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i10": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i11": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i12": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i13": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i14": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "claude-sonnet-5-bezahlt__i15": {
+      "modell": "claude-sonnet-5 (bezahlt)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i01": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting ',' delimiter: line 1 column 1158 (char 1157)"
+      ]
+    },
+    "gpt-5-6-terra-pro-bezahlt__i02": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting ',' delimiter: line 1 column 883 (char 882)"
+      ]
+    },
+    "gpt-5-6-terra-pro-bezahlt__i03": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i04": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i05": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i06": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i07": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i08": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i09": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i10": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i11": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i12": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting ',' delimiter: line 1 column 800 (char 799)"
+      ]
+    },
+    "gpt-5-6-terra-pro-bezahlt__i13": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i14": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "gpt-5-6-terra-pro-bezahlt__i15": {
+      "modell": "gpt-5.6-terra-pro (bezahlt)",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    }
+  }
+}

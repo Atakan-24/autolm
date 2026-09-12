@@ -9,11 +9,12 @@ Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
 > Status: **Stufe 0–3 abgeschlossen, Stufe 4 vermessen** — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
-> Eval-Harness gegen echtes n8n läuft, **fünf große Modelle gemessen: 68 %
-> gültige Workflows, und 96 % aller Fehler sind derselbe Fehlertyp** —
-> erfundene Node-Typnamen (`sendEmail` statt `emailSend`). Genau die Lücke,
-> die ein kleines Spezialmodell schließen können sollte. 2.012 gültige
-> Vorlagen ≈ 7,3 Mio. Token als Rohmaterial für Stufe 4 gezählt.
+> Eval-Harness gegen echtes n8n läuft, **neun Modelle gemessen (fünf gratis,
+> vier bezahlt): 60–100 % gültige Workflows, und 89 % aller Fehler sind
+> derselbe Fehlertyp** — erfundene Node-Typnamen (`sendEmail` statt
+> `emailSend`). Ein kostenloses Modell schlägt dabei zwei bezahlte
+> Frontier-Modelle. Genau die Lücke, die ein kleines Spezialmodell schließen
+> können sollte. 2.012 gültige Vorlagen ≈ 7,3 Mio. Token für Stufe 4.
 > Fehlt: der GPU-Trainingslauf und der Bau des Workflow-Modells.
 
 ---
@@ -50,16 +51,22 @@ Achse, auf der ein kleines Modell plausibel gewinnen kann, ist die
 **Gültigkeitsquote** — die Vermutung war, dass große Modelle zuverlässig
 Node-Typen erfinden, die es nicht gibt.
 
-**Gemessen (12.09.2026, fünf Modelle, 75 Antworten, ohne Typenliste im
-Prompt): die Vermutung stimmt, und zwar schärfer als erwartet.** 68 %
-gültige Workflows — aber **96 % aller Fehlschläge sind genau ein Fehlertyp**:
+**Gemessen (12.09.2026, neun Modelle, 135 Antworten, ohne Typenliste im
+Prompt): die Vermutung stimmt, und zwar schärfer als erwartet.** 60–100 %
+gültige Workflows — aber **89 % aller Fehlschläge sind genau ein Fehlertyp**:
 ein erfundener Bezeichner bei ansonsten korrekter Struktur (`sendEmail`
 statt `emailSend`, `hubSpotTrigger` statt `hubspotTrigger`). Struktur und
 Verdrahtung sitzen bei ~99 %. Damit ist die Zielmarke für Stufe 4 keine
 Vermutung mehr, sondern eine Zahl. Details: [Stufe 3](#schwerer-modus--und-damit-der-fund-der-das-ganze-projekt-begründet).
 
+**Zweite Messung, noch überraschender:** vier bezahlte Frontier-Modelle
+(Claude Opus 5, Claude Sonnet 5, GPT-5.6-terra-pro, GPT-5.2-chat) im selben
+Test — sie gewinnen **nicht** zuverlässig. Ein kostenloses Modell schlägt
+zwei bezahlte; das teure Flaggschiff einer Familie verliert gegen das
+günstigere Modell derselben Familie. Nur Claude Sonnet 5 erreicht 100 %.
+
 Offen bleibt der Rest der Achsen (Latenz, Kosten je 1.000 Anfragen,
-Offline-Betrieb) und der Vergleich gegen GPT-4/Claude selbst (~5 € API).
+Offline-Betrieb).
 
 ## Aufbau
 
@@ -69,7 +76,7 @@ Offline-Betrieb) und der Vergleich gegen GPT-4/Claude selbst (~5 € API).
 | **0** | Modell aus 04 herausgelöst, schneller Attention-Pfad, gegen Lehrpfad bewiesen gleich | ✅ `kern/` |
 | **1** | Datenpipeline: BPE-Encoder + -Trainer 39× beschleunigt, **384.762.231 echte TinyStories-Token** vortokenisiert (über dem 340M-Chinchilla-Ziel) | ✅ `kern/bpe_*`, `daten/vortokenisiere.py` |
 | **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — `kern/gpu_bootstrap.sh` startet ihn auf einer Miet-GPU ohne Browser | 🔶 Infrastruktur fertig, Training offen |
-| **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **fünf Modelle gemessen (68 % gültig, leicht + schwer)**. GPT-4/Claude noch nicht gefahren (~5 €) | ✅ `bewertung/` |
+| **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **neun Modelle gemessen (leicht + schwer, gratis + bezahlt), 2,41 $ tatsächliche API-Kosten** | ✅ `bewertung/` |
 | 4 | Workflow-Modell: validator-gesicherte synthetische Trainingsdaten | 🔶 vermessen (2.012 Vorlagen ≈ 7,3 Mio. Token), Bau offen |
 | 5 | Eingeschränkte Dekodierung (falls nötig) | offen |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
@@ -251,6 +258,49 @@ eine Zahl, gegen die Stufe 4 antreten muss: **68 % über alle fünf Modelle.**
 
 Rohdaten: `bewertung/schwer_antworten.jsonl`,
 `bewertung/ergebnisse/schwer-2026-09-12.json`.
+
+### Und jetzt die bezahlten Spitzenmodelle — sie gewinnen nicht
+
+Derselbe schwere Modus, dieselben 15 Instruktionen, vier kostenpflichtige
+Frontier-Modelle über OpenRouter. **Tatsächliche Kosten: 2,41 $** (am
+Guthaben vorher/nachher gemessen, nicht geschätzt).
+
+| Modell | Preis (in/out je Mio. Token) | Gültig | 95-%-KI |
+|---|---|---|---|
+| **Claude Sonnet 5** | 2 $ / 10 $ | **100 %** | [100 %, 100 %] |
+| GPT-5.6-terra-pro | 2 $ / 12 $ | 80 % | [60 %, 100 %] |
+| **DeepSeek-V4-Flash** | **kostenlos** | **80 %** | [60 %, 100 %] |
+| Nemotron-3-Ultra 550B | kostenlos | 73 % | [47 %, 93 %] |
+| Claude Opus 5 | 5 $ / 25 $ | 67 % | [40 %, 87 %] |
+| Gemma-4-31B-it | kostenlos | 67 % | [40 %, 87 %] |
+| GPT-5.2-chat | 1,75 $ / 14 $ | 60 % | [33 %, 87 %] |
+| Llama-4-Maverick | kostenlos | 60 % | [33 %, 87 %] |
+| MiniMax-M3 | kostenlos | 60 % | [33 %, 87 %] |
+
+**Zwei Ergebnisse, die man nicht erwarten würde:**
+
+1. **Bezahlen hilft nicht zuverlässig.** Ein *kostenloses* Modell
+   (DeepSeek-V4-Flash, 80 %) schlägt zwei bezahlte Frontier-Modelle —
+   Claude Opus 5 (67 %) und GPT-5.2-chat (60 %). Preis und Gültigkeitsquote
+   sind auf dieser Aufgabe **nicht korreliert**.
+2. **Das teurere Modell derselben Familie verliert.** Claude Sonnet 5 (2 $/Mio.)
+   erreicht 100 %, Claude Opus 5 (5 $/Mio., das Flaggschiff) nur 67 % — bei
+   identischem Prompt. Opus erfand unter anderem `readWriteFromFile`
+   (echt: `readWriteFile`) und `csv` (echt: `spreadsheetFile`).
+
+**Über alle neun Modelle, 135 Antworten:** 38 Fehlschläge, davon **34 (89 %)
+ausschließlich am Node-Typnamen** — bei korrektem JSON und korrektem
+Verbindungsgraph. Und es sind nur **sechs** verschiedene erfundene
+Bezeichner im ganzen Datensatz, angeführt von 24× `sendEmail`.
+
+**Was das für Stufe 4 bedeutet:** Die Messlatte ist nicht mehr „irgendwas
+mit 68 %", sondern **Claude Sonnet 5 mit 100 %**. Ein 17-Mio.-Parameter-
+Modell kann das nur schaffen, wenn es das Vokabular wirklich auswendig
+kennt — genau das ist die Wette. Und selbst wenn es nur 90 % erreicht, hätte
+es vier von neun getesteten Modellen geschlagen, darunter zwei bezahlte.
+
+Rohdaten: `bewertung/premium_antworten.jsonl`,
+`bewertung/ergebnisse/premium-schwer-2026-09-12.json`.
 
 **Zweiter Fund, diesmal im eigenen Harness:** beim ersten Lauf mit vier
 Modellen in einer Datei zeigte die Tabelle nur *ein* Modell mit n = 15
