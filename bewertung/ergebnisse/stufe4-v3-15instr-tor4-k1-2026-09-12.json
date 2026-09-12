@@ -1,0 +1,183 @@
+{
+  "zeit": "2026-09-12 17:58:32",
+  "anzahl_kandidaten": 15,
+  "je_modell": {
+    "autolm-workflow-7M-v3-schritt2400-k1": {
+      "n": 15,
+      "tor1_json_quote": 0.6666666666666666,
+      "tor2_struktur_quote": 0.4666666666666667,
+      "tor3_verbindungen_quote": 0.6666666666666666,
+      "tor4_import_quote": 0.4666666666666667,
+      "gueltigkeitsquote_alle_vier": 0.4666666666666667
+    }
+  },
+  "einzelergebnisse": {
+    "autolm-workflow-7M-v3-schritt2400-k1__i01": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i01",
+      "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 4 (s@2Tool): unbekannter Node-Typ 'n8n-nodes-base.s@2Tool' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i02": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i02",
+      "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i03": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i03",
+      "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i04": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i04",
+      "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i05": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i05",
+      "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 2 (herMapTool): unbekannter Node-Typ 'n8n-nodes-base.herMapTool' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i06": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i06",
+      "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i07": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i07",
+      "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+      "tor1_json": true,
+      "tor2_struktur": false,
+      "tor3_verbindungen": true,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 2: Node 1 (googleAdsTrigger): unbekannter Node-Typ 'n8n-nodes-base.googleAdsTrigger' -- existiert nicht in n8n 2.25.6",
+        "Tor 2: Node 2 (googleAdsTrigger 2): unbekannter Node-Typ 'n8n-nodes-base.googleAdsTrigger' -- existiert nicht in n8n 2.25.6"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i08": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i08",
+      "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i09": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i09",
+      "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i10": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i10",
+      "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i11": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i11",
+      "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i12": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i12",
+      "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i13": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i13",
+      "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+      "tor1_json": false,
+      "tor2_struktur": false,
+      "tor3_verbindungen": false,
+      "tor4_importiert": null,
+      "probleme": [
+        "Tor 1: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i14": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i14",
+      "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    },
+    "autolm-workflow-7M-v3-schritt2400-k1__i15": {
+      "modell": "autolm-workflow-7M-v3-schritt2400-k1",
+      "id": "i15",
+      "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+      "tor1_json": true,
+      "tor2_struktur": true,
+      "tor3_verbindungen": true,
+      "tor4_importiert": true,
+      "probleme": []
+    }
+  }
+}
