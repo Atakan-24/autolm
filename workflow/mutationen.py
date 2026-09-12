@@ -187,10 +187,10 @@ OPERATIONEN = {
 }
 
 
-def ist_gueltig(wf: dict, mit_namen: bool = False) -> bool:
+def ist_gueltig(wf: dict, mit_namen: bool = False, mit_nummern: bool = False) -> bool:
     """Kurzschrift-Rundlauf + Tor 1-3 -- exakt der Weg, den spaeter das Modell geht."""
     try:
-        text = ks.serialisiere(wf, mit_namen)
+        text = ks.serialisiere(wf, mit_namen, mit_nummern)
         gerendert = ks.rendere(text)
     except ks.KurzschriftFehler:
         return False
@@ -199,7 +199,7 @@ def ist_gueltig(wf: dict, mit_namen: bool = False) -> bool:
 
 def mutiere(wf: dict, rng: random.Random, katalog: dict, gruppen: dict,
             versionen: dict, hoechstens_ops: int = 3,
-            mit_namen: bool = False) -> tuple[dict, list[str]] | None:
+            mit_namen: bool = False, mit_nummern: bool = False) -> tuple[dict, list[str]] | None:
     """1..hoechstens_ops zufaellige Operationen; None, wenn nichts Gueltiges entsteht.
     Ohne Namen in der Kurzschrift ist `umbenenne` wirkungslos und wird ausgelassen."""
     aktuell = wf
@@ -213,28 +213,30 @@ def mutiere(wf: dict, rng: random.Random, katalog: dict, gruppen: dict,
             continue
         aktuell = ergebnis
         angewandt.append(name)
-    if not angewandt or not ist_gueltig(aktuell, mit_namen):
+    if not angewandt or not ist_gueltig(aktuell, mit_namen, mit_nummern):
         return None
     return aktuell, angewandt
 
 
 def erzeuge_mutanten(vorlage: dict, anzahl: int, seed: int, katalog: dict,
-                     gruppen: dict, versionen: dict, mit_namen: bool = False) -> list[dict]:
+                     gruppen: dict, versionen: dict, mit_namen: bool = False,
+                     mit_nummern: bool = False) -> list[dict]:
     """
     Bis zu `anzahl` VERSCHIEDENE gueltige Mutanten einer Vorlage. Verschieden
     heisst: andere Kurzschrift als das Original und als jede andere Mutante --
     sonst zaehlt das Modell dasselbe Beispiel mehrfach.
     """
     rng = random.Random(f"{seed}:{vorlage['id']}")
-    gesehen = {ks.serialisiere(vorlage["wf"], mit_namen)}
+    gesehen = {ks.serialisiere(vorlage["wf"], mit_namen, mit_nummern)}
     aus, versuche = [], 0
     while len(aus) < anzahl and versuche < anzahl * 6:
         versuche += 1
-        m = mutiere(vorlage["wf"], rng, katalog, gruppen, versionen, mit_namen=mit_namen)
+        m = mutiere(vorlage["wf"], rng, katalog, gruppen, versionen,
+                    mit_namen=mit_namen, mit_nummern=mit_nummern)
         if m is None:
             continue
         wf, ops = m
-        text = ks.serialisiere(wf, mit_namen)
+        text = ks.serialisiere(wf, mit_namen, mit_nummern)
         if text in gesehen:
             continue
         gesehen.add(text)

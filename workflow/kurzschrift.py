@@ -49,6 +49,8 @@ from collections import defaultdict, deque
 NAMENSRAUM = uuid.UUID("6ba7b811-9dad-11d1-80b4-00c04fd430c8")  # fest -> reproduzierbare IDs
 
 _KNOTEN = re.compile(r"^n(\d+) (\S+)@(\S+)(?: (.*))?$")
+# Fassung 3: Knotenzeile OHNE Nummer -- die Nummer ist die Zeilenposition
+_KNOTEN_IMPLIZIT = re.compile(r"^([^\s>]+)@([^\s@]+)$")  # letztes @ trennt die Version ("@n8n/..." beginnt mit @)
 # "n1 > n2", "n1 >2 n4", "n5 ai_tool> n6", "n5 ai_tool>1 n6"
 _KANTE = re.compile(r"^n(\d+) ([A-Za-z_]*)>(\d*) n(\d+)$")
 
@@ -91,7 +93,7 @@ def _anzeigename(typ: str) -> str:
     return e["anzeige"] if e else typ.rsplit(".", 1)[-1]
 
 
-def serialisiere(wf: dict, mit_namen: bool = False) -> str:
+def serialisiere(wf: dict, mit_namen: bool = False, mit_nummern: bool = False) -> str:
     """
     n8n-Workflow (dict) -> Kurzschrift-Text. Knoten in der Reihenfolge der
     `nodes`-Liste, Kanten in der Reihenfolge von `connections`.
@@ -106,6 +108,14 @@ def serialisiere(wf: dict, mit_namen: bool = False) -> str:
     Der Name traegt fuer Tor 1-4 nichts -- `rendere()` setzt stattdessen
     den Katalog-Anzeigenamen des Typs, eindeutig gemacht.
     `mit_namen=True` bleibt fuer den Vergleich (Ablationsarm) erhalten.
+
+    FASSUNG 3 (Vorgabe, `mit_nummern=False`): Knotenzeilen tragen auch
+    KEINE Nummer mehr -- die Nummer ist die Zeilenposition. Gemessen an
+    Fassung 2 (7M, Schritt 800, n=98): 63 von 98 Ausgaben unlesbar, 28 mit
+    doppelter Nummer ("n7 ... n7 ... n7", "n11 n12 n11") -- das Modell
+    kopiert die letzte Nummer statt hochzuzaehlen. Kanten (`n3 > n5`)
+    behalten absolute Nummern; dort ist ein Zaehlfehler ein falscher
+    Verweis, kein Abbruch, und wird ueber die Kanten-Ueberdeckung gemessen.
     """
     nodes = wf.get("nodes", [])
     nummer = {}
@@ -115,7 +125,9 @@ def serialisiere(wf: dict, mit_namen: bool = False) -> str:
         if name in nummer:
             raise KurzschriftFehler(f"doppelter Node-Name {name!r}")
         nummer[name] = i
-        kopf = f"n{i} {n['type']}@{_version_text(n.get('typeVersion'))}"
+        kopf = f"{n['type']}@{_version_text(n.get('typeVersion'))}"
+        if mit_nummern or mit_namen:
+            kopf = f"n{i} {kopf}"
         zeilen.append(f"{kopf} {_saeubere(name)}" if mit_namen else kopf)
     for quelle, typen in (wf.get("connections") or {}).items():
         if quelle not in nummer:
@@ -153,14 +165,18 @@ def parse(text: str) -> dict:
                 raise KurzschriftFehler("zweite wf-Zeile")
             name = zeile[3:].strip() or "Workflow"
             continue
-        m = _KNOTEN.match(zeile)
-        if m:
-            knoten.append((int(m.group(1)), m.group(2), m.group(3), (m.group(4) or "").strip()))
-            continue
         m = _KANTE.match(zeile)
         if m:
             kanten.append((int(m.group(1)), m.group(2) or "main",
                            int(m.group(3) or 0), int(m.group(4))))
+            continue
+        m = _KNOTEN.match(zeile)
+        if m:
+            knoten.append((int(m.group(1)), m.group(2), m.group(3), (m.group(4) or "").strip()))
+            continue
+        m = _KNOTEN_IMPLIZIT.match(zeile)
+        if m:
+            knoten.append((len(knoten) + 1, m.group(1), m.group(2), ""))
             continue
         raise KurzschriftFehler(f"unlesbare Zeile: {zeile!r}")
     if name is None:
@@ -243,6 +259,13 @@ def rendere(text: str) -> dict:
         "connections": connections,
         "settings": {"executionOrder": "v1"},
     }
+
+
+def kanten_typen(wf: dict) -> set[tuple]:
+    """(Quell-Typ, Verbindungstyp, Ausgang, Ziel-Typ) -- Kanten-Ueberdeckung gegen
+    eine Referenz, unabhaengig von Namen und Nummerierung."""
+    typ = {n.get("name"): n.get("type") for n in wf.get("nodes", [])}
+    return {(typ.get(q), t, a, typ.get(z)) for q, t, a, z in kanten_menge(wf)}
 
 
 def kanten_index(wf: dict) -> set[tuple]:

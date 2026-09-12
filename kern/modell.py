@@ -224,7 +224,10 @@ class MiniGPT(nn.Module):
         logits = self.ausgabe(x)
         if ziele is None:
             return logits, None
-        verlust = F.cross_entropy(logits.view(B * T, -1), ziele.reshape(B * T))
+        # ignore_index=-100 ist die Vorgabe von cross_entropy: Ziele mit -100
+        # (Stufe 4, Instruktionsmaske) zaehlen nicht -- hier ausgeschrieben,
+        # damit es beim Lesen nicht wie Zufall aussieht.
+        verlust = F.cross_entropy(logits.view(B * T, -1), ziele.reshape(B * T), ignore_index=-100)
         return logits, verlust
 
     @torch.no_grad()

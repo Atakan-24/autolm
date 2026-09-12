@@ -85,7 +85,7 @@ def erzeuge_ids(modell: MiniGPT, prompt: list[int], eos_id: int, hoechstens: int
 def bewerte_text(kurz: str, referenz: str | None, echte: set[str]) -> dict:
     e = {"tor0_kurzschrift": False, "tor1_json": False, "tor2_struktur": False,
          "tor3_verbindungen": False, "gueltig": False, "erfundene_typen": [],
-         "typen_jaccard": None, "knoten": 0, "probleme": []}
+         "typen_jaccard": None, "kanten_jaccard": None, "knoten": 0, "probleme": []}
     try:
         gerendert = ks.rendere(kurz)
     except ks.KurzschriftFehler as x:
@@ -101,9 +101,12 @@ def bewerte_text(kurz: str, referenz: str | None, echte: set[str]) -> dict:
     e["gueltig"] = r["alle_bestanden_ohne_import"]
     e["probleme"].extend(r["probleme"][:5])
     if referenz:
-        ref = {n["type"] for n in ks.rendere(referenz)["nodes"]}
+        ref_wf = ks.rendere(referenz)
+        ref = {n["type"] for n in ref_wf["nodes"]}
         m = set(typen)
         e["typen_jaccard"] = round(len(ref & m) / max(1, len(ref | m)), 3)
+        rk, mk = ks.kanten_typen(ref_wf), ks.kanten_typen(gerendert)
+        e["kanten_jaccard"] = round(len(rk & mk) / max(1, len(rk | mk)), 3)
     return e
 
 
@@ -181,6 +184,7 @@ def main():
     n = len(einzel)
     def quote(schl): return round(sum(1 for e in einzel if e[schl]) / max(1, n), 3)
     jacc = [e["typen_jaccard"] for e in einzel if e["typen_jaccard"] is not None]
+    kjacc = [e["kanten_jaccard"] for e in einzel if e["kanten_jaccard"] is not None]
     erfunden = {}
     for e in einzel:
         for t in e["erfundene_typen"]:
@@ -194,6 +198,7 @@ def main():
         "gueltig_at_1": quote("gueltig_at_1"), "gueltig_at_k": quote("gueltig_at_k"),
         "abgebrochen": quote("abgebrochen"),
         "typen_jaccard_mittel": round(sum(jacc) / len(jacc), 3) if jacc else None,
+        "kanten_jaccard_mittel": round(sum(kjacc) / len(kjacc), 3) if kjacc else None,
         "erfundene_typen": dict(sorted(erfunden.items(), key=lambda x: -x[1])),
         "dauer_s": round(time.time() - t0),
     }

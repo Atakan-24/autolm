@@ -53,7 +53,7 @@ def main():
     test = lade_jsonl(args.daten / "test.jsonl")
     index = [(woerter(b["instruktion"]), b) for b in train]
 
-    einzel, jacc, gueltig = [], [], 0
+    einzel, jacc, kjacc, gueltig = [], [], [], 0
     for t in test:
         w = woerter(t["instruktion"])
         bester, score = None, -1.0
@@ -64,6 +64,9 @@ def main():
         ref, m = typen(t["kurzschrift"]), typen(bester["kurzschrift"])
         j = len(ref & m) / max(1, len(ref | m))
         jacc.append(j)
+        rk = ks.kanten_typen(ks.rendere(t["kurzschrift"]))
+        mk = ks.kanten_typen(ks.rendere(bester["kurzschrift"]))
+        kjacc.append(len(rk & mk) / max(1, len(rk | mk)))
         ok = pruefe_alle_tore(json.dumps(ks.rendere(bester["kurzschrift"])))["alle_bestanden_ohne_import"]
         gueltig += ok
         einzel.append({"id": f"t{t['quelle_id']}", "nachbar_quelle_id": bester["quelle_id"],
@@ -75,6 +78,7 @@ def main():
         "gueltig": round(gueltig / max(1, len(test)), 3),
         "typen_jaccard_mittel": round(sum(jacc) / max(1, len(jacc)), 3),
         "typen_jaccard_median": round(sorted(jacc)[len(jacc) // 2], 3) if jacc else None,
+        "kanten_jaccard_mittel": round(sum(kjacc) / max(1, len(kjacc)), 3),
         "hinweis": "Gueltigkeit ist per Konstruktion 100 % -- die aussagekraeftige Zahl ist die Typen-Ueberdeckung.",
     }
     print(json.dumps(z, indent=2, ensure_ascii=False))

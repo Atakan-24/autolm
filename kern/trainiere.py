@@ -44,7 +44,7 @@ def lade_daten(pfad: Path) -> np.memmap:
 
 
 def hole_stapel(daten: np.memmap, position: int, block: int, batch: int,
-                 geraet: str) -> tuple[torch.Tensor, torch.Tensor, int]:
+                 geraet: str, maske: np.memmap | None = None) -> tuple[torch.Tensor, torch.Tensor, int]:
     """
     Liest `batch` aufeinanderfolgende Sequenzen ab `position`, rollt am
     Ende der Datei um. Gibt die NEUE Position zurueck -- das ist exakt
@@ -58,7 +58,13 @@ def hole_stapel(daten: np.memmap, position: int, block: int, batch: int,
             position = 0
         stueck = daten[position:position + block + 1].astype(np.int64)
         xs.append(stueck[:-1])
-        ys.append(stueck[1:])
+        ziel = stueck[1:]
+        if maske is not None:
+            # -100 = ignore_index von cross_entropy: Instruktionstoken tragen
+            # nichts zum Verlust bei, das Modell lernt nur die Kurzschrift.
+            m = maske[position + 1:position + block + 1]
+            ziel = np.where(m == 1, ziel, -100)
+        ys.append(ziel)
         position += block
     x = torch.from_numpy(np.stack(xs)).to(geraet)
     y = torch.from_numpy(np.stack(ys)).to(geraet)
@@ -90,6 +96,9 @@ def main():
     p.add_argument("--val-daten", type=Path, default=None,
                     help="zweiter uint16-Strom; Verlust darauf bei jedem Log-Schritt")
     p.add_argument("--val-stapel", type=int, default=8)
+    p.add_argument("--maske", action="store_true",
+                    help="Stufe 4: <daten>.maske.bin (uint8) lesen; nur Positionen mit 1 "
+                         "zaehlen zum Verlust (Kurzschrift, nicht Instruktion)")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
     torch.manual_seed(args.seed)
@@ -116,6 +125,12 @@ def main():
 
     daten = lade_daten(args.daten)
     print(f"Daten: {len(daten):,} Token aus {args.daten}")
+    maske = None
+    if args.maske:
+        maske = np.memmap(args.daten.with_suffix(".maske.bin"), dtype=np.uint8, mode="r")
+        if len(maske) != len(daten):
+            raise SystemExit(f"Maske ({len(maske):,}) passt nicht zu den Daten ({len(daten):,})")
+        print(f"Maske: {int(maske.sum()):,} von {len(maske):,} Token zaehlen zum Verlust")
 
     schritte = args.schritte or max(1, args.token_budget // (batch * block))
     print(f"Ziel: {schritte:,} Schritte (~{schritte * batch * block:,} Token)")
@@ -133,6 +148,8 @@ def main():
         "schichten": schichten, "block": block, "batch": batch, "lr": args.lr,
         "daten": str(args.daten), "seed": args.seed}, indent=2), encoding="utf8")
     val_daten = lade_daten(args.val_daten) if args.val_daten else None
+    val_maske = (np.memmap(args.val_daten.with_suffix(".maske.bin"), dtype=np.uint8, mode="r")
+                 if (args.val_daten and args.maske) else None)
     verlauf = open(args.checkpoint_ordner / "verlauf.jsonl", "a", encoding="utf8")
 
     @torch.no_grad()
@@ -142,7 +159,7 @@ def main():
         modell.eval()
         pos, summe = 0, 0.0
         for _ in range(args.val_stapel):
-            vx, vy, pos = hole_stapel(val_daten, pos, block, batch, geraet)
+            vx, vy, pos = hole_stapel(val_daten, pos, block, batch, geraet, val_maske)
             summe += modell(vx, vy)[1].item()
         modell.train()
         return summe / args.val_stapel
@@ -157,7 +174,7 @@ def main():
     t0 = time.time()
     verlust_log = []
     for schritt in range(start_schritt, schritte):
-        x, y, position = hole_stapel(daten, position, block, batch, geraet)
+        x, y, position = hole_stapel(daten, position, block, batch, geraet, maske)
         _, verlust = modell(x, y)
         optimierer.zero_grad(set_to_none=True)
         verlust.backward()

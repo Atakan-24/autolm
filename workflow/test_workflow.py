@@ -56,13 +56,27 @@ class Kurzschrift(unittest.TestCase):
         wf1 = ks.rendere(ks.serialisiere(BEISPIEL, mit_namen=True))
         self.assertEqual(ks.kanten_menge(wf1), ks.kanten_menge(BEISPIEL))
 
+    def test_fassung_3_ohne_nummern(self):
+        text = ks.serialisiere(BEISPIEL)
+        self.assertEqual(text.splitlines()[1], "n8n-nodes-base.formTrigger@2.2")
+        self.assertIn("n2 >1 n4", text)                    # Kanten behalten absolute Nummern
+        wf = ks.rendere(text)
+        self.assertEqual(ks.kanten_index(wf), ks.kanten_index(BEISPIEL))
+        self.assertEqual(ks.kanten_typen(wf), ks.kanten_typen(BEISPIEL))
+        # Fassung 2 (Nummern) und 1 (Namen) rendern auf dasselbe Ergebnis
+        self.assertEqual(json.dumps(ks.rendere(ks.serialisiere(BEISPIEL, mit_nummern=True))),
+                         json.dumps(wf))
+        # ein Typ, der mit "n8" beginnt, ist keine Nummer -- kein Fehlparse
+        wf2 = ks.rendere("wf\nn8n-nodes-base.set@3.4\nn8n-nodes-base.code@2\nn1 > n2")
+        self.assertEqual([n["type"] for n in wf2["nodes"]], ["n8n-nodes-base.set", "n8n-nodes-base.code"])
+
     def test_gleiche_typen_bekommen_eindeutige_namen(self):
         wf = ks.rendere("wf\nn1 n8n-nodes-base.set@3.4\nn2 n8n-nodes-base.set@3.4\nn1 > n2")
         self.assertEqual([n["name"] for n in wf["nodes"]], ["Set", "Set 2"])
         self.assertTrue(pruefe_alle_tore(json.dumps(wf))["alle_bestanden_ohne_import"])
 
     def test_ausgang_index_und_verbindungstyp(self):
-        text = ks.serialisiere(BEISPIEL, mit_namen=True)
+        text = ks.serialisiere(BEISPIEL, mit_nummern=True)
         self.assertIn("n2 >1 n4", text)          # zweiter Ausgang
         self.assertIn("n1 > n2", text)           # main, Ausgang 0 -> kurz
         wf = ks.rendere("wf x\nn1 a.b@1 A\nn2 a.c@1 B\nn1 ai_tool> n2")
