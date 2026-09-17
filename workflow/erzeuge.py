@@ -49,15 +49,24 @@ from workflow import kurzschrift as ks  # noqa: E402
 from workflow.tokenizer_workflow import WorkflowTokenizer  # noqa: E402
 
 
-def lade_modell(ordner: Path, geraet: str) -> tuple[MiniGPT, dict]:
+def lade_modell(ordner: Path, geraet: str, bestes: bool = False) -> tuple[MiniGPT, dict]:
     konfig = json.loads((ordner / "modell_konfig.json").read_text(encoding="utf8"))
     modell = MiniGPT(konfig["vokabular"], dim=konfig["dim"], koepfe=konfig["koepfe"],
                      schichten=konfig["schichten"], block=konfig["block"]).to(geraet)
-    schritt, _ = Checkpointer(ordner).lade_neuesten(modell, torch.optim.AdamW(modell.parameters()))
-    if schritt == 0:
-        raise SystemExit(f"kein Checkpoint in {ordner}")
+    ckpt = Checkpointer(ordner)
+    if bestes:
+        schritt, bval = ckpt.lade_bestes(modell)
+        if schritt == 0:
+            raise SystemExit(f"kein Best-Checkpoint (ckpt_best.pt) in {ordner}")
+    else:
+        schritt, _ = ckpt.lade_neuesten(modell, torch.optim.AdamW(modell.parameters()))
+        bval = None
+        if schritt == 0:
+            raise SystemExit(f"kein Checkpoint in {ordner}")
     modell.eval()
     konfig["schritt"] = schritt
+    if bestes:
+        konfig["best_val"] = bval
     return modell, konfig
 
 
@@ -125,6 +134,8 @@ def main():
     p.add_argument("--top-k", type=int, default=40)
     p.add_argument("--hoechstens-token", type=int, default=768)
     p.add_argument("--modell-name", default="autolm-workflow")
+    p.add_argument("--bestes", action="store_true",
+                   help="den Best-Val-Checkpoint (ckpt_best.pt) laden statt des letzten")
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--zeige", type=int, default=3, help="so viele Beispiele ausdrucken")
     args = p.parse_args()
@@ -133,7 +144,7 @@ def main():
     geraet = "cuda" if torch.cuda.is_available() else "cpu"
     tok_pfad = args.tokenizer or ((args.test.parent if args.test else WURZEL / "daten" / "workflow") / "tokenizer.pkl")
     tok = WorkflowTokenizer.lade(tok_pfad)
-    modell, konfig = lade_modell(args.checkpoints, geraet)
+    modell, konfig = lade_modell(args.checkpoints, geraet, bestes=args.bestes)
     echte = lade_echte_node_typen()
     print(f"Modell: {modell.anzahl_parameter():,} Parameter, Schritt {konfig['schritt']}, {geraet}")
 

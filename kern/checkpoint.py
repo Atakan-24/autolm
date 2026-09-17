@@ -139,6 +139,76 @@ class Checkpointer:
 
         return inhalt["schritt"], inhalt["datenposition"]
 
+    def speichere_bestes(self, modell, optimierer, schritt: int, datenposition: int,
+                          val_verlust: float) -> bool:
+        """
+        Haelt den Checkpoint mit dem NIEDRIGSTEN gesehenen Validierungsverlust
+        in einer eigenen Datei ckpt_best.pt fest -- unabhaengig von den zwei
+        rotierenden Slots, die immer nur den JUENGSTEN Stand halten. Grund:
+        der beste Val-Stand liegt in der Praxis vor dem Ende (hier gemessen bei
+        Schritt 1.150-1.850 von 2.400); ohne diese Datei ueberschreibt ihn das
+        Weitertrainieren, und bewertet wird dann ein schon ueberangepasster
+        Endstand. Schreibt NUR, wenn val_verlust den bisher besten unterbietet.
+        Gibt True zurueck, wenn ein neuer Bester geschrieben wurde.
+
+        Atomar (temp + replace) wie speichere(); die Pruefsumme wandert in die
+        Meta-Datei, damit ein Bitfehler beim Laden klar benannt ist. Anders als
+        speichere() nur EINE Datei -- der Crash-Resume haengt weiter an den zwei
+        Slots, der Best-Stand ist eine Zugabe fuer die Bewertung.
+        """
+        meta = self._lade_meta()
+        bisher = meta.get("best_val")
+        if bisher is not None and val_verlust >= bisher:
+            return False
+
+        inhalt = {
+            "modell": modell.state_dict(),
+            "optimierer": optimierer.state_dict(),
+            "schritt": schritt,
+            "datenposition": datenposition,
+            "val_verlust": val_verlust,
+            "torch_rng": torch.get_rng_state(),
+            "numpy_rng": np.random.get_state(),
+            "python_rng": random.getstate(),
+            "zeit": time.time(),
+        }
+        ziel = self.ordner / f"{self.praefix}_best.pt"
+        temp = ziel.with_suffix(".tmp")
+        torch.save(inhalt, temp)
+        pruefsumme = self._pruefsumme(temp)
+        temp.replace(ziel)
+
+        meta["best_val"] = val_verlust
+        meta["best_schritt"] = schritt
+        meta["best_pruefsumme"] = pruefsumme
+        self._speichere_meta(meta)
+        return True
+
+    def bester_val(self):
+        """Bisher bester Validierungsverlust, oder None -- damit ein Resume den
+        Vergleich fortsetzt statt bei Unendlich neu zu beginnen."""
+        return self._lade_meta().get("best_val")
+
+    def lade_bestes(self, modell, optimierer=None):
+        """
+        Laedt den Best-Val-Checkpoint (ckpt_best.pt). Gibt (schritt, val_verlust)
+        zurueck, oder (0, None), wenn es keinen gibt. Pruefsumme wird wie bei
+        lade_neuesten VOR dem Laden geprueft.
+        """
+        meta = self._lade_meta()
+        pfad = self.ordner / f"{self.praefix}_best.pt"
+        if "best_val" not in meta or not pfad.exists():
+            return 0, None
+        if self._pruefsumme(pfad) != meta.get("best_pruefsumme"):
+            raise RuntimeError(
+                f"Best-Checkpoint {pfad} ist beschaedigt (Pruefsumme stimmt nicht)."
+            )
+        inhalt = torch.load(pfad, map_location="cpu", weights_only=False)
+        modell.load_state_dict(inhalt["modell"])
+        if optimierer is not None and "optimierer" in inhalt:
+            optimierer.load_state_dict(inhalt["optimierer"])
+        return inhalt["schritt"], inhalt.get("val_verlust")
+
     def _pruefsumme(self, pfad: Path) -> str:
         h = hashlib.sha256()
         with open(pfad, "rb") as f:
