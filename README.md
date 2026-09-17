@@ -896,9 +896,27 @@ Test-Split mit n = 98 gemessen, wo eine Referenz existiert. Der
 alte Befund aus Stufe 4 bleibt bis dahin stehen: das Modell liegt bei der
 Treffsicherheit unter der Abschreib-Kontrolle.
 
-Rohdaten: `bewertung/ergebnisse/stufe5-15instr-{ohne,maske}-k1.json`,
-`stufe5-15instr-tor4-2026-09-17.json`, Kandidaten in
-`bewertung/stufe5_tor4_kandidaten.jsonl`.
+**Und die Gegenprobe gegen den eigenen Befund von vorhin:** Stufe 4 hat
+gezeigt, dass ein bloß anderer Zufallsstrom die Zahlen um mehrere
+Prozentpunkte bewegt — eine Messung mit einem einzigen Seed wäre nach dieser
+Erkenntnis nicht belastbar. Also dieselben 15 Instruktionen noch einmal mit
+Seed 1 und 2, beide Arme, gepaart über (Seed, Fall-ID):
+
+| | gültig@1 | 95-%-KI | erfundene Typen |
+|---|---|---|---|
+| ohne `--beschraenkt`, 3 Seeds gepoolt | 10/45 = 22 % | [13 %, 36 %] | 11 |
+| mit `--beschraenkt`, 3 Seeds gepoolt | **45/45 = 100 %** | [92 %, 100 %] | **0** |
+
+Je Seed einzeln ohne Maske 20 %, 27 %, 20 % — mit Maske dreimal 100 %.
+Exakter McNemar-Test über die 45 Paare: 35 diskordante Fälle, **alle** in
+dieselbe Richtung, p = 6 × 10⁻¹¹. Die Maske griff je nach Seed 42-, 17- bzw.
+18-mal ein. Der Effekt hängt also nicht am Zufallsstrom, und er ist um
+Größenordnungen deutlicher als die Rauschgrenze, an der die Stufe-4-Messung
+gescheitert ist.
+
+Rohdaten: `bewertung/ergebnisse/stufe5-15instr-{ohne,maske}-k1*.json`,
+`stufe5-15instr-tor4-2026-09-17.json`, `stufe5-15instr-3seeds-2026-09-17.json`,
+Kandidaten in `bewertung/stufe5_tor4_kandidaten.jsonl`.
 
 ## Schritt 1 — was drinsteht
 
