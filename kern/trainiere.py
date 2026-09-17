@@ -191,6 +191,9 @@ def main():
                                       "val": None if vv is None else round(vv, 4),
                                       "zeit_s": round(dt)}) + "\n")
             verlauf.flush()
+            if vv is not None and ckpt.speichere_bestes(modell, optimierer, schritt, position, vv):
+                print(f"    -> neuer bester Val {vv:.4f} bei Schritt {schritt:,} "
+                      f"(ckpt_best.pt)", flush=True)
 
         if schritt % args.checkpoint_alle == 0 and schritt > start_schritt:
             ckpt.speichere(modell, optimierer, schritt, position, verlust_log)

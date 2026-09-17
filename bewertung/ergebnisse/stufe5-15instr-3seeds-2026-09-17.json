@@ -1,0 +1,45 @@
+{
+ "frage": "Wirkt die Maske ueber verschiedene Zufallsstroeme, oder war Seed 0 ein Gluecksfall?",
+ "aufbau": "15 fremd formulierte Instruktionen x 3 Seeds (0,1,2), Best@1850, k=1, gepaart ueber (seed,id)",
+ "n_gepaart": 45,
+ "ohne_maske": {
+  "gueltig": 10,
+  "anteil": 0.222,
+  "wilson95_pct": [
+   12.5,
+   36.3
+  ],
+  "erfundene_typen_gesamt": 11
+ },
+ "mit_maske": {
+  "gueltig": 45,
+  "anteil": 1.0,
+  "wilson95_pct": [
+   92.1,
+   100
+  ],
+  "erfundene_typen_gesamt": 0
+ },
+ "mcnemar": {
+  "nur_ohne_gueltig": 0,
+  "nur_mit_gueltig": 35,
+  "p_exakt": 5.820766091346741e-11
+ },
+ "je_seed": {
+  "0": {
+   "ohne": 0.2,
+   "mit": 1.0,
+   "eingriffe": 42
+  },
+  "1": {
+   "ohne": 0.267,
+   "mit": 1.0,
+   "eingriffe": 17
+  },
+  "2": {
+   "ohne": 0.2,
+   "mit": 1.0,
+   "eingriffe": 18
+  }
+ }
+}

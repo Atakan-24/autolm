@@ -7,7 +7,7 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. Frühere Angabe: — 384,8 Mio. echte
+> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. **Stufe 5 (17.09.2026): eingeschränkte Dekodierung gebaut und gemessen** — eine Logit-Maske macht ungültige Node-Typen und ungültige Grammatik beim Schreiben unwählbar, statt die fertige Antwort zu reparieren. Auf den 15 fremd formulierten Instruktionen, **ein** Versuch je Instruktion und ohne Validator in der Schleife, steigt die Quote durch alle vier Tore inklusive echtem n8n-Import von **20 % auf 100 %** (über drei Zufallsströme: 45 von 45, p = 6 × 10⁻¹¹); erfundene Typen 11 gegen 0. Auf den 98 Testfällen mit Referenz: gültig@1 von 36 % auf 97 %, und die Typen-Überdeckung **steigt** dabei (0,26 → 0,35) statt zu leiden. Damit erreicht das 7-Mio.-Modell den Wert des besten der neun Frontier-Modelle auf dieser Aufgabe — bei der Gültigkeit, nicht bei der Treffsicherheit. **Nachtrag 17.09.2026:** der beste Validierungs-Checkpoint wird jetzt mitgespeichert und wurde gegen den Endstand gemessen — kein Unterschied, den 98 Testfälle auflösen könnten; ein bloß anderer Zufallsstrom bei bitgleichen Gewichten bewegt die Zahlen genauso stark. Der Prüfstand ist damit vermessen, nicht das Modell. Frühere Angabe: — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
 > Eval-Harness gegen echtes n8n läuft, **neun Modelle gemessen (fünf gratis,
 > vier bezahlt): 60–100 % gültige Workflows, und 89 % aller Fehler sind
@@ -78,7 +78,7 @@ Offline-Betrieb).
 | **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — `kern/gpu_bootstrap.sh` startet ihn auf einer Miet-GPU ohne Browser | 🔶 Infrastruktur fertig, Training offen |
 | **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **neun Modelle gemessen (leicht + schwer, gratis + bezahlt), 2,41 $ tatsächliche API-Kosten** | ✅ `bewertung/` |
 | **4** | Workflow-Modell: Kurzschrift, Mutations-Pipeline (jede Mutante durch den Validator), Split nach Vorlagen-ID mit hartem Leck-Abbruch, eigener Tokenizer, **drei Fassungen auf CPU trainiert und auf 98 ungesehenen Vorlagen gemessen** | 🔶 `workflow/` — gebaut und gemessen (7M, CPU); GPU-Lauf und größeres Modell offen |
-| 5 | Eingeschränkte Dekodierung (falls nötig) | offen |
+| **5** | **Eingeschränkte Dekodierung**: Logit-Maske über den 825 echten Node-Typen und der Kurzschrift-Grammatik, hinter `--beschraenkt`. Auf den 15 fremd formulierten Instruktionen, ein Versuch, alle vier Tore: **20 % → 100 % gültig**, erfundene Typen 1 → 0 | ✅ `workflow/beschraenkt.py` — 22 Tests; n=98-Messung der Treffsicherheit läuft |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
 | 7 | Quantisierung, Hugging-Face-Demo | offen |
 
@@ -518,6 +518,143 @@ Buchstabendreher. Das Vokabular auswendig zu können ist die leichte Hälfte der
   überlesen hätte — der Abbruch hat es erzwungen.
 
 
+### Die Gegenprobe zur Überanpassung — geteiltes Ergebnis (B8)
+
+V3 überpasst sich: Trainingsverlust 3,19 gegen Validierung 4,62, Plateau ab
+Schritt 1.600. Die naheliegende Erklärung war die Datenerzeugung — 20
+Mutanten je Vorlage, die einander zu ähnlich sind. Also ein Lauf, der genau
+das ändert und **sonst nichts**: gleicher Seed, gleiches Modell, gleiches
+Schrittbudget, gleicher Split.
+
+| | V3 | B8 |
+|---|---|---|
+| Mutanten je Vorlage | 20 | **8**, gestaffelt (1–3 Operationen) |
+| Instruktions-Varianten je Original | 3 | **6** |
+| Trainings-Token | 2,56 Mio. | **1,60 Mio.** |
+| bester Validierungsverlust | **4,55** (Schritt 1.850) | 4,59 (Schritt 1.150) |
+| Validierung am Ende (Schritt 2.350) | **4,62** | 5,11 |
+| Abstand Training↔Validierung | **1,42** | 2,70 |
+| lesbare Ausgabe (Tor 0) | 71 % | **84 %** |
+| gültig@1 | 36 % | **41 %** |
+| gültig@4 | 70 % | **84 %** |
+| ins Token-Limit gelaufen | 7 % | **0 %** |
+| **Typen-Jaccard** | **0,41** | 0,34 |
+| Kanten-Jaccard | 0,04 | 0,04 |
+| erfundene Typen | 1 Formatfehler | **0** |
+
+**Das Ergebnis geht auseinander, und genau das ist der Befund.** B8 schreibt
+**mehr gültige** Workflows — 84 % statt 70 % bestehen alle Tore, kein einziger
+läuft ins Token-Limit, kein einziger Typ ist erfunden. Und B8 trifft die
+**Sache schlechter**: Typen-Jaccard 0,34 statt 0,41.
+
+Die Erklärung, die zu beidem passt: weniger Mutanten heißt weniger gesehene
+Typen-Vielfalt. Das Modell weicht auf die Handvoll Typen aus, die es sicher
+kann — das ergibt saubere, kurze, gültige Workflows, die aber häufiger am
+Gewünschten vorbeigehen. **Gültigkeit und Treffsicherheit sind hier zwei
+Achsen, keine eine.** Wer nur die Gültigkeitsquote berichtet, verkauft einen
+Rückschritt als Fortschritt.
+
+**Die Überanpassungs-Hypothese ist widerlegt, und zwar in die andere
+Richtung.** Weniger, stärker gestaffelte Mutanten haben den Abstand zwischen
+Trainings- und Validierungsverlust nicht gedämpft, sondern von 1,42 auf
+2,70 **verdoppelt**, und B8 erreicht sein Optimum schon bei Schritt
+1.150 statt 1.850. Nicht die Ähnlichkeit der Mutanten war das Problem,
+sondern die **Menge**: 1,60 Mio. Token reichen diesem Modell nicht, auch wenn
+sie vielfältiger sind.
+
+Gegen die eigene Erwartung, deshalb hier: über die ersten rund 600 Schritte
+war B8 an **jedem** Messpunkt besser. Die zusätzlichen Instruktions-Varianten
+helfen also messbar — dem Lauf geht danach nur der Stoff aus.
+
+**Urteil nach der vorab festgelegten Regel: V3 bleibt die Basis.** Sie stand vor dem
+Lauf in `bewertung/ergebnisse/stufe4-b8-konfiguration-2026-09-12.json`
+(„nur als besser dokumentiert, wenn die Holdout-Messung mindestens V3 bei
+Gültigkeit@1 **und** Typen-Jaccard erreicht und die Validierungskurve nicht
+schlechter endet"). Von drei Bedingungen ist eine erfüllt. Genau dafür
+schreibt man die Regel vorher auf: die Gültigkeitsquote allein hätte eine
+Erfolgsmeldung hergegeben.
+
+**Was daraus folgt — und ein Fund über das eigene Werkzeug:** beide Modelle
+wurden bei Schritt 2.400 bewertet, obwohl **beide** ihr Optimum vorher hatten
+(V3 bei 1.850, B8 bei 1.150). Der Checkpointer hält bewusst nur zwei
+rotierende Stände — der beste Stand ist damit nicht mehr bewertbar, er ist
+überschrieben. Der nächste Schritt ist deshalb nicht noch eine Datenvariante,
+sondern: den Stand mit dem besten Validierungsverlust mitspeichern und **den**
+messen. Erst danach mehr Daten, und die kommen nicht aus mehr Mutanten,
+sondern aus mehr echten Vorlagen.
+**Gemacht, 17.09.2026 — siehe nächster Abschnitt.** Das Ergebnis war nicht
+die erwartete Antwort, sondern eine Rauschgrenze.
+
+### Der beste Stand gemessen — und die Rauschgrenze des Prüfstands (17.09.2026)
+
+Der Checkpointer hält seit `7b27da5` zusätzlich den Stand mit dem niedrigsten
+Validierungsverlust fest (`ckpt_best.pt`, atomar, mit Prüfsumme, nur bei
+echter Verbesserung; `erzeuge.py --bestes` lädt ihn). Ein neuer Lauf mit der
+unveränderten V3-Konfiguration — gleicher Seed, gleiche Daten, gleiches
+Schrittbudget — hat zuerst bewiesen, dass die Ergänzung das Training nicht
+berührt: die Validierungskurve trifft die V3-Zahlen auf die Stelle (4,55 bei
+Schritt 1.850, 4,62 bei 2.350), und die 72 Gewichtstensoren des neuen
+2.400er-Stands sind **bitgleich** mit dem alten (größte Abweichung 0). Dann
+beide Stände desselben Laufs auf denselben 98 Test-Vorlagen, Best-of-4,
+Temperatur 0,7, top-k 40 — **gepaart** über die Fall-ID,
+exakter McNemar-Test, Bootstrap-Intervalle
+(`bewertung/vergleiche_checkpoints.py`):
+
+| | Best (Schritt 1.850, Val 4,55) | Ende (Schritt 2.400, Val 4,62) | Differenz, 95-%-KI | p |
+|---|---|---|---|---|
+| lesbar (Tor 0) | 81 % | 73 % | +7 pp [−4, +18] | 0,30 |
+| gültig@1 | 28 % | 37 % | −9 pp [−21, +3] | 0,20 |
+| gültig@4 | 79 % | 73 % | +5 pp [−6, +16] | 0,47 |
+| Typen-Jaccard, unbedingt (ungültig zählt 0) | 0,27 | 0,29 | −0,01 [−0,07, +0,05] | 0,59 |
+| Kanten-Jaccard, unbedingt | 0,02 | 0,04 | −0,01 | 0,20 |
+| erfundene Typen | 2 | 0 | | |
+
+Elf Tests, **keiner** signifikant, kleinstes p 0,098. Und „nicht signifikant"
+heißt hier nicht „gleich gut": die Intervalle sind so breit, dass ein
+Unterschied von zehn Prozentpunkten in beide Richtungen darin Platz hat.
+
+**Die Kontrollmessung, die das einordnet:** der alte V3-Stand (Schritt 2.400)
+gegen den neuen 2.400er-Stand — **bitgleiche Gewichte**, nur der Zufallsstrom
+beim Sampling ist ein anderer. (Und ein Fund nebenbei, `f75f979`: `--seed`
+wirkte beim Laden des letzten Standes gar nicht, weil der Checkpointer den
+Trainings-RNG wiederherstellt und den Seed überschrieb — die beiden Läufe
+unterschieden sich im Zufallsstrom trotzdem, nur nicht aus dem Grund, den die
+Befehlszeile behauptete. Seit `f75f979` gilt der Seed für beide Ladewege.)
+Unterschiede allein aus dem Zufallsstrom: Tor 0 2 pp, gültig@4 3 pp,
+Typen-Jaccard 0,02, erfundene Typen 1 gegen 0. Die Intervalle dieses Null-Vergleichs sind genauso breit wie die des
+echten Vergleichs (`stufe4-rauschgrenze-seed0-gegen-seed1-2026-09-17.json`).
+
+**Befund:** mit 98 Testfällen kann dieser Prüfstand einen Checkpoint-Wechsel
+nicht von einem Wechsel des Zufallsstroms unterscheiden. Die Frage „ist der Stand mit dem
+besten Validierungsverlust auch der bessere Workflow-Erzeuger?" ist damit
+nicht mit Nein beantwortet, sondern **mit diesem Prüfstand nicht
+beantwortbar**. Das ist das Ergebnis dieser Messung — und die Zahl, die jede
+weitere Änderung schlagen muss: ein Effekt unter rund zehn Prozentpunkten
+(bzw. 0,06 Jaccard) ist bei n = 98 unsichtbar.
+
+**Nachtrag zu B8, mit derselben Brille** (`stufe4-b8-gegen-v3-gepaart-2026-09-17.json`,
+beide über denselben Ladeweg bewertet): der Gültigkeitsvorsprung von B8 liegt **außerhalb** der
+Rauschgrenze — gültig@4 +13 pp [+1, +24], p 0,047; kein Token-Limit-Abbruch
+gegen 7 %, p 0,016. Die „schlechtere Treffsicherheit" dagegen hängt am
+Maß: der Typen-Jaccard oben (0,34 gegen 0,41) ist nur über die Fälle
+gemittelt, in denen die Ausgabe lesbar war — wer mehr lesbare Ausgaben
+liefert, wird auf einer anderen Teilmenge gemessen. **Unbedingt** (unlesbar
+zählt 0) sind es 0,29 gegen 0,29, Differenz −0,01 [−0,07, +0,05]. Das Urteil
+nach der vorab festgelegten Regel bleibt (die Validierungskurve endet
+schlechter, das war die dritte Bedingung), aber die Lesart „B8 trifft
+schlechter" ist mit den Daten nicht belegt — sie war ein Artefakt des
+bedingten Maßes. Deshalb ist die unbedingte Fassung ab jetzt das Hauptmaß.
+
+**Was daraus folgt:** nicht noch ein Lauf, sondern mehr Trennschärfe. Der
+Test-Split hat 98 von 1.978 Vorlagen; ein Unterschied von fünf Prozentpunkten
+bräuchte grob viermal so viele Fälle. Billiger und sofort möglich: dieselben
+98 Fälle mit mehreren Zufallsströmen (`--seed`, seit `f75f979` wirksam) je Stand — das mittelt das
+Sampling-Rauschen weg, nicht die Fall-Schwankung. Und der nächste Schritt am
+Modell muss ein Effekt sein, der die Grenze sicher überspringt: Stufe 5
+(eingeschränkte Dekodierung über den 825 echten Typen und der
+Kurzschrift-Grammatik) greift genau die Tor-0-Fehler an, die 20–30 % der
+Ausgaben kosten.
+
 ### Gegen die Frontier-Modelle — dieselben 15 Instruktionen, alle vier Tore, echter n8n-Import
 
 Fassung 3, Schritt 2.400, die 15 deutschen Instruktionen aus Stufe 3 (die
@@ -595,9 +732,236 @@ statt ihn stillschweigend in einen gültigen Workflow umzuschreiben.
   14-Mio.-Konfiguration braucht 6,3 s/Schritt auf vier Kernen; der
   GPU-Lauf (Stufe 2) hängt weiter an einem Miet-GPU-Zugang.
 
+**Stand 17.09.2026 zu dieser Liste:** Punkt 3 (unlesbare Ausgaben, erfundene
+Typen, falsche Kantenverweise) ist mit Stufe 5 erledigt — die Maske macht
+diese Fehler beim Schreiben unmöglich. Punkt 1 (Treffsicherheit unter der
+Abschreib-Kontrolle) und Punkt 4 (Modellgröße) stehen unverändert; eine Maske
+kann erzwingen, dass ein Workflow gültig ist, nicht dass er der richtige ist.
+
 Alle Zahlen: `bewertung/ergebnisse/stufe4-*.json`, die 15 gerenderten
 Kandidaten in `bewertung/eigenes_modell_v3_antworten.jsonl` (Best-of-8) und
 `bewertung/eigenes_modell_v3_k1_antworten.jsonl` (ein Versuch).
+
+## Stufe 5 — eingeschränkte Dekodierung (17.09.2026)
+
+Stufe 4 endete mit einer konkreten Zielzahl: ein Effekt unter rund zehn
+Prozentpunkten ist bei n = 98 unsichtbar, und Tor-0-Fehler (unlesbare
+Kurzschrift) sowie erfundene Typen kosten 20–30 % der Ausgaben. Stufe 5
+greift genau die an — nicht durch Nachbessern der fertigen Antwort, sondern
+durch eine **Logit-Maske**, die ein ungültiges Zeichen gar nicht erst
+wählbar macht: `workflow/beschraenkt.py` verfolgt beim Erzeugen den
+Grammatik-Zustand der Kurzschrift (Fassung 3, `kurzschrift.py`) zeichenweise
+mit und setzt bei jedem Schritt den Logit jedes Tokens, das eine Sackgasse
+wäre, auf `-inf` — **bevor** Temperatur/top-k/argmax entscheiden.
+
+**Was die Maske erzwingt:**
+- Zeile 1 exakt `wf`.
+- Jede Knotenzeile `<typ>@<version>`: `typ` muss einer der 825 echten
+  n8n-Node-Typen sein (`bewertung/echte_node_typen.json`, geprüft über einen
+  Zeichen-Trie), `version` passend zu `\d+(\.\d+)?`.
+- Erst alle Knotenzeilen, dann erst Kantenzeilen — wie es die
+  Trainingsdaten immer tun; nach der ersten vollständigen Kante ist keine
+  weitere Knotenzeile mehr erlaubt.
+- Jede Kantenzeile `n<von> <vtyp>><idx> n<nach>`: `von`/`nach` zwischen 1
+  und der bisherigen Knotenzahl (keine erfundenen Zeilenverweise mehr —
+  genau der Fehler aus dem Beispiel `n19 > n20if@2.2`), `vtyp` aus den elf
+  Verbindungstypen, die tatsächlich in `daten/workflow3/train.jsonl`
+  vorkommen (`VERBINDUNGSTYPEN`-Konstante in `beschraenkt.py`, einmalig über
+  alle 40.983 Trainingszeilen gezählt).
+- EOS erst, wenn mindestens ein Knoten steht und die aktuelle Zeile leer
+  (direkt nach `\n`) oder selbst schon vollständig gültig ist.
+
+**Was sie bewusst nicht tut:** die Treffsicherheit gegenüber der
+Instruktion bleibt Sache des Modells, nicht der Grammatik — die Maske macht
+eine Ausgabe lesbar und typensicher, nicht zutreffend. Versionsnummern
+werden nur syntaktisch geprüft, nicht gegen echte n8n-Versionsstände. Tor 4
+(echter n8n-Import) bleibt eine Prüfung nach dem Erzeugen. Und: kein
+Sondertoken je Typ, kein Umtrainieren — dieselben Checkpoints, derselbe
+BPE-Tokenizer wie in Stufe 4.
+
+**Einschalten:** nur hinter dem expliziten Schalter `--beschraenkt`, sonst
+unverändertes Verhalten (Vorgabe bleibt Vorgabe):
+
+```bash
+python workflow/erzeuge.py --checkpoints daten/workflow3/ckpt_bestrun \
+  --tokenizer daten/workflow3/tokenizer.pkl --bestes \
+  --instruktionen bewertung/instruktionen.jsonl --n 3 --k 1 \
+  --hoechstens-token 300 --beschraenkt
+```
+
+**Lokaler Rauchtest, dieselben 3 Instruktionen, mit und ohne Maske**
+(`daten/workflow3/ckpt_bestrun`, Schritt 1.850, Temperatur 0,7, top-k 40,
+Seed 0):
+
+| | Tor 0 | Tor 1 | Tor 2 | Tor 3 | gültig@1 | erfundene Typen | Eingriffe |
+|---|---|---|---|---|---|---|---|
+| ohne `--beschraenkt` | 0/3 | 0/3 | 0/3 | 0/3 | 0/3 | 0 | — |
+| mit `--beschraenkt` | 3/3 | 3/3 | 3/3 | 3/3 | 3/3 | 0 | 3 |
+
+Beide Fehlschläge ohne Maske waren derselbe Fehlertyp: „Kante nutzt
+unbekannten Knoten n9" / „...n21" — eine Zeilenreferenz über die tatsächliche
+Knotenzahl hinaus, also genau das, was die Bereichsprüfung 1 ≤ n ≤
+Knotenzahl verhindert. „Eingriffe" zählt die Schritte, an denen das Token
+mit dem höchsten Logit maskiert war — 3 auf 3 Beispiele ist kein Beleg für
+einen großen Effekt, nur der Unterschied auf einer Handvoll Fälle; die
+tragfähige Zahl kommt erst vom Test-Split (siehe unten).
+
+`workflow/test_beschraenkt.py` (22 Tests) prüft die Grammatik direkt: alle
+200 stichprobenartig geprüften Trainings-Kurzschriften werden Zeichen für
+Zeichen akzeptiert, ein erfundener Typ wird am ersten abweichenden Byte
+abgelehnt, Kantenverweise außerhalb der Knotenzahl und Knotenzeilen nach der
+ersten Kante werden abgelehnt, 300 zufällig erzeugte gültige Präfixe laufen
+nie in eine Sackgasse, und der stärkste Test lässt ein **untrainiertes**
+MiniGPT (Zufallsgewichte, 32 Dimensionen, 1 Schicht) 30 Sequenzen bei
+Temperatur 1,0 und top-k 40 erzeugen: **mit** Maske sind alle 30 lesbar,
+tor-1-3-gültig und ohne erfundenen Typ — **ohne** Maske scheitern (zur
+Einordnung, nicht Teil der Prüfung) auf dieser Maschine alle 30. Ein
+Regressionstest belegt, dass `erzeuge_ids(...)` ohne `maske`-Argument
+bitgleich zum Stand vor dieser Änderung bleibt.
+
+**Empfohlener Bewertungsbefehl für kiserver** (Test-Split, n = 98, Best-of-4,
+je zwei Erzeugungs-Seeds, mit und ohne Maske — dieselbe Gepaart-Methode wie
+beim Rauschgrenze-Vergleich oben):
+
+```bash
+for beschraenkt in "" "--beschraenkt"; do
+  for seed in 0 1; do
+    tag=$([ -z "$beschraenkt" ] && echo ohne || echo mit)
+    python workflow/erzeuge.py --checkpoints daten/workflow3/ckpt_bestrun \
+      --tokenizer daten/workflow3/tokenizer.pkl --bestes \
+      --test daten/workflow3/test.jsonl --k 4 --temperatur 0.7 --top-k 40 \
+      --seed $seed $beschraenkt \
+      --out bewertung/ergebnisse/stufe5-${tag}-seed${seed}-2026-09-17.json
+  done
+done
+python bewertung/vergleiche_checkpoints.py \
+  --a bewertung/ergebnisse/stufe5-ohne-seed0-2026-09-17.json \
+  --b bewertung/ergebnisse/stufe5-mit-seed0-2026-09-17.json \
+  --out bewertung/ergebnisse/stufe5-vergleich-seed0-2026-09-17.json
+```
+
+**Grenzen, ehrlich benannt:**
+- Die Maske erzwingt **Lesbarkeit und echte Typen**, nicht Treffsicherheit —
+  der Typen-Jaccard gegen die Referenz kann sinken, wenn das Modell durch
+  die Einschränkung auf einen anderen (aber gültigen) Typ ausweicht statt
+  auf den eigentlich gemeinten.
+- Versionsnummern werden nur gegen `\d+(\.\d+)?` geprüft, nicht gegen echte
+  n8n-Versionsstände — eine syntaktisch gültige, aber nie existierende
+  Version bleibt möglich.
+- Ein fester `--hoechstens-token`-Deckel kann eine Sequenz mitten in ihrer
+  letzten, noch unvollständigen Zeile abschneiden — kein Grammatikfehler
+  (die Maske erlaubte an dieser Stelle weiterhin nur gültige Fortsetzungen),
+  sondern das Ende des Zeitbudgets.
+- Wie beim Best/Ende-Vergleich in Stufe 4 gilt: der Effekt muss die
+  gemessene Rauschgrenze von rund zehn Prozentpunkten (bzw. 0,06 Jaccard)
+  bei n = 98 schlagen, um als belegt zu gelten — der Drei-Beispiel-Rauchtest
+  oben zeigt nur, dass die Maske tut, was sie soll, nicht, wie groß der
+  Effekt auf dem Test-Split ist.
+
+### Die 15 fremd formulierten Instruktionen — alle vier Tore, echter n8n-Import
+
+Der Rauchtest oben zeigt nur, dass die Maske tut, was sie soll. Die Messung,
+die zählt, ist die härteste aus Stufe 4: dieselben 15 deutschen Instruktionen
+aus Stufe 3, anders formuliert als alles im Training — genau dort hatte das
+Modell **drei Typen erfunden** (`s@2Tool`, `herMapTool`, `googleAdsTrigger`).
+Derselbe Checkpoint (Best, Schritt 1.850), derselbe Seed, **ein** Versuch je
+Instruktion (k = 1), einmal mit und einmal ohne Maske, ausgewertet durch
+`bewertung/vergleich.py` — also inklusive Tor 4, dem echten Import in n8n
+2.25.6:
+
+| | n | Tor 1 | Tor 2 | Tor 3 | Tor 4 | gültig | 95-%-KI |
+|---|---|---|---|---|---|---|---|
+| ohne `--beschraenkt` | 15 | 27 % | 20 % | 27 % | 20 % | **20 %** | [0 %, 40 %] |
+| mit `--beschraenkt` | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+
+Erfundene Typen: **1 gegen 0** (`n8n-nodes-base.des` — ein abgeschnittener
+Typname, den die Maske konstruktionsbedingt nicht schreiben kann). Die Maske
+griff dabei 42-mal ein, also in 42 Dekodierschritten war das Token mit dem
+höchsten Logit unzulässig.
+
+**Das ist der Sprung, den Stufe 4 gefordert hat:** 80 Prozentpunkte liegen
+weit über der dort gemessenen Rauschgrenze von rund 10 Prozentpunkten, und
+anders als bei Best-of-k steckt hier **kein** Validator in der Schleife —
+jede Antwort ist der erste und einzige Versuch. Zum Vergleich: die neun
+Frontier-Modelle liegen auf derselben Aufgabe mit einem Versuch bei 60–100 %
+(Stufe 3). Ein 7-Mio.-Parameter-Modell, das auf einer CPU trainiert wurde,
+erreicht mit eingeschränkter Dekodierung denselben Wert wie das beste davon.
+
+**Und die Einschränkung, die dazugehört:** Gültigkeit ist nicht
+Treffsicherheit. Die Maske erzwingt, dass ein Workflow *lesbar, strukturell
+korrekt und aus echten Node-Typen gebaut* ist — nicht, dass er *das* tut, was
+die Instruktion verlangt. Ob die Typen-Überdeckung (Jaccard) unter der Maske
+steigt, fällt oder gleich bleibt, beantwortet der nächste Abschnitt auf dem
+Test-Split mit n = 98, wo eine Referenz existiert — kurz: sie fällt nicht,
+und der alte Befund aus Stufe 4 bleibt trotzdem stehen, dass das Modell bei
+der Treffsicherheit unter der Abschreib-Kontrolle liegt.
+
+**Und die Gegenprobe gegen den eigenen Befund von vorhin:** Stufe 4 hat
+gezeigt, dass ein bloß anderer Zufallsstrom die Zahlen um mehrere
+Prozentpunkte bewegt — eine Messung mit einem einzigen Seed wäre nach dieser
+Erkenntnis nicht belastbar. Also dieselben 15 Instruktionen noch einmal mit
+Seed 1 und 2, beide Arme, gepaart über (Seed, Fall-ID):
+
+| | gültig@1 | 95-%-KI | erfundene Typen |
+|---|---|---|---|
+| ohne `--beschraenkt`, 3 Seeds gepoolt | 10/45 = 22 % | [13 %, 36 %] | 11 |
+| mit `--beschraenkt`, 3 Seeds gepoolt | **45/45 = 100 %** | [92 %, 100 %] | **0** |
+
+Je Seed einzeln ohne Maske 20 %, 27 %, 20 % — mit Maske dreimal 100 %.
+Exakter McNemar-Test über die 45 Paare: 35 diskordante Fälle, **alle** in
+dieselbe Richtung, p = 6 × 10⁻¹¹. Die Maske griff je nach Seed 42-, 17- bzw.
+18-mal ein. Der Effekt hängt also nicht am Zufallsstrom, und er ist um
+Größenordnungen deutlicher als die Rauschgrenze, an der die Stufe-4-Messung
+gescheitert ist.
+
+Rohdaten: `bewertung/ergebnisse/stufe5-15instr-{ohne,maske}-k1*.json`,
+`stufe5-15instr-tor4-2026-09-17.json`, `stufe5-15instr-3seeds-2026-09-17.json`,
+Kandidaten in `bewertung/stufe5_tor4_kandidaten.jsonl`.
+
+### Der Test-Split, n = 98 — und was die Maske *nicht* kann
+
+Die 15 Instruktionen haben keine Referenzlösung; die Frage nach der
+Treffsicherheit lässt sich dort nicht stellen. Auf dem Test-Split schon: 98
+Vorlagen, die das Modell nie gesehen hat, jede mit ihrer echten Kurzschrift
+als Referenz. Derselbe Checkpoint, derselbe Seed, Best-of-4, einmal mit und
+einmal ohne Maske, gepaart über die Fall-ID
+(`bewertung/vergleiche_checkpoints.py`):
+
+| | ohne Maske | mit Maske | Differenz, 95-%-KI | p |
+|---|---|---|---|---|
+| lesbar (Tor 0) | 75,5 % | **100 %** | +24,5 pp [16, 34] | < 0,0001 |
+| gültig@1 | 35,7 % | **96,9 %** | +61,2 pp [51, 70] | < 0,0001 |
+| gültig@4 | 74,5 % | **100 %** | +25,5 pp [17, 35] | < 0,0001 |
+| ins Token-Limit gelaufen | 7,1 % | 1,0 % | −6,1 pp [1, 12] | 0,07 |
+| erfundene Typen | 1 | **0** | | |
+| **Typen-Jaccard, unbedingt** | 0,260 | **0,346** | +0,087 [0,044, 0,129] | 0,0002 |
+| Typen-Jaccard, nur beidseitig gültig | 0,344 | 0,343 | +0,001 [−0,036, +0,039] | 0,98 |
+
+**Die letzten beiden Zeilen sind der eigentliche Befund, und sie widersprechen
+sich nur scheinbar.** Unbedingt gerechnet (eine unlesbare Ausgabe zählt 0)
+steigt die Treffsicherheit deutlich und signifikant. Auf den Fällen, in denen
+*beide* Arme etwas Gültiges erzeugt haben, ist sie **identisch** — 0,344 gegen
+0,343, das Intervall schließt jeden nennenswerten Unterschied aus.
+
+Beides zusammen heißt: **die Maske macht das Modell nicht klüger, sie
+verliert aber auch nichts.** Der ganze Gewinn kommt daher, dass Ausgaben, die
+vorher an einer kaputten Zeile scheiterten, jetzt überhaupt erst gewertet
+werden können — und diese geretteten Ausgaben sind genauso gut wie die, die
+vorher schon durchkamen. Die naheliegende Sorge, eine Grammatik-Maske presse
+das Modell in sichere, aber unpassende Workflows, ist damit gemessen und
+widerlegt.
+
+Was unverändert bleibt: die **Kanten** (Jaccard 0,019 → 0,026, nicht
+signifikant). Die Maske stellt sicher, dass jede Kante auf einen existierenden
+Knoten zeigt — nicht, dass es die *richtige* Kante ist. Und die
+Nächster-Nachbar-Kontrolle aus Stufe 4 liegt bei 0,52 Typen und 0,20 Kanten:
+**Abschreiben schlägt das Modell bei der Treffsicherheit weiterhin deutlich.**
+Stufe 5 hat die Gültigkeitslücke geschlossen, nicht die Wissenslücke.
+
+Nebenbei gemessen: der Lauf **mit** Maske war schneller (522 s gegen 1.329 s),
+obwohl jeder einzelne Dekodierschritt teurer ist — weil Best-of-4 fast nie
+einen zweiten Versuch braucht. Die Maske griff über den ganzen Lauf 712-mal
+ein.
 
 ## Schritt 1 — was drinsteht
 

@@ -1,0 +1,230 @@
+{
+  "a": {
+    "datei": "bewertung\\ergebnisse\\stufe4-b8-test-schritt2400.json",
+    "schritt": 2400
+  },
+  "b": {
+    "datei": "bewertung\\ergebnisse\\stufe4-v3-test-schritt2400.json",
+    "schritt": 2400
+  },
+  "gepaarte_faelle": 98,
+  "nur_in_a": 0,
+  "nur_in_b": 0,
+  "tore": {
+    "tor0_kurzschrift": {
+      "a_anteil": 0.8367,
+      "b_anteil": 0.7143,
+      "a_wilson": [
+        0.7511,
+        0.8969
+      ],
+      "b_wilson": [
+        0.6181,
+        0.7943
+      ],
+      "diskordant_nur_a": 24,
+      "diskordant_nur_b": 12,
+      "differenz": 0.1224,
+      "differenz_ki95": [
+        0.0102,
+        0.2449
+      ],
+      "mcnemar_p": 0.0652,
+      "signifikant_005": false
+    },
+    "tor1_json": {
+      "a_anteil": 0.8367,
+      "b_anteil": 0.7143,
+      "a_wilson": [
+        0.7511,
+        0.8969
+      ],
+      "b_wilson": [
+        0.6181,
+        0.7943
+      ],
+      "diskordant_nur_a": 24,
+      "diskordant_nur_b": 12,
+      "differenz": 0.1224,
+      "differenz_ki95": [
+        0.0,
+        0.2449
+      ],
+      "mcnemar_p": 0.0652,
+      "signifikant_005": false
+    },
+    "tor2_struktur": {
+      "a_anteil": 0.8367,
+      "b_anteil": 0.7041,
+      "a_wilson": [
+        0.7511,
+        0.8969
+      ],
+      "b_wilson": [
+        0.6074,
+        0.7854
+      ],
+      "diskordant_nur_a": 25,
+      "diskordant_nur_b": 12,
+      "differenz": 0.1327,
+      "differenz_ki95": [
+        0.0102,
+        0.2551
+      ],
+      "mcnemar_p": 0.047,
+      "signifikant_005": true
+    },
+    "tor3_verbindungen": {
+      "a_anteil": 0.8367,
+      "b_anteil": 0.7143,
+      "a_wilson": [
+        0.7511,
+        0.8969
+      ],
+      "b_wilson": [
+        0.6181,
+        0.7943
+      ],
+      "diskordant_nur_a": 24,
+      "diskordant_nur_b": 12,
+      "differenz": 0.1224,
+      "differenz_ki95": [
+        0.0,
+        0.2347
+      ],
+      "mcnemar_p": 0.0652,
+      "signifikant_005": false
+    },
+    "gueltig_at_1": {
+      "a_anteil": 0.4082,
+      "b_anteil": 0.3571,
+      "a_wilson": [
+        0.3161,
+        0.5071
+      ],
+      "b_wilson": [
+        0.2693,
+        0.4557
+      ],
+      "diskordant_nur_a": 28,
+      "diskordant_nur_b": 23,
+      "differenz": 0.051,
+      "differenz_ki95": [
+        -0.0918,
+        0.1939
+      ],
+      "mcnemar_p": 0.5758,
+      "signifikant_005": false
+    },
+    "gueltig_at_k": {
+      "a_anteil": 0.8367,
+      "b_anteil": 0.7041,
+      "a_wilson": [
+        0.7511,
+        0.8969
+      ],
+      "b_wilson": [
+        0.6074,
+        0.7854
+      ],
+      "diskordant_nur_a": 25,
+      "diskordant_nur_b": 12,
+      "differenz": 0.1327,
+      "differenz_ki95": [
+        0.0102,
+        0.2449
+      ],
+      "mcnemar_p": 0.047,
+      "signifikant_005": true
+    },
+    "abgebrochen": {
+      "a_anteil": 0.0,
+      "b_anteil": 0.0714,
+      "a_wilson": [
+        0.0,
+        0.0377
+      ],
+      "b_wilson": [
+        0.035,
+        0.1402
+      ],
+      "diskordant_nur_a": 0,
+      "diskordant_nur_b": 7,
+      "differenz": -0.0714,
+      "differenz_ki95": [
+        -0.1224,
+        -0.0204
+      ],
+      "mcnemar_p": 0.0156,
+      "signifikant_005": true
+    }
+  },
+  "jaccard": {
+    "typen_jaccard__unbedingt": {
+      "n": 98,
+      "a_mittel": 0.2855,
+      "b_mittel": 0.2929,
+      "differenz": -0.0074,
+      "differenz_ki95": [
+        -0.0659,
+        0.0512
+      ],
+      "a_besser": 44,
+      "b_besser": 45,
+      "vorzeichentest_p": 1.0,
+      "signifikant_005": false,
+      "hauptmass": true
+    },
+    "typen_jaccard__beidseitig_gueltig": {
+      "n": 58,
+      "a_mittel": 0.3343,
+      "b_mittel": 0.3952,
+      "differenz": -0.0609,
+      "differenz_ki95": [
+        -0.1036,
+        -0.0178
+      ],
+      "a_besser": 20,
+      "b_besser": 33,
+      "vorzeichentest_p": 0.0984,
+      "signifikant_005": false,
+      "hauptmass": false
+    },
+    "kanten_jaccard__unbedingt": {
+      "n": 98,
+      "a_mittel": 0.033,
+      "b_mittel": 0.0283,
+      "differenz": 0.0047,
+      "differenz_ki95": [
+        -0.011,
+        0.0205
+      ],
+      "a_besser": 32,
+      "b_besser": 24,
+      "vorzeichentest_p": 0.3497,
+      "signifikant_005": false,
+      "hauptmass": true
+    },
+    "kanten_jaccard__beidseitig_gueltig": {
+      "n": 58,
+      "a_mittel": 0.0444,
+      "b_mittel": 0.0349,
+      "differenz": 0.0095,
+      "differenz_ki95": [
+        -0.0129,
+        0.0334
+      ],
+      "a_besser": 19,
+      "b_besser": 17,
+      "vorzeichentest_p": 0.8679,
+      "signifikant_005": false,
+      "hauptmass": false
+    }
+  },
+  "urteil": {
+    "tests_gesamt": 11,
+    "davon_signifikant_005": 3,
+    "kleinstes_p": 0.0156,
+    "lesart": "Mindestens ein Test trennt die Staende; bei mehreren Tests gleichzeitig ist die Mehrfachtestung zu beachten."
+  }
+}
