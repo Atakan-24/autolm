@@ -852,6 +852,48 @@ python bewertung/vergleiche_checkpoints.py \
   oben zeigt nur, dass die Maske tut, was sie soll, nicht, wie groß der
   Effekt auf dem Test-Split ist.
 
+### Die 15 fremd formulierten Instruktionen — alle vier Tore, echter n8n-Import
+
+Der Rauchtest oben zeigt nur, dass die Maske tut, was sie soll. Die Messung,
+die zählt, ist die härteste aus Stufe 4: dieselben 15 deutschen Instruktionen
+aus Stufe 3, anders formuliert als alles im Training — genau dort hatte das
+Modell **drei Typen erfunden** (`s@2Tool`, `herMapTool`, `googleAdsTrigger`).
+Derselbe Checkpoint (Best, Schritt 1.850), derselbe Seed, **ein** Versuch je
+Instruktion (k = 1), einmal mit und einmal ohne Maske, ausgewertet durch
+`bewertung/vergleich.py` — also inklusive Tor 4, dem echten Import in n8n
+2.25.6:
+
+| | n | Tor 1 | Tor 2 | Tor 3 | Tor 4 | gültig | 95-%-KI |
+|---|---|---|---|---|---|---|---|
+| ohne `--beschraenkt` | 15 | 27 % | 20 % | 27 % | 20 % | **20 %** | [0 %, 40 %] |
+| mit `--beschraenkt` | 15 | 100 % | 100 % | 100 % | 100 % | **100 %** | [100 %, 100 %] |
+
+Erfundene Typen: **1 gegen 0** (`n8n-nodes-base.des` — ein abgeschnittener
+Typname, den die Maske konstruktionsbedingt nicht schreiben kann). Die Maske
+griff dabei 42-mal ein, also in 42 Dekodierschritten war das Token mit dem
+höchsten Logit unzulässig.
+
+**Das ist der Sprung, den Stufe 4 gefordert hat:** 80 Prozentpunkte liegen
+weit über der dort gemessenen Rauschgrenze von rund 10 Prozentpunkten, und
+anders als bei Best-of-k steckt hier **kein** Validator in der Schleife —
+jede Antwort ist der erste und einzige Versuch. Zum Vergleich: die neun
+Frontier-Modelle liegen auf derselben Aufgabe mit einem Versuch bei 60–100 %
+(Stufe 3). Ein 7-Mio.-Parameter-Modell, das auf einer CPU trainiert wurde,
+erreicht mit eingeschränkter Dekodierung denselben Wert wie das beste davon.
+
+**Und die Einschränkung, die dazugehört:** Gültigkeit ist nicht
+Treffsicherheit. Die Maske erzwingt, dass ein Workflow *lesbar, strukturell
+korrekt und aus echten Node-Typen gebaut* ist — nicht, dass er *das* tut, was
+die Instruktion verlangt. Ob die Typen-Überdeckung (Jaccard) unter der Maske
+steigt, fällt oder gleich bleibt, ist die offene Frage; sie wird auf dem
+Test-Split mit n = 98 gemessen, wo eine Referenz existiert. Der
+alte Befund aus Stufe 4 bleibt bis dahin stehen: das Modell liegt bei der
+Treffsicherheit unter der Abschreib-Kontrolle.
+
+Rohdaten: `bewertung/ergebnisse/stufe5-15instr-{ohne,maske}-k1.json`,
+`stufe5-15instr-tor4-2026-09-17.json`, Kandidaten in
+`bewertung/stufe5_tor4_kandidaten.jsonl`.
+
 ## Schritt 1 — was drinsteht
 
 `schritte/01_wie_lernt_ein_computer.py` — **keine Bibliothek, nur Python.**
