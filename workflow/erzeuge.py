@@ -46,7 +46,6 @@ from modell import MiniGPT  # noqa: E402
 from checkpoint import Checkpointer  # noqa: E402
 from tore import pruefe_alle_tore, lade_echte_node_typen  # noqa: E402
 from workflow import kurzschrift as ks  # noqa: E402
-from workflow.beschraenkt import KurzschriftMaske  # noqa: E402
 from workflow.tokenizer_workflow import WorkflowTokenizer  # noqa: E402
 
 
@@ -73,25 +72,11 @@ def lade_modell(ordner: Path, geraet: str, bestes: bool = False) -> tuple[MiniGP
 
 @torch.no_grad()
 def erzeuge_ids(modell: MiniGPT, prompt: list[int], eos_id: int, hoechstens: int,
-                temperatur: float, top_k: int | None, geraet: str,
-                maske: "KurzschriftMaske | None" = None) -> list[int]:
-    """
-    `maske`: optional, Stufe 5 (eingeschraenkte Dekodierung). Wenn gesetzt,
-    wird sie vor jeder Erzeugung zurueckgesetzt und filtert bei jedem
-    Schritt die Logits auf grammatik-/typengueltige Tokens (workflow/
-    beschraenkt.py), BEVOR Temperatur/top-k/argmax entscheiden. `maske` ist
-    danach fortgeschaltet (maske.eingriffe zaehlt die Schritte, an denen
-    das urspruengliche Argmax-Token unzulaessig war). Ohne `maske` (Vorgabe)
-    ist dieser Code bitgenau der alte Pfad -- keine Verhaltensaenderung.
-    """
-    if maske is not None:
-        maske.zuruecksetzen()
+                temperatur: float, top_k: int | None, geraet: str) -> list[int]:
     idx = torch.tensor([prompt], dtype=torch.long, device=geraet)
     for _ in range(hoechstens):
         logits, _ = modell(idx[:, -modell.block:])
         logits = logits[:, -1, :]
-        if maske is not None:
-            logits = maske.maskiere_logits(logits, top_k, temperatur)
         if temperatur <= 0:
             naechstes = logits.argmax(dim=-1, keepdim=True)
         else:
@@ -101,10 +86,7 @@ def erzeuge_ids(modell: MiniGPT, prompt: list[int], eos_id: int, hoechstens: int
                 logits[logits < v[:, [-1]]] = -float("inf")
             naechstes = torch.multinomial(torch.softmax(logits, dim=-1), num_samples=1)
         idx = torch.cat((idx, naechstes), dim=1)
-        naechste_id = int(naechstes.item())
-        if maske is not None:
-            maske.schreibe(naechste_id)
-        if naechste_id == eos_id:
+        if naechstes.item() == eos_id:
             break
     return idx[0].tolist()
 
@@ -156,9 +138,6 @@ def main():
                    help="den Best-Val-Checkpoint (ckpt_best.pt) laden statt des letzten")
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--zeige", type=int, default=3, help="so viele Beispiele ausdrucken")
-    p.add_argument("--beschraenkt", action="store_true",
-                   help="Stufe 5: Logit-Maske erzwingt echte Node-Typen und "
-                        "Kurzschrift-Grammatik beim Dekodieren (workflow/beschraenkt.py)")
     args = p.parse_args()
 
     geraet = "cuda" if torch.cuda.is_available() else "cpu"
@@ -167,15 +146,13 @@ def main():
     modell, konfig = lade_modell(args.checkpoints, geraet, bestes=args.bestes)
     # Der Seed wird NACH dem Laden gesetzt, nicht davor. Grund, gemessen am
     # 17.09.2026: Checkpointer.lade_neuesten() stellt den Trainings-RNG aus dem
-    # Checkpoint wieder her (das ist fuer ein Resume richtig) und ueberschreibt
-    # damit ein vorher gesetztes manual_seed. --seed war im Zweig "letzter
-    # Stand" also wirkungslos, waehrend er im Zweig --bestes wirkte -- zwei
-    # Staende liessen sich so nicht sauber vergleichen, weil ihre Zufallsstroeme
-    # aus verschiedenen Quellen kamen. Nach dem Laden gesetzt, gilt der Seed
-    # fuer beide Zweige gleich.
+    # Checkpoint wieder her (fuer ein Resume richtig) und ueberschrieb damit ein
+    # vorher gesetztes manual_seed. --seed war im Zweig "letzter Stand" also
+    # wirkungslos, waehrend er im Zweig --bestes wirkte -- zwei Staende liessen
+    # sich so nicht vergleichen, weil ihre Zufallsstroeme aus verschiedenen
+    # Quellen kamen. Nach dem Laden gesetzt, gilt der Seed fuer beide Zweige.
     torch.manual_seed(args.seed)
     echte = lade_echte_node_typen()
-    maske = KurzschriftMaske(tok, echte) if args.beschraenkt else None
     print(f"Modell: {modell.anzahl_parameter():,} Parameter, Schritt {konfig['schritt']}, {geraet}")
 
     if args.test:
