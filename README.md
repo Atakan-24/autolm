@@ -7,7 +7,7 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. **Stufe 5 (17.09.2026): eingeschränkte Dekodierung gebaut und gemessen** — eine Logit-Maske macht ungültige Node-Typen und ungültige Grammatik beim Schreiben unwählbar, statt die fertige Antwort zu reparieren. Auf den 15 fremd formulierten Instruktionen, **ein** Versuch je Instruktion und ohne Validator in der Schleife, steigt die Quote durch alle vier Tore inklusive echtem n8n-Import von **20 % auf 100 %**; erfundene Typen 1 gegen 0. Damit erreicht das 7-Mio.-Modell den Wert des besten der neun Frontier-Modelle auf dieser Aufgabe — bei der Gültigkeit, nicht bei der Treffsicherheit. **Nachtrag 17.09.2026:** der beste Validierungs-Checkpoint wird jetzt mitgespeichert und wurde gegen den Endstand gemessen — kein Unterschied, den 98 Testfälle auflösen könnten; ein bloß anderer Zufallsstrom bei bitgleichen Gewichten bewegt die Zahlen genauso stark. Der Prüfstand ist damit vermessen, nicht das Modell. Frühere Angabe: — 384,8 Mio. echte
+> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. **Stufe 5 (17.09.2026): eingeschränkte Dekodierung gebaut und gemessen** — eine Logit-Maske macht ungültige Node-Typen und ungültige Grammatik beim Schreiben unwählbar, statt die fertige Antwort zu reparieren. Auf den 15 fremd formulierten Instruktionen, **ein** Versuch je Instruktion und ohne Validator in der Schleife, steigt die Quote durch alle vier Tore inklusive echtem n8n-Import von **20 % auf 100 %** (über drei Zufallsströme: 45 von 45, p = 6 × 10⁻¹¹); erfundene Typen 11 gegen 0. Auf den 98 Testfällen mit Referenz: gültig@1 von 36 % auf 97 %, und die Typen-Überdeckung **steigt** dabei (0,26 → 0,35) statt zu leiden. Damit erreicht das 7-Mio.-Modell den Wert des besten der neun Frontier-Modelle auf dieser Aufgabe — bei der Gültigkeit, nicht bei der Treffsicherheit. **Nachtrag 17.09.2026:** der beste Validierungs-Checkpoint wird jetzt mitgespeichert und wurde gegen den Endstand gemessen — kein Unterschied, den 98 Testfälle auflösen könnten; ein bloß anderer Zufallsstrom bei bitgleichen Gewichten bewegt die Zahlen genauso stark. Der Prüfstand ist damit vermessen, nicht das Modell. Frühere Angabe: — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
 > Eval-Harness gegen echtes n8n läuft, **neun Modelle gemessen (fünf gratis,
 > vier bezahlt): 60–100 % gültige Workflows, und 89 % aller Fehler sind
@@ -891,10 +891,10 @@ erreicht mit eingeschränkter Dekodierung denselben Wert wie das beste davon.
 Treffsicherheit. Die Maske erzwingt, dass ein Workflow *lesbar, strukturell
 korrekt und aus echten Node-Typen gebaut* ist — nicht, dass er *das* tut, was
 die Instruktion verlangt. Ob die Typen-Überdeckung (Jaccard) unter der Maske
-steigt, fällt oder gleich bleibt, ist die offene Frage; sie wird auf dem
-Test-Split mit n = 98 gemessen, wo eine Referenz existiert. Der
-alte Befund aus Stufe 4 bleibt bis dahin stehen: das Modell liegt bei der
-Treffsicherheit unter der Abschreib-Kontrolle.
+steigt, fällt oder gleich bleibt, beantwortet der nächste Abschnitt auf dem
+Test-Split mit n = 98, wo eine Referenz existiert — kurz: sie fällt nicht,
+und der alte Befund aus Stufe 4 bleibt trotzdem stehen, dass das Modell bei
+der Treffsicherheit unter der Abschreib-Kontrolle liegt.
 
 **Und die Gegenprobe gegen den eigenen Befund von vorhin:** Stufe 4 hat
 gezeigt, dass ein bloß anderer Zufallsstrom die Zahlen um mehrere
@@ -917,6 +917,51 @@ gescheitert ist.
 Rohdaten: `bewertung/ergebnisse/stufe5-15instr-{ohne,maske}-k1*.json`,
 `stufe5-15instr-tor4-2026-09-17.json`, `stufe5-15instr-3seeds-2026-09-17.json`,
 Kandidaten in `bewertung/stufe5_tor4_kandidaten.jsonl`.
+
+### Der Test-Split, n = 98 — und was die Maske *nicht* kann
+
+Die 15 Instruktionen haben keine Referenzlösung; die Frage nach der
+Treffsicherheit lässt sich dort nicht stellen. Auf dem Test-Split schon: 98
+Vorlagen, die das Modell nie gesehen hat, jede mit ihrer echten Kurzschrift
+als Referenz. Derselbe Checkpoint, derselbe Seed, Best-of-4, einmal mit und
+einmal ohne Maske, gepaart über die Fall-ID
+(`bewertung/vergleiche_checkpoints.py`):
+
+| | ohne Maske | mit Maske | Differenz, 95-%-KI | p |
+|---|---|---|---|---|
+| lesbar (Tor 0) | 75,5 % | **100 %** | +24,5 pp [16, 34] | < 0,0001 |
+| gültig@1 | 35,7 % | **96,9 %** | +61,2 pp [51, 70] | < 0,0001 |
+| gültig@4 | 74,5 % | **100 %** | +25,5 pp [17, 35] | < 0,0001 |
+| ins Token-Limit gelaufen | 7,1 % | 1,0 % | −6,1 pp [1, 12] | 0,07 |
+| erfundene Typen | 1 | **0** | | |
+| **Typen-Jaccard, unbedingt** | 0,260 | **0,346** | +0,087 [0,044, 0,129] | 0,0002 |
+| Typen-Jaccard, nur beidseitig gültig | 0,344 | 0,343 | +0,001 [−0,036, +0,039] | 0,98 |
+
+**Die letzten beiden Zeilen sind der eigentliche Befund, und sie widersprechen
+sich nur scheinbar.** Unbedingt gerechnet (eine unlesbare Ausgabe zählt 0)
+steigt die Treffsicherheit deutlich und signifikant. Auf den Fällen, in denen
+*beide* Arme etwas Gültiges erzeugt haben, ist sie **identisch** — 0,344 gegen
+0,343, das Intervall schließt jeden nennenswerten Unterschied aus.
+
+Beides zusammen heißt: **die Maske macht das Modell nicht klüger, sie
+verliert aber auch nichts.** Der ganze Gewinn kommt daher, dass Ausgaben, die
+vorher an einer kaputten Zeile scheiterten, jetzt überhaupt erst gewertet
+werden können — und diese geretteten Ausgaben sind genauso gut wie die, die
+vorher schon durchkamen. Die naheliegende Sorge, eine Grammatik-Maske presse
+das Modell in sichere, aber unpassende Workflows, ist damit gemessen und
+widerlegt.
+
+Was unverändert bleibt: die **Kanten** (Jaccard 0,019 → 0,026, nicht
+signifikant). Die Maske stellt sicher, dass jede Kante auf einen existierenden
+Knoten zeigt — nicht, dass es die *richtige* Kante ist. Und die
+Nächster-Nachbar-Kontrolle aus Stufe 4 liegt bei 0,52 Typen und 0,20 Kanten:
+**Abschreiben schlägt das Modell bei der Treffsicherheit weiterhin deutlich.**
+Stufe 5 hat die Gültigkeitslücke geschlossen, nicht die Wissenslücke.
+
+Nebenbei gemessen: der Lauf **mit** Maske war schneller (522 s gegen 1.329 s),
+obwohl jeder einzelne Dekodierschritt teurer ist — weil Best-of-4 fast nie
+einen zweiten Versuch braucht. Die Maske griff über den ganzen Lauf 712-mal
+ein.
 
 ## Schritt 1 — was drinsteht
 
