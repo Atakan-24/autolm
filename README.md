@@ -736,6 +736,122 @@ Alle Zahlen: `bewertung/ergebnisse/stufe4-*.json`, die 15 gerenderten
 Kandidaten in `bewertung/eigenes_modell_v3_antworten.jsonl` (Best-of-8) und
 `bewertung/eigenes_modell_v3_k1_antworten.jsonl` (ein Versuch).
 
+## Stufe 5 — eingeschränkte Dekodierung (17.09.2026)
+
+Stufe 4 endete mit einer konkreten Zielzahl: ein Effekt unter rund zehn
+Prozentpunkten ist bei n = 98 unsichtbar, und Tor-0-Fehler (unlesbare
+Kurzschrift) sowie erfundene Typen kosten 20–30 % der Ausgaben. Stufe 5
+greift genau die an — nicht durch Nachbessern der fertigen Antwort, sondern
+durch eine **Logit-Maske**, die ein ungültiges Zeichen gar nicht erst
+wählbar macht: `workflow/beschraenkt.py` verfolgt beim Erzeugen den
+Grammatik-Zustand der Kurzschrift (Fassung 3, `kurzschrift.py`) zeichenweise
+mit und setzt bei jedem Schritt den Logit jedes Tokens, das eine Sackgasse
+wäre, auf `-inf` — **bevor** Temperatur/top-k/argmax entscheiden.
+
+**Was die Maske erzwingt:**
+- Zeile 1 exakt `wf`.
+- Jede Knotenzeile `<typ>@<version>`: `typ` muss einer der 825 echten
+  n8n-Node-Typen sein (`bewertung/echte_node_typen.json`, geprüft über einen
+  Zeichen-Trie), `version` passend zu `\d+(\.\d+)?`.
+- Erst alle Knotenzeilen, dann erst Kantenzeilen — wie es die
+  Trainingsdaten immer tun; nach der ersten vollständigen Kante ist keine
+  weitere Knotenzeile mehr erlaubt.
+- Jede Kantenzeile `n<von> <vtyp>><idx> n<nach>`: `von`/`nach` zwischen 1
+  und der bisherigen Knotenzahl (keine erfundenen Zeilenverweise mehr —
+  genau der Fehler aus dem Beispiel `n19 > n20if@2.2`), `vtyp` aus den elf
+  Verbindungstypen, die tatsächlich in `daten/workflow3/train.jsonl`
+  vorkommen (`VERBINDUNGSTYPEN`-Konstante in `beschraenkt.py`, einmalig über
+  alle 40.983 Trainingszeilen gezählt).
+- EOS erst, wenn mindestens ein Knoten steht und die aktuelle Zeile leer
+  (direkt nach `\n`) oder selbst schon vollständig gültig ist.
+
+**Was sie bewusst nicht tut:** die Treffsicherheit gegenüber der
+Instruktion bleibt Sache des Modells, nicht der Grammatik — die Maske macht
+eine Ausgabe lesbar und typensicher, nicht zutreffend. Versionsnummern
+werden nur syntaktisch geprüft, nicht gegen echte n8n-Versionsstände. Tor 4
+(echter n8n-Import) bleibt eine Prüfung nach dem Erzeugen. Und: kein
+Sondertoken je Typ, kein Umtrainieren — dieselben Checkpoints, derselbe
+BPE-Tokenizer wie in Stufe 4.
+
+**Einschalten:** nur hinter dem expliziten Schalter `--beschraenkt`, sonst
+unverändertes Verhalten (Vorgabe bleibt Vorgabe):
+
+```bash
+python workflow/erzeuge.py --checkpoints daten/workflow3/ckpt_bestrun \
+  --tokenizer daten/workflow3/tokenizer.pkl --bestes \
+  --instruktionen bewertung/instruktionen.jsonl --n 3 --k 1 \
+  --hoechstens-token 300 --beschraenkt
+```
+
+**Lokaler Rauchtest, dieselben 3 Instruktionen, mit und ohne Maske**
+(`daten/workflow3/ckpt_bestrun`, Schritt 1.850, Temperatur 0,7, top-k 40,
+Seed 0):
+
+| | Tor 0 | Tor 1 | Tor 2 | Tor 3 | gültig@1 | erfundene Typen | Eingriffe |
+|---|---|---|---|---|---|---|---|
+| ohne `--beschraenkt` | 0/3 | 0/3 | 0/3 | 0/3 | 0/3 | 0 | — |
+| mit `--beschraenkt` | 3/3 | 3/3 | 3/3 | 3/3 | 3/3 | 0 | 3 |
+
+Beide Fehlschläge ohne Maske waren derselbe Fehlertyp: „Kante nutzt
+unbekannten Knoten n9" / „...n21" — eine Zeilenreferenz über die tatsächliche
+Knotenzahl hinaus, also genau das, was die Bereichsprüfung 1 ≤ n ≤
+Knotenzahl verhindert. „Eingriffe" zählt die Schritte, an denen das Token
+mit dem höchsten Logit maskiert war — 3 auf 3 Beispiele ist kein Beleg für
+einen großen Effekt, nur der Unterschied auf einer Handvoll Fälle; die
+tragfähige Zahl kommt erst vom Test-Split (siehe unten).
+
+`workflow/test_beschraenkt.py` (22 Tests) prüft die Grammatik direkt: alle
+200 stichprobenartig geprüften Trainings-Kurzschriften werden Zeichen für
+Zeichen akzeptiert, ein erfundener Typ wird am ersten abweichenden Byte
+abgelehnt, Kantenverweise außerhalb der Knotenzahl und Knotenzeilen nach der
+ersten Kante werden abgelehnt, 300 zufällig erzeugte gültige Präfixe laufen
+nie in eine Sackgasse, und der stärkste Test lässt ein **untrainiertes**
+MiniGPT (Zufallsgewichte, 32 Dimensionen, 1 Schicht) 30 Sequenzen bei
+Temperatur 1,0 und top-k 40 erzeugen: **mit** Maske sind alle 30 lesbar,
+tor-1-3-gültig und ohne erfundenen Typ — **ohne** Maske scheitern (zur
+Einordnung, nicht Teil der Prüfung) auf dieser Maschine alle 30. Ein
+Regressionstest belegt, dass `erzeuge_ids(...)` ohne `maske`-Argument
+bitgleich zum Stand vor dieser Änderung bleibt.
+
+**Empfohlener Bewertungsbefehl für kiserver** (Test-Split, n = 98, Best-of-4,
+je zwei Erzeugungs-Seeds, mit und ohne Maske — dieselbe Gepaart-Methode wie
+beim Rauschgrenze-Vergleich oben):
+
+```bash
+for beschraenkt in "" "--beschraenkt"; do
+  for seed in 0 1; do
+    tag=$([ -z "$beschraenkt" ] && echo ohne || echo mit)
+    python workflow/erzeuge.py --checkpoints daten/workflow3/ckpt_bestrun \
+      --tokenizer daten/workflow3/tokenizer.pkl --bestes \
+      --test daten/workflow3/test.jsonl --k 4 --temperatur 0.7 --top-k 40 \
+      --seed $seed $beschraenkt \
+      --out bewertung/ergebnisse/stufe5-${tag}-seed${seed}-2026-09-17.json
+  done
+done
+python bewertung/vergleiche_checkpoints.py \
+  --a bewertung/ergebnisse/stufe5-ohne-seed0-2026-09-17.json \
+  --b bewertung/ergebnisse/stufe5-mit-seed0-2026-09-17.json \
+  --out bewertung/ergebnisse/stufe5-vergleich-seed0-2026-09-17.json
+```
+
+**Grenzen, ehrlich benannt:**
+- Die Maske erzwingt **Lesbarkeit und echte Typen**, nicht Treffsicherheit —
+  der Typen-Jaccard gegen die Referenz kann sinken, wenn das Modell durch
+  die Einschränkung auf einen anderen (aber gültigen) Typ ausweicht statt
+  auf den eigentlich gemeinten.
+- Versionsnummern werden nur gegen `\d+(\.\d+)?` geprüft, nicht gegen echte
+  n8n-Versionsstände — eine syntaktisch gültige, aber nie existierende
+  Version bleibt möglich.
+- Ein fester `--hoechstens-token`-Deckel kann eine Sequenz mitten in ihrer
+  letzten, noch unvollständigen Zeile abschneiden — kein Grammatikfehler
+  (die Maske erlaubte an dieser Stelle weiterhin nur gültige Fortsetzungen),
+  sondern das Ende des Zeitbudgets.
+- Wie beim Best/Ende-Vergleich in Stufe 4 gilt: der Effekt muss die
+  gemessene Rauschgrenze von rund zehn Prozentpunkten (bzw. 0,06 Jaccard)
+  bei n = 98 schlagen, um als belegt zu gelten — der Drei-Beispiel-Rauchtest
+  oben zeigt nur, dass die Maske tut, was sie soll, nicht, wie groß der
+  Effekt auf dem Test-Split ist.
+
 ## Schritt 1 — was drinsteht
 
 `schritte/01_wie_lernt_ein_computer.py` — **keine Bibliothek, nur Python.**
