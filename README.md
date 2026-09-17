@@ -7,7 +7,7 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. **Nachtrag 17.09.2026:** der beste Validierungs-Checkpoint wird jetzt mitgespeichert und wurde gegen den Endstand gemessen — kein Unterschied, den 98 Testfälle auflösen könnten; ein bloß anderer Zufallsstrom bei bitgleichen Gewichten bewegt die Zahlen genauso stark. Der Prüfstand ist damit vermessen, nicht das Modell. Frühere Angabe: — 384,8 Mio. echte
+> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. **Stufe 5 (17.09.2026): eingeschränkte Dekodierung gebaut und gemessen** — eine Logit-Maske macht ungültige Node-Typen und ungültige Grammatik beim Schreiben unwählbar, statt die fertige Antwort zu reparieren. Auf den 15 fremd formulierten Instruktionen, **ein** Versuch je Instruktion und ohne Validator in der Schleife, steigt die Quote durch alle vier Tore inklusive echtem n8n-Import von **20 % auf 100 %**; erfundene Typen 1 gegen 0. Damit erreicht das 7-Mio.-Modell den Wert des besten der neun Frontier-Modelle auf dieser Aufgabe — bei der Gültigkeit, nicht bei der Treffsicherheit. **Nachtrag 17.09.2026:** der beste Validierungs-Checkpoint wird jetzt mitgespeichert und wurde gegen den Endstand gemessen — kein Unterschied, den 98 Testfälle auflösen könnten; ein bloß anderer Zufallsstrom bei bitgleichen Gewichten bewegt die Zahlen genauso stark. Der Prüfstand ist damit vermessen, nicht das Modell. Frühere Angabe: — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
 > Eval-Harness gegen echtes n8n läuft, **neun Modelle gemessen (fünf gratis,
 > vier bezahlt): 60–100 % gültige Workflows, und 89 % aller Fehler sind
@@ -78,7 +78,7 @@ Offline-Betrieb).
 | **2** | Absturzsicheres Checkpointing (echter Kill-und-Resume-Beweis) + Trainingsloop fertig. **GPU-Lauf selbst noch offen** — `kern/gpu_bootstrap.sh` startet ihn auf einer Miet-GPU ohne Browser | 🔶 Infrastruktur fertig, Training offen |
 | **3** | **Eval-Harness gegen echtes n8n 2.25.6** — vier Tore, Vergleichs-Orchestrator, **neun Modelle gemessen (leicht + schwer, gratis + bezahlt), 2,41 $ tatsächliche API-Kosten** | ✅ `bewertung/` |
 | **4** | Workflow-Modell: Kurzschrift, Mutations-Pipeline (jede Mutante durch den Validator), Split nach Vorlagen-ID mit hartem Leck-Abbruch, eigener Tokenizer, **drei Fassungen auf CPU trainiert und auf 98 ungesehenen Vorlagen gemessen** | 🔶 `workflow/` — gebaut und gemessen (7M, CPU); GPU-Lauf und größeres Modell offen |
-| 5 | Eingeschränkte Dekodierung (falls nötig) | offen — jetzt mit gemessener Zielmarke: 3 erfundene Typen auf 15 fremd formulierten Instruktionen |
+| **5** | **Eingeschränkte Dekodierung**: Logit-Maske über den 825 echten Node-Typen und der Kurzschrift-Grammatik, hinter `--beschraenkt`. Auf den 15 fremd formulierten Instruktionen, ein Versuch, alle vier Tore: **20 % → 100 % gültig**, erfundene Typen 1 → 0 | ✅ `workflow/beschraenkt.py` — 22 Tests; n=98-Messung der Treffsicherheit läuft |
 | 6 | Ablation (3 Seeds), Skalierungskurve, Interpretierbarkeit gegen den echten Parse-Baum | offen |
 | 7 | Quantisierung, Hugging-Face-Demo | offen |
 
@@ -731,6 +731,12 @@ statt ihn stillschweigend in einen gültigen Workflow umzuschreiben.
 - **7 Mio. Parameter auf CPU** sind die Untergrenze, nicht die Wahl. Die
   14-Mio.-Konfiguration braucht 6,3 s/Schritt auf vier Kernen; der
   GPU-Lauf (Stufe 2) hängt weiter an einem Miet-GPU-Zugang.
+
+**Stand 17.09.2026 zu dieser Liste:** Punkt 3 (unlesbare Ausgaben, erfundene
+Typen, falsche Kantenverweise) ist mit Stufe 5 erledigt — die Maske macht
+diese Fehler beim Schreiben unmöglich. Punkt 1 (Treffsicherheit unter der
+Abschreib-Kontrolle) und Punkt 4 (Modellgröße) stehen unverändert; eine Maske
+kann erzwingen, dass ein Workflow gültig ist, nicht dass er der richtige ist.
 
 Alle Zahlen: `bewertung/ergebnisse/stufe4-*.json`, die 15 gerenderten
 Kandidaten in `bewertung/eigenes_modell_v3_antworten.jsonl` (Best-of-8) und
