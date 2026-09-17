@@ -7,7 +7,7 @@ gemessen wird.**
 Kein fertiges Modell feingetunt. Kein API-Wrapper. Der Transformer, der
 Tokenizer, die Trainingsschleife: selbst gebaut, Schritt für Schritt.
 
-> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. Frühere Angabe: — 384,8 Mio. echte
+> Status: **Stufe 0–3 abgeschlossen, Stufe 4 gebaut und erstmals gemessen (12.09.2026)** — ein 7-Mio.-Parameter-Modell, auf CPU trainiert, erzeugt aus einer Beschreibung in normaler Sprache in 70 % der Fälle (Best-of-4) ein n8n-Workflow-Gerüst, das dieselben Tore passiert wie die Antworten der neun Frontier-Modelle — mit einem erfundenen Node-Typ. Drei Fassungen der Textform an einem Tag, jede aus einer gemessenen Schwäche der vorigen. Was fehlt: GPU, ein größeres Modell, Parameter im Gerüst. **Nachtrag 17.09.2026:** der beste Validierungs-Checkpoint wird jetzt mitgespeichert und wurde gegen den Endstand gemessen — kein Unterschied, den 98 Testfälle auflösen könnten; ein bloß anderer Zufallsstrom bei bitgleichen Gewichten bewegt die Zahlen genauso stark. Der Prüfstand ist damit vermessen, nicht das Modell. Frühere Angabe: — 384,8 Mio. echte
 > Trainings-Token vorbereitet (über dem Chinchilla-optimalen Ziel),
 > Eval-Harness gegen echtes n8n läuft, **neun Modelle gemessen (fünf gratis,
 > vier bezahlt): 60–100 % gültige Workflows, und 89 % aller Fehler sind
@@ -582,6 +582,78 @@ rotierende Stände — der beste Stand ist damit nicht mehr bewertbar, er ist
 sondern: den Stand mit dem besten Validierungsverlust mitspeichern und **den**
 messen. Erst danach mehr Daten, und die kommen nicht aus mehr Mutanten,
 sondern aus mehr echten Vorlagen.
+**Gemacht, 17.09.2026 — siehe nächster Abschnitt.** Das Ergebnis war nicht
+die erwartete Antwort, sondern eine Rauschgrenze.
+
+### Der beste Stand gemessen — und die Rauschgrenze des Prüfstands (17.09.2026)
+
+Der Checkpointer hält seit `7b27da5` zusätzlich den Stand mit dem niedrigsten
+Validierungsverlust fest (`ckpt_best.pt`, atomar, mit Prüfsumme, nur bei
+echter Verbesserung; `erzeuge.py --bestes` lädt ihn). Ein neuer Lauf mit der
+unveränderten V3-Konfiguration — gleicher Seed, gleiche Daten, gleiches
+Schrittbudget — hat zuerst bewiesen, dass die Ergänzung das Training nicht
+berührt: die Validierungskurve trifft die V3-Zahlen auf die Stelle (4,55 bei
+Schritt 1.850, 4,62 bei 2.350), und die 72 Gewichtstensoren des neuen
+2.400er-Stands sind **bitgleich** mit dem alten (größte Abweichung 0). Dann
+beide Stände desselben Laufs auf denselben 98 Test-Vorlagen, Best-of-4,
+Temperatur 0,7, top-k 40 — **gepaart** über die Fall-ID,
+exakter McNemar-Test, Bootstrap-Intervalle
+(`bewertung/vergleiche_checkpoints.py`):
+
+| | Best (Schritt 1.850, Val 4,55) | Ende (Schritt 2.400, Val 4,62) | Differenz, 95-%-KI | p |
+|---|---|---|---|---|
+| lesbar (Tor 0) | 81 % | 73 % | +7 pp [−4, +18] | 0,30 |
+| gültig@1 | 28 % | 37 % | −9 pp [−21, +3] | 0,20 |
+| gültig@4 | 79 % | 73 % | +5 pp [−6, +16] | 0,47 |
+| Typen-Jaccard, unbedingt (ungültig zählt 0) | 0,27 | 0,29 | −0,01 [−0,07, +0,05] | 0,59 |
+| Kanten-Jaccard, unbedingt | 0,02 | 0,04 | −0,01 | 0,20 |
+| erfundene Typen | 2 | 0 | | |
+
+Elf Tests, **keiner** signifikant, kleinstes p 0,098. Und „nicht signifikant"
+heißt hier nicht „gleich gut": die Intervalle sind so breit, dass ein
+Unterschied von zehn Prozentpunkten in beide Richtungen darin Platz hat.
+
+**Die Kontrollmessung, die das einordnet:** der alte V3-Stand (Schritt 2.400)
+gegen den neuen 2.400er-Stand — **bitgleiche Gewichte**, nur der Zufallsstrom
+beim Sampling ist ein anderer. (Und ein Fund nebenbei, `f75f979`: `--seed`
+wirkte beim Laden des letzten Standes gar nicht, weil der Checkpointer den
+Trainings-RNG wiederherstellt und den Seed überschrieb — die beiden Läufe
+unterschieden sich im Zufallsstrom trotzdem, nur nicht aus dem Grund, den die
+Befehlszeile behauptete. Seit `f75f979` gilt der Seed für beide Ladewege.)
+Unterschiede allein aus dem Zufallsstrom: Tor 0 2 pp, gültig@4 3 pp,
+Typen-Jaccard 0,02, erfundene Typen 1 gegen 0. Die Intervalle dieses Null-Vergleichs sind genauso breit wie die des
+echten Vergleichs (`stufe4-rauschgrenze-seed0-gegen-seed1-2026-09-17.json`).
+
+**Befund:** mit 98 Testfällen kann dieser Prüfstand einen Checkpoint-Wechsel
+nicht von einem Wechsel des Zufallsstroms unterscheiden. Die Frage „ist der Stand mit dem
+besten Validierungsverlust auch der bessere Workflow-Erzeuger?" ist damit
+nicht mit Nein beantwortet, sondern **mit diesem Prüfstand nicht
+beantwortbar**. Das ist das Ergebnis dieser Messung — und die Zahl, die jede
+weitere Änderung schlagen muss: ein Effekt unter rund zehn Prozentpunkten
+(bzw. 0,06 Jaccard) ist bei n = 98 unsichtbar.
+
+**Nachtrag zu B8, mit derselben Brille** (`stufe4-b8-gegen-v3-gepaart-2026-09-17.json`,
+beide über denselben Ladeweg bewertet): der Gültigkeitsvorsprung von B8 liegt **außerhalb** der
+Rauschgrenze — gültig@4 +13 pp [+1, +24], p 0,047; kein Token-Limit-Abbruch
+gegen 7 %, p 0,016. Die „schlechtere Treffsicherheit" dagegen hängt am
+Maß: der Typen-Jaccard oben (0,34 gegen 0,41) ist nur über die Fälle
+gemittelt, in denen die Ausgabe lesbar war — wer mehr lesbare Ausgaben
+liefert, wird auf einer anderen Teilmenge gemessen. **Unbedingt** (unlesbar
+zählt 0) sind es 0,29 gegen 0,29, Differenz −0,01 [−0,07, +0,05]. Das Urteil
+nach der vorab festgelegten Regel bleibt (die Validierungskurve endet
+schlechter, das war die dritte Bedingung), aber die Lesart „B8 trifft
+schlechter" ist mit den Daten nicht belegt — sie war ein Artefakt des
+bedingten Maßes. Deshalb ist die unbedingte Fassung ab jetzt das Hauptmaß.
+
+**Was daraus folgt:** nicht noch ein Lauf, sondern mehr Trennschärfe. Der
+Test-Split hat 98 von 1.978 Vorlagen; ein Unterschied von fünf Prozentpunkten
+bräuchte grob viermal so viele Fälle. Billiger und sofort möglich: dieselben
+98 Fälle mit mehreren Zufallsströmen (`--seed`, seit `f75f979` wirksam) je Stand — das mittelt das
+Sampling-Rauschen weg, nicht die Fall-Schwankung. Und der nächste Schritt am
+Modell muss ein Effekt sein, der die Grenze sicher überspringt: Stufe 5
+(eingeschränkte Dekodierung über den 825 echten Typen und der
+Kurzschrift-Grammatik) greift genau die Tor-0-Fehler an, die 20–30 % der
+Ausgaben kosten.
 
 ### Gegen die Frontier-Modelle — dieselben 15 Instruktionen, alle vier Tore, echter n8n-Import
 
