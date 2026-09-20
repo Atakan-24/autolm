@@ -582,78 +582,146 @@ rotierende Stände — der beste Stand ist damit nicht mehr bewertbar, er ist
 sondern: den Stand mit dem besten Validierungsverlust mitspeichern und **den**
 messen. Erst danach mehr Daten, und die kommen nicht aus mehr Mutanten,
 sondern aus mehr echten Vorlagen.
-**Gemacht, 17.09.2026 — siehe nächster Abschnitt.** Das Ergebnis war nicht
-die erwartete Antwort, sondern eine Rauschgrenze.
+**Gemacht, 18.09.2026 — siehe nächster Abschnitt.** Die Antwort ist nein, und
+auf dem Weg dorthin sind zwei Defekte im Prüfstand selbst aufgefallen.
 
-### Der beste Stand gemessen — und die Rauschgrenze des Prüfstands (17.09.2026)
+### Den besten Stand gemessen — die Antwort ist nein (18.09.2026)
 
 Der Checkpointer hält seit `7b27da5` zusätzlich den Stand mit dem niedrigsten
-Validierungsverlust fest (`ckpt_best.pt`, atomar, mit Prüfsumme, nur bei
-echter Verbesserung; `erzeuge.py --bestes` lädt ihn). Ein neuer Lauf mit der
-unveränderten V3-Konfiguration — gleicher Seed, gleiche Daten, gleiches
-Schrittbudget — hat zuerst bewiesen, dass die Ergänzung das Training nicht
-berührt: die Validierungskurve trifft die V3-Zahlen auf die Stelle (4,55 bei
-Schritt 1.850, 4,62 bei 2.350), und die 72 Gewichtstensoren des neuen
-2.400er-Stands sind **bitgleich** mit dem alten (größte Abweichung 0). Dann
-beide Stände desselben Laufs auf denselben 98 Test-Vorlagen, Best-of-4,
-Temperatur 0,7, top-k 40 — **gepaart** über die Fall-ID,
-exakter McNemar-Test, Bootstrap-Intervalle
-(`bewertung/vergleiche_checkpoints.py`):
+Validierungsverlust fest: `ckpt_best.pt`, atomar geschrieben, mit Prüfsumme,
+nur bei echter Verbesserung; `erzeuge.py --bestes` lädt ihn. Die zwei
+rotierenden Slots bleiben davon unberührt, der Absturz-Resume hängt weiter an
+ihnen.
 
-| | Best (Schritt 1.850, Val 4,55) | Ende (Schritt 2.400, Val 4,62) | Differenz, 95-%-KI | p |
-|---|---|---|---|---|
-| lesbar (Tor 0) | 81 % | 73 % | +7 pp [−4, +18] | 0,30 |
-| gültig@1 | 28 % | 37 % | −9 pp [−21, +3] | 0,20 |
-| gültig@4 | 79 % | 73 % | +5 pp [−6, +16] | 0,47 |
-| Typen-Jaccard, unbedingt (ungültig zählt 0) | 0,27 | 0,29 | −0,01 [−0,07, +0,05] | 0,59 |
-| Kanten-Jaccard, unbedingt | 0,02 | 0,04 | −0,01 | 0,20 |
-| erfundene Typen | 2 | 0 | | |
+**Die Ergänzung rührt das Training nicht an — bewiesen, nicht behauptet.** Ein
+frischer Lauf mit der unveränderten V3-Konfiguration trifft die alte
+Validierungskurve auf die Stelle (bester Wert 4,5479 bei Schritt 1.850, 4,6152
+bei 2.350, Abstand Training↔Validierung 1,4295 gegen die berichteten 1,42), und
+der neue 2.400er-Stand ist mit dem alten **bitgleich**: alle 72
+Gewichtstensoren, der gespeicherte RNG-Zustand und die Datenposition, größte
+Abweichung 0,000e+00.
 
-Elf Tests, **keiner** signifikant, kleinstes p 0,098. Und „nicht signifikant"
-heißt hier nicht „gleich gut": die Intervalle sind so breit, dass ein
-Unterschied von zehn Prozentpunkten in beide Richtungen darin Platz hat.
+#### Der erste Vergleich war falsch — zwei Defekte im Prüfstand
 
-**Die Kontrollmessung, die das einordnet:** der alte V3-Stand (Schritt 2.400)
-gegen den neuen 2.400er-Stand — **bitgleiche Gewichte**, nur der Zufallsstrom
-beim Sampling ist ein anderer. (Und ein Fund nebenbei, `f75f979`: `--seed`
-wirkte beim Laden des letzten Standes gar nicht, weil der Checkpointer den
-Trainings-RNG wiederherstellt und den Seed überschrieb — die beiden Läufe
-unterschieden sich im Zufallsstrom trotzdem, nur nicht aus dem Grund, den die
-Befehlszeile behauptete. Seit `f75f979` gilt der Seed für beide Ladewege.)
-Unterschiede allein aus dem Zufallsstrom: Tor 0 2 pp, gültig@4 3 pp,
-Typen-Jaccard 0,02, erfundene Typen 1 gegen 0. Die Intervalle dieses Null-Vergleichs sind genauso breit wie die des
-echten Vergleichs (`stufe4-rauschgrenze-seed0-gegen-seed1-2026-09-17.json`).
+Die erste Auswertung meldete, der Best-Stand passiere mehr Tore und treffe
+dafür schlechter. Beides war nicht haltbar, weil die beiden Arme gar nicht
+vergleichbar erzeugt wurden:
 
-**Befund:** mit 98 Testfällen kann dieser Prüfstand einen Checkpoint-Wechsel
-nicht von einem Wechsel des Zufallsstroms unterscheiden. Die Frage „ist der Stand mit dem
-besten Validierungsverlust auch der bessere Workflow-Erzeuger?" ist damit
-nicht mit Nein beantwortet, sondern **mit diesem Prüfstand nicht
-beantwortbar**. Das ist das Ergebnis dieser Messung — und die Zahl, die jede
-weitere Änderung schlagen muss: ein Effekt unter rund zehn Prozentpunkten
-(bzw. 0,06 Jaccard) ist bei n = 98 unsichtbar.
+1. **`--seed` war im Zweig „letzter Stand" wirkungslos.** `erzeuge.py` setzte
+   `manual_seed` **vor** dem Laden, und `Checkpointer.lade_neuesten()` stellt
+   danach den Trainings-RNG aus dem Checkpoint wieder her — für ein Resume
+   richtig, hier fatal. Im Zweig `--bestes` wirkte der Seed dagegen, weil
+   `lade_bestes()` den RNG nicht anfasst. Die beiden verglichenen Stände zogen
+   ihre Zufallszahlen also aus verschiedenen Quellen. Nachgemessen: vor der
+   Reparatur lieferten Seed 0 und Seed 1 im Endstand-Zweig **10 von 10**
+   identische Ausgaben, danach **0 von 8**.
+2. **Die Ergebnisdatei protokollierte `hoechstens_token` nicht.** Damit ließ
+   sich von zwei gespeicherten Läufen nicht einmal nachweisen, ob sie
+   vergleichbar erzeugt wurden. Konkret ungeklärt geblieben: zwei
+   Endstand-Bewertungen mit bitgleichen Gewichten, bitgleichem RNG-Zustand und
+   deterministischem Prüfstand (10/10 identische Ausgaben bei Wiederholung)
+   ergaben 71,4 % gegen 73,5 % Tor 0. Aus den gespeicherten Daten ist nicht
+   rekonstruierbar, woher die Differenz kam.
 
-**Nachtrag zu B8, mit derselben Brille** (`stufe4-b8-gegen-v3-gepaart-2026-09-17.json`,
-beide über denselben Ladeweg bewertet): der Gültigkeitsvorsprung von B8 liegt **außerhalb** der
-Rauschgrenze — gültig@4 +13 pp [+1, +24], p 0,047; kein Token-Limit-Abbruch
-gegen 7 %, p 0,016. Die „schlechtere Treffsicherheit" dagegen hängt am
-Maß: der Typen-Jaccard oben (0,34 gegen 0,41) ist nur über die Fälle
-gemittelt, in denen die Ausgabe lesbar war — wer mehr lesbare Ausgaben
-liefert, wird auf einer anderen Teilmenge gemessen. **Unbedingt** (unlesbar
-zählt 0) sind es 0,29 gegen 0,29, Differenz −0,01 [−0,07, +0,05]. Das Urteil
-nach der vorab festgelegten Regel bleibt (die Validierungskurve endet
-schlechter, das war die dritte Bedingung), aber die Lesart „B8 trifft
-schlechter" ist mit den Daten nicht belegt — sie war ein Artefakt des
-bedingten Maßes. Deshalb ist die unbedingte Fassung ab jetzt das Hauptmaß.
+Beides ist behoben (`f75f979`, `5a2e087`): der Seed wird nach dem Laden
+gesetzt und gilt für beide Zweige, und Token-Grenze, Checkpoint-Quelle und
+-Pfad stehen jetzt im Ergebnis. Wie groß der Unterschied ist, zeigt die
+Richtung: **gültig@1 kippt von 9,2 Punkten schlechter auf 5,1 Punkte besser**,
+sobald beide Arme denselben Zufallsstrom bekommen.
 
-**Was daraus folgt:** nicht noch ein Lauf, sondern mehr Trennschärfe. Der
-Test-Split hat 98 von 1.978 Vorlagen; ein Unterschied von fünf Prozentpunkten
-bräuchte grob viermal so viele Fälle. Billiger und sofort möglich: dieselben
-98 Fälle mit mehreren Zufallsströmen (`--seed`, seit `f75f979` wirksam) je Stand — das mittelt das
-Sampling-Rauschen weg, nicht die Fall-Schwankung. Und der nächste Schritt am
-Modell muss ein Effekt sein, der die Grenze sicher überspringt: Stufe 5
-(eingeschränkte Dekodierung über den 825 echten Typen und der
-Kurzschrift-Grammatik) greift genau die Tor-0-Fehler an, die 20–30 % der
-Ausgaben kosten.
+#### Das Rauschen des Prüfstands, gemessen statt geschätzt
+
+Erst mit wirksamem `--seed` lässt sich die Frage stellen, die vorher nicht zu
+stellen war: wie weit schwankt die Bewertung, wenn sich **nichts** ändert
+außer der Zufallszahl? Derselbe Checkpoint, dreimal bewertet, n = 98, k = 4:
+
+| Maß | Streuung über drei Seeds (SD) |
+|---|---|
+| Tor 0 / Tor 1 / Tor 3 | **5,4 Prozentpunkte** |
+| Tor 2 = gültig@4 | **6,0 Prozentpunkte** |
+| gültig@1 | **5,7 Prozentpunkte** |
+| abgebrochen | 3,1 Prozentpunkte |
+| Typen-Jaccard | 0,023 |
+| Kanten-Jaccard | 0,009 |
+
+Zum Vergleich: die Tor-Unterschiede, um die in diesem Projekt bisher gerungen
+wurde, liegen bei 3 bis 14 Punkten. **Ein einzelner Bewertungslauf kann
+Unterschiede dieser Größe nicht von seiner eigenen Zufallsschwankung
+trennen.**
+
+#### Das Ergebnis, über drei Seeds je Stand gemittelt
+
+Beide Stände desselben Laufs, je Seeds 0/1/2, dieselben 98 ungesehenen
+Vorlagen, Best-of-4, Temperatur 0,7, top-k 40. Gepaart über die Fall-ID,
+Permutationstest auf die mittlere Differenz (also auf genau die berichtete
+Größe), Bootstrap-Intervalle, Holm-Korrektur über die unterscheidbaren
+Messgrößen:
+
+| Maß | bester Stand (1.850) | Endstand (2.400) | Differenz | 95-%-KI | Holm-p | Effekt in Seed-SD |
+|---|---|---|---|---|---|---|
+| Tor 0 / 1 / 3 | 71,8 % | 74,5 % | −2,7 pp | [−9,9, +4,4] | 1,00 | 0,5× |
+| Tor 2 = gültig@4 | 71,4 % | 74,1 % | −2,7 pp | [−10,2, +4,4] | 1,00 | 0,5× |
+| gültig@1 | 32,3 % | 36,7 % | −4,4 pp | [−12,2, +3,4] | 1,00 | 0,8× |
+| abgebrochen | 4,4 % | 4,1 % | +0,3 pp | [−2,4, +3,4] | 1,00 | 0,1× |
+| **Typen-Jaccard** | **0,249** | **0,305** | **−0,056** | [−0,091, −0,021] | **0,010** | 2,4× |
+| **Kanten-Jaccard** | **0,020** | **0,031** | **−0,012** | [−0,020, −0,004] | **0,027** | 1,4× |
+
+Zwei Anmerkungen zur Redlichkeit der Tabelle. Erstens: die sieben
+Tor-Spalten der Bewertung sind in Wahrheit **vier** unterscheidbare Messgrößen
+— `tor0`, `tor1` und `tor3` sind in 98 von 98 Fällen dasselbe Ereignis, ebenso
+`tor2` und `gültig@4`. Die Holm-Korrektur läuft deshalb über sechs Hypothesen,
+nicht über neun; über neun gerechnet bestraft man sich für Tests, die man nie
+gemacht hat. Zweitens ist der Jaccard hier **unbedingt** gerechnet: eine
+ungültige Ausgabe zählt als 0. Die naheliegende Variante „nur Fälle, die beide
+Stände lösen" sieht fairer aus, konditioniert aber auf ein Ergebnis, das erst
+nach der Behandlung entsteht — sie schneidet dem einen Stand seine besten
+Fälle weg und dem anderen seine schwächsten und erzeugt damit genau den
+Unterschied, den sie zu messen vorgibt.
+
+#### Was daraus folgt
+
+**Der angekündigte Schritt ist eingelöst, und er hat die Erwartung
+widerlegt.** Der Stand mit dem niedrigsten Validierungsverlust ist nicht der
+bessere. Er trifft die geforderten Node-Typen **schlechter** (0,249 gegen
+0,305, Holm-p 0,010) und die Verbindungen ebenfalls (0,020 gegen 0,031,
+Holm-p 0,027). Ein um 0,067 Nat niedrigerer Validierungsverlust hat sich nicht
+in ein besseres Modell übersetzt, sondern in ein schlechteres — auf den
+einzigen beiden Maßen, die überhaupt trennscharf genug sind.
+
+Bei den Tor-Maßen trennt nichts: alle Unterschiede liegen zwischen 0,1 und
+0,8 Seed-Standardabweichungen, alle Holm-p bei 1,00. Das heißt **nicht**, dass
+die Stände dort gleich gut sind — die Konfidenzintervalle reichen von etwa
+zehn Punkten in die eine bis vier Punkte in die andere Richtung. Es heißt, dass
+98 Testvorlagen mit stochastischem Sampling diese Frage nicht beantworten.
+
+Und es heißt drittens etwas über alle früheren Zahlen dieses Kapitels: sie
+stammen aus je **einem** Sampling-Lauf. Bei einer Seed-Streuung von 5 bis 6
+Punkten auf den Tor-Maßen sind die Einzelvergleiche zwischen den Fassungen V1,
+V2, V3 und B8 dort weniger trennscharf, als die Tabellen aussehen lassen. Die
+Jaccard-Werte sind davon deutlich weniger betroffen (SD 0,009 bis 0,023).
+
+**Eine frühere Aussage dieses Kapitels fällt damit.** Weiter oben steht, B8
+treffe „die Sache schlechter" als V3 — Typen-Jaccard 0,34 gegen 0,41. Das sind
+**bedingte** Mittelwerte, also genau das Maß mit dem eben beschriebenen
+Auswahlfehler. Unbedingt nachgerechnet stehen die beiden bei 0,286 gegen 0,293:
+Differenz −0,007, Intervall [−0,065, +0,049], p = 0,80. Dort ist kein
+Unterschied. Das Urteil „V3 bleibt die Basis" hält weiterhin, es trägt sich
+aber allein auf die dritte Bedingung der vorab festgelegten Regel — die
+Validierungskurve endet schlechter — und nicht auf die Treffsicherheit. Das
+unbedingte Maß ist ab hier das Hauptmaß.
+
+**Der nächste Schritt ist deshalb kein weiterer Checkpoint-Vergleich, sondern
+ein größerer Prüfstand:** mehr echte Vorlagen für einen größeren Holdout, und
+Bewertungen grundsätzlich über mehrere Seeds gemittelt. `bewertung/vergleiche_checkpoints.py`
+nimmt dafür mehrere Ergebnisdateien je Stand entgegen und weist die
+Seed-Streuung neben jedem Unterschied aus.
+
+Und am Modell muss der nächste Eingriff ein Effekt sein, der diese gemessene
+Latte sicher überspringt, statt in ihr zu verschwinden. Genau das ist **Stufe 5**
+im nächsten Kapitel: die eingeschränkte Dekodierung greift die Tor-0-Fehler an,
+die hier 25 bis 30 % der Ausgaben kosten — eine Größenordnung über der
+Seed-Streuung von 5 bis 6 Punkten, und damit der erste Unterschied in diesem
+Projekt, den ein einzelner Bewertungslauf überhaupt tragen könnte.
 
 ### Gegen die Frontier-Modelle — dieselben 15 Instruktionen, alle vier Tore, echter n8n-Import
 
