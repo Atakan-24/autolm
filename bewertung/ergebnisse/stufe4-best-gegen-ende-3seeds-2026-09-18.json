@@ -1,0 +1,217 @@
+{
+  "a": {
+    "dateien": [
+      "bewertung\\ergebnisse\\stufe4-fix-best1850-seed0.json",
+      "bewertung\\ergebnisse\\stufe4-fix-best1850-seed1.json",
+      "bewertung\\ergebnisse\\stufe4-fix-best1850-seed2.json"
+    ],
+    "schritt": 1850
+  },
+  "b": {
+    "dateien": [
+      "bewertung\\ergebnisse\\stufe4-fix-end2400-seed0.json",
+      "bewertung\\ergebnisse\\stufe4-fix-end2400-seed1.json",
+      "bewertung\\ergebnisse\\stufe4-fix-end2400-seed2.json"
+    ],
+    "schritt": 2400
+  },
+  "gepaarte_faelle": 98,
+  "nur_in_a": 0,
+  "nur_in_b": 0,
+  "tore": {
+    "tor0_kurzschrift": {
+      "a_mittel": 0.7177,
+      "b_mittel": 0.7449,
+      "differenz": -0.0272,
+      "differenz_ki95": [
+        -0.0986,
+        0.0442
+      ],
+      "permutationstest_p": 0.5153,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0412,
+      "seed_sd_b": 0.054,
+      "effekt_in_seed_sd": 0.5,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    },
+    "tor1_json": {
+      "a_mittel": 0.7177,
+      "b_mittel": 0.7449,
+      "differenz": -0.0272,
+      "differenz_ki95": [
+        -0.102,
+        0.0442
+      ],
+      "permutationstest_p": 0.5252,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0412,
+      "seed_sd_b": 0.054,
+      "effekt_in_seed_sd": 0.5,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    },
+    "tor2_struktur": {
+      "a_mittel": 0.7143,
+      "b_mittel": 0.7415,
+      "differenz": -0.0272,
+      "differenz_ki95": [
+        -0.102,
+        0.0442
+      ],
+      "permutationstest_p": 0.5251,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0368,
+      "seed_sd_b": 0.0598,
+      "effekt_in_seed_sd": 0.46,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    },
+    "tor3_verbindungen": {
+      "a_mittel": 0.7177,
+      "b_mittel": 0.7449,
+      "differenz": -0.0272,
+      "differenz_ki95": [
+        -0.0986,
+        0.0442
+      ],
+      "permutationstest_p": 0.5211,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0412,
+      "seed_sd_b": 0.054,
+      "effekt_in_seed_sd": 0.5,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    },
+    "gueltig_at_1": {
+      "a_mittel": 0.3231,
+      "b_mittel": 0.3673,
+      "differenz": -0.0442,
+      "differenz_ki95": [
+        -0.1224,
+        0.034
+      ],
+      "permutationstest_p": 0.3133,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0358,
+      "seed_sd_b": 0.0568,
+      "effekt_in_seed_sd": 0.78,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    },
+    "gueltig_at_k": {
+      "a_mittel": 0.7143,
+      "b_mittel": 0.7415,
+      "differenz": -0.0272,
+      "differenz_ki95": [
+        -0.102,
+        0.0476
+      ],
+      "permutationstest_p": 0.5265,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0368,
+      "seed_sd_b": 0.0598,
+      "effekt_in_seed_sd": 0.46,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    },
+    "abgebrochen": {
+      "a_mittel": 0.0442,
+      "b_mittel": 0.0408,
+      "differenz": 0.0034,
+      "differenz_ki95": [
+        -0.0238,
+        0.034
+      ],
+      "permutationstest_p": 1.0,
+      "signifikant_005": false,
+      "seed_sd_a": 0.0312,
+      "seed_sd_b": 0.027,
+      "effekt_in_seed_sd": 0.11,
+      "hauptmass": true,
+      "holm_p": 1.0,
+      "signifikant_005_holm": false
+    }
+  },
+  "jaccard": {
+    "typen_jaccard": {
+      "a_mittel": 0.2488,
+      "b_mittel": 0.3052,
+      "differenz": -0.0564,
+      "differenz_ki95": [
+        -0.0911,
+        -0.0209
+      ],
+      "permutationstest_p": 0.0017,
+      "signifikant_005": true,
+      "seed_sd_a": 0.0112,
+      "seed_sd_b": 0.0234,
+      "effekt_in_seed_sd": 2.41,
+      "hauptmass": true,
+      "holm_p": 0.0102,
+      "signifikant_005_holm": true
+    },
+    "kanten_jaccard": {
+      "a_mittel": 0.0197,
+      "b_mittel": 0.0313,
+      "differenz": -0.0116,
+      "differenz_ki95": [
+        -0.0201,
+        -0.0036
+      ],
+      "permutationstest_p": 0.0053,
+      "signifikant_005": true,
+      "seed_sd_a": 0.0029,
+      "seed_sd_b": 0.0085,
+      "effekt_in_seed_sd": 1.36,
+      "hauptmass": true,
+      "holm_p": 0.0265,
+      "signifikant_005_holm": true
+    }
+  },
+  "seeds_a": [
+    0,
+    1,
+    2
+  ],
+  "seeds_b": [
+    0,
+    1,
+    2
+  ],
+  "messgroessen": {
+    "tor_gruppen": [
+      [
+        "tor0_kurzschrift",
+        "tor1_json",
+        "tor3_verbindungen"
+      ],
+      [
+        "gueltig_at_k",
+        "tor2_struktur"
+      ],
+      [
+        "gueltig_at_1"
+      ],
+      [
+        "abgebrochen"
+      ]
+    ],
+    "tor_spalten": 7,
+    "unterscheidbar": 6
+  },
+  "urteil": {
+    "tests_gesamt": 9,
+    "davon_signifikant_005_roh": 2,
+    "davon_signifikant_005_holm": 2,
+    "kleinstes_p_roh": 0.0017,
+    "kleinstes_p_holm": 0.0102,
+    "lesart": "Ueber mehrere Seeds gemittelt. Massgeblich ist die Holm-korrigierte Spalte -- neun gleichzeitige Tests liefern sonst zufaellige Treffer. Die Seed-SD je Metrik sagt, ob ein Unterschied ueberhaupt groesser ist als das Rauschen des Pruefstands."
+  }
+}
