@@ -24,6 +24,7 @@ sys.path.insert(0, str(WURZEL))
 sys.path.insert(0, str(WURZEL / "bewertung"))
 
 from workflow import kurzschrift as ks  # noqa: E402
+from workflow.beschraenkt import KurzschriftMaske  # noqa: E402
 from workflow.erzeuge import bewerte_text, erzeuge_ids, lade_modell  # noqa: E402
 from workflow.tokenizer_workflow import WorkflowTokenizer  # noqa: E402
 from tore import lade_echte_node_typen  # noqa: E402
@@ -47,6 +48,9 @@ def main() -> None:
     p.add_argument("--hoechstens-token", type=int, default=768)
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--out", type=Path, help="optional: nur den gerenderten Workflow speichern")
+    p.add_argument("--beschraenkt", action="store_true",
+                   help="Stufe 5: Logit-Maske erzwingt echte Node-Typen und "
+                        "Kurzschrift-Grammatik beim Dekodieren (workflow/beschraenkt.py)")
     args = p.parse_args()
     if args.k < 1:
         p.error("--k muss mindestens 1 sein")
@@ -56,12 +60,16 @@ def main() -> None:
     tok = WorkflowTokenizer.lade(args.tokenizer)
     modell, konfig = lade_modell(args.checkpoints, geraet)
     echte = lade_echte_node_typen()
+    maske = KurzschriftMaske(tok, echte) if args.beschraenkt else None
     prompt = tok.kodiere_prompt(args.instruktion)
 
     versuche = []
+    eingriffe = 0
     for _ in range(args.k):
         ids = erzeuge_ids(modell, prompt, tok.eos_id, args.hoechstens_token,
-                           args.temperatur, args.top_k, geraet)
+                           args.temperatur, args.top_k, geraet, maske=maske)
+        if maske is not None:
+            eingriffe += maske.eingriffe
         kurz = tok.dekodiere_antwort(ids)
         bewertung = bewerte_text(kurz, None, echte)
         bewertung["kurzschrift"] = kurz
@@ -77,6 +85,8 @@ def main() -> None:
         "geraet": geraet,
         "instruktion": args.instruktion,
         "versuche": len(versuche),
+        "beschraenkt": args.beschraenkt,
+        "eingriffe": eingriffe,
         "gueltig": beste["gueltig"],
         "probleme": beste["probleme"],
         "kurzschrift": beste["kurzschrift"],

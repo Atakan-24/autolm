@@ -1,0 +1,457 @@
+{
+  "erzeugt_von": "workflow/vergleiche_lauefe.py",
+  "basis": "bewertung\\ergebnisse\\stufe4-v3-verlauf-7M.jsonl",
+  "kandidat": "bewertung\\ergebnisse\\stufe4-b8-verlauf-7M.jsonl",
+  "gemeinsame_schritte": [
+    0,
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500,
+    550,
+    600,
+    650,
+    700,
+    750,
+    800,
+    850,
+    900,
+    950,
+    1000,
+    1050,
+    1100,
+    1150,
+    1200,
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1600,
+    1650,
+    1700,
+    1750,
+    1800,
+    1850,
+    1900,
+    1950,
+    2000,
+    2050,
+    2100,
+    2150,
+    2200,
+    2250,
+    2300,
+    2350
+  ],
+  "letzter_gemeinsamer_schritt": {
+    "schritt": 2350,
+    "basis_val": 4.6152,
+    "kandidat_val": 5.1091,
+    "delta_val": 0.4939,
+    "basis_luecke": 1.4218,
+    "kandidat_luecke": 2.6993
+  },
+  "minimum_basis": {
+    "schritt": 1850,
+    "val": 4.5479
+  },
+  "minimum_kandidat": {
+    "schritt": 1150,
+    "val": 4.5903
+  },
+  "stichproben": [
+    {
+      "schritt": 0,
+      "basis_val": 8.3784,
+      "kandidat_val": 8.3865,
+      "delta_val": 0.0081,
+      "basis_luecke": -0.1096,
+      "kandidat_luecke": -0.0841
+    },
+    {
+      "schritt": 50,
+      "basis_val": 6.785,
+      "kandidat_val": 6.7091,
+      "delta_val": -0.0759,
+      "basis_luecke": 0.0677,
+      "kandidat_luecke": -0.0488
+    },
+    {
+      "schritt": 100,
+      "basis_val": 6.6378,
+      "kandidat_val": 6.4962,
+      "delta_val": -0.1416,
+      "basis_luecke": 0.1382,
+      "kandidat_luecke": 0.0524
+    },
+    {
+      "schritt": 150,
+      "basis_val": 6.1472,
+      "kandidat_val": 5.9676,
+      "delta_val": -0.1796,
+      "basis_luecke": 0.1919,
+      "kandidat_luecke": 0.2484
+    },
+    {
+      "schritt": 200,
+      "basis_val": 5.7342,
+      "kandidat_val": 5.5846,
+      "delta_val": -0.1496,
+      "basis_luecke": 0.2598,
+      "kandidat_luecke": 0.1728
+    },
+    {
+      "schritt": 250,
+      "basis_val": 5.5,
+      "kandidat_val": 5.326,
+      "delta_val": -0.174,
+      "basis_luecke": 0.2446,
+      "kandidat_luecke": 0.2853
+    },
+    {
+      "schritt": 300,
+      "basis_val": 5.3454,
+      "kandidat_val": 5.1434,
+      "delta_val": -0.202,
+      "basis_luecke": 0.5319,
+      "kandidat_luecke": 0.3427
+    },
+    {
+      "schritt": 350,
+      "basis_val": 5.2355,
+      "kandidat_val": 5.0356,
+      "delta_val": -0.1999,
+      "basis_luecke": 0.4844,
+      "kandidat_luecke": 0.2847
+    },
+    {
+      "schritt": 400,
+      "basis_val": 5.139,
+      "kandidat_val": 4.9693,
+      "delta_val": -0.1697,
+      "basis_luecke": 0.317,
+      "kandidat_luecke": 0.0395
+    },
+    {
+      "schritt": 450,
+      "basis_val": 5.0759,
+      "kandidat_val": 4.9088,
+      "delta_val": -0.1671,
+      "basis_luecke": 0.559,
+      "kandidat_luecke": 0.4074
+    },
+    {
+      "schritt": 500,
+      "basis_val": 5.0133,
+      "kandidat_val": 4.8429,
+      "delta_val": -0.1704,
+      "basis_luecke": 0.2702,
+      "kandidat_luecke": 0.3699
+    },
+    {
+      "schritt": 550,
+      "basis_val": 4.9959,
+      "kandidat_val": 4.8021,
+      "delta_val": -0.1938,
+      "basis_luecke": 0.5318,
+      "kandidat_luecke": 0.5412
+    },
+    {
+      "schritt": 600,
+      "basis_val": 4.9529,
+      "kandidat_val": 4.7703,
+      "delta_val": -0.1826,
+      "basis_luecke": 0.5519,
+      "kandidat_luecke": 0.7648
+    },
+    {
+      "schritt": 650,
+      "basis_val": 4.9087,
+      "kandidat_val": 4.7589,
+      "delta_val": -0.1498,
+      "basis_luecke": 0.4928,
+      "kandidat_luecke": 0.506
+    },
+    {
+      "schritt": 700,
+      "basis_val": 4.8811,
+      "kandidat_val": 4.7154,
+      "delta_val": -0.1657,
+      "basis_luecke": 0.7537,
+      "kandidat_luecke": 0.6829
+    },
+    {
+      "schritt": 750,
+      "basis_val": 4.8491,
+      "kandidat_val": 4.6797,
+      "delta_val": -0.1694,
+      "basis_luecke": 0.5047,
+      "kandidat_luecke": 0.6608
+    },
+    {
+      "schritt": 800,
+      "basis_val": 4.8299,
+      "kandidat_val": 4.6866,
+      "delta_val": -0.1433,
+      "basis_luecke": 0.4596,
+      "kandidat_luecke": 0.6693
+    },
+    {
+      "schritt": 850,
+      "basis_val": 4.8211,
+      "kandidat_val": 4.663,
+      "delta_val": -0.1581,
+      "basis_luecke": 0.5177,
+      "kandidat_luecke": 0.6002
+    },
+    {
+      "schritt": 900,
+      "basis_val": 4.769,
+      "kandidat_val": 4.6553,
+      "delta_val": -0.1137,
+      "basis_luecke": 0.7132,
+      "kandidat_luecke": 0.6486
+    },
+    {
+      "schritt": 950,
+      "basis_val": 4.7651,
+      "kandidat_val": 4.6586,
+      "delta_val": -0.1065,
+      "basis_luecke": 0.524,
+      "kandidat_luecke": 1.1135
+    },
+    {
+      "schritt": 1000,
+      "basis_val": 4.7454,
+      "kandidat_val": 4.632,
+      "delta_val": -0.1134,
+      "basis_luecke": 0.6209,
+      "kandidat_luecke": 1.2423
+    },
+    {
+      "schritt": 1050,
+      "basis_val": 4.7245,
+      "kandidat_val": 4.6205,
+      "delta_val": -0.104,
+      "basis_luecke": 0.6359,
+      "kandidat_luecke": 0.9554
+    },
+    {
+      "schritt": 1100,
+      "basis_val": 4.7061,
+      "kandidat_val": 4.6425,
+      "delta_val": -0.0636,
+      "basis_luecke": 0.6087,
+      "kandidat_luecke": 0.8925
+    },
+    {
+      "schritt": 1150,
+      "basis_val": 4.6937,
+      "kandidat_val": 4.5903,
+      "delta_val": -0.1034,
+      "basis_luecke": 0.7528,
+      "kandidat_luecke": 0.997
+    },
+    {
+      "schritt": 1200,
+      "basis_val": 4.6653,
+      "kandidat_val": 4.6101,
+      "delta_val": -0.0552,
+      "basis_luecke": 0.8449,
+      "kandidat_luecke": 1.1442
+    },
+    {
+      "schritt": 1250,
+      "basis_val": 4.6681,
+      "kandidat_val": 4.6229,
+      "delta_val": -0.0452,
+      "basis_luecke": 0.5494,
+      "kandidat_luecke": 1.0618
+    },
+    {
+      "schritt": 1300,
+      "basis_val": 4.6324,
+      "kandidat_val": 4.6429,
+      "delta_val": 0.0105,
+      "basis_luecke": 0.9585,
+      "kandidat_luecke": 1.3736
+    },
+    {
+      "schritt": 1350,
+      "basis_val": 4.6334,
+      "kandidat_val": 4.6169,
+      "delta_val": -0.0165,
+      "basis_luecke": 0.9911,
+      "kandidat_luecke": 1.4051
+    },
+    {
+      "schritt": 1400,
+      "basis_val": 4.6357,
+      "kandidat_val": 4.6348,
+      "delta_val": -0.0009,
+      "basis_luecke": 0.9458,
+      "kandidat_luecke": 1.2565
+    },
+    {
+      "schritt": 1450,
+      "basis_val": 4.6276,
+      "kandidat_val": 4.6337,
+      "delta_val": 0.0061,
+      "basis_luecke": 0.9002,
+      "kandidat_luecke": 1.3113
+    },
+    {
+      "schritt": 1500,
+      "basis_val": 4.6128,
+      "kandidat_val": 4.6632,
+      "delta_val": 0.0504,
+      "basis_luecke": 0.778,
+      "kandidat_luecke": 1.4414
+    },
+    {
+      "schritt": 1550,
+      "basis_val": 4.5879,
+      "kandidat_val": 4.6607,
+      "delta_val": 0.0728,
+      "basis_luecke": 0.7731,
+      "kandidat_luecke": 1.6158
+    },
+    {
+      "schritt": 1600,
+      "basis_val": 4.6015,
+      "kandidat_val": 4.6627,
+      "delta_val": 0.0612,
+      "basis_luecke": 1.1346,
+      "kandidat_luecke": 1.586
+    },
+    {
+      "schritt": 1650,
+      "basis_val": 4.573,
+      "kandidat_val": 4.7123,
+      "delta_val": 0.1393,
+      "basis_luecke": 0.8742,
+      "kandidat_luecke": 1.5343
+    },
+    {
+      "schritt": 1700,
+      "basis_val": 4.5619,
+      "kandidat_val": 4.721,
+      "delta_val": 0.1591,
+      "basis_luecke": 1.1906,
+      "kandidat_luecke": 1.5963
+    },
+    {
+      "schritt": 1750,
+      "basis_val": 4.5777,
+      "kandidat_val": 4.7581,
+      "delta_val": 0.1804,
+      "basis_luecke": 0.823,
+      "kandidat_luecke": 1.9805
+    },
+    {
+      "schritt": 1800,
+      "basis_val": 4.5832,
+      "kandidat_val": 4.7593,
+      "delta_val": 0.1761,
+      "basis_luecke": 1.1492,
+      "kandidat_luecke": 1.8627
+    },
+    {
+      "schritt": 1850,
+      "basis_val": 4.5479,
+      "kandidat_val": 4.812,
+      "delta_val": 0.2641,
+      "basis_luecke": 1.4295,
+      "kandidat_luecke": 1.8816
+    },
+    {
+      "schritt": 1900,
+      "basis_val": 4.5716,
+      "kandidat_val": 4.8405,
+      "delta_val": 0.2689,
+      "basis_luecke": 0.9914,
+      "kandidat_luecke": 2.011
+    },
+    {
+      "schritt": 1950,
+      "basis_val": 4.5753,
+      "kandidat_val": 4.8442,
+      "delta_val": 0.2689,
+      "basis_luecke": 1.0586,
+      "kandidat_luecke": 2.1627
+    },
+    {
+      "schritt": 2000,
+      "basis_val": 4.5816,
+      "kandidat_val": 4.8784,
+      "delta_val": 0.2968,
+      "basis_luecke": 1.0714,
+      "kandidat_luecke": 2.1415
+    },
+    {
+      "schritt": 2050,
+      "basis_val": 4.5867,
+      "kandidat_val": 4.8885,
+      "delta_val": 0.3018,
+      "basis_luecke": 1.0354,
+      "kandidat_luecke": 2.1237
+    },
+    {
+      "schritt": 2100,
+      "basis_val": 4.5941,
+      "kandidat_val": 4.9292,
+      "delta_val": 0.3351,
+      "basis_luecke": 1.1174,
+      "kandidat_luecke": 2.4084
+    },
+    {
+      "schritt": 2150,
+      "basis_val": 4.5622,
+      "kandidat_val": 4.936,
+      "delta_val": 0.3738,
+      "basis_luecke": 1.5306,
+      "kandidat_luecke": 2.2515
+    },
+    {
+      "schritt": 2200,
+      "basis_val": 4.5867,
+      "kandidat_val": 4.9991,
+      "delta_val": 0.4124,
+      "basis_luecke": 1.1225,
+      "kandidat_luecke": 2.3911
+    },
+    {
+      "schritt": 2250,
+      "basis_val": 4.6053,
+      "kandidat_val": 5.0453,
+      "delta_val": 0.44,
+      "basis_luecke": 1.4077,
+      "kandidat_luecke": 2.5205
+    },
+    {
+      "schritt": 2300,
+      "basis_val": 4.6008,
+      "kandidat_val": 5.0561,
+      "delta_val": 0.4553,
+      "basis_luecke": 1.2853,
+      "kandidat_luecke": 2.84
+    },
+    {
+      "schritt": 2350,
+      "basis_val": 4.6152,
+      "kandidat_val": 5.1091,
+      "delta_val": 0.4939,
+      "basis_luecke": 1.4218,
+      "kandidat_luecke": 2.6993
+    }
+  ]
+}

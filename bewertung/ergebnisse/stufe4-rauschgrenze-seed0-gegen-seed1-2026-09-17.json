@@ -1,0 +1,230 @@
+{
+  "a": {
+    "datei": "bewertung\\ergebnisse\\stufe4-v3-test-schritt2400.json",
+    "schritt": 2400
+  },
+  "b": {
+    "datei": "bewertung\\ergebnisse\\stufe4-bestrun-end2400.json",
+    "schritt": 2400
+  },
+  "gepaarte_faelle": 98,
+  "nur_in_a": 0,
+  "nur_in_b": 0,
+  "tore": {
+    "tor0_kurzschrift": {
+      "a_anteil": 0.7143,
+      "b_anteil": 0.7347,
+      "a_wilson": [
+        0.6181,
+        0.7943
+      ],
+      "b_wilson": [
+        0.6396,
+        0.812
+      ],
+      "diskordant_nur_a": 14,
+      "diskordant_nur_b": 16,
+      "differenz": -0.0204,
+      "differenz_ki95": [
+        -0.1327,
+        0.0918
+      ],
+      "mcnemar_p": 0.8555,
+      "signifikant_005": false
+    },
+    "tor1_json": {
+      "a_anteil": 0.7143,
+      "b_anteil": 0.7347,
+      "a_wilson": [
+        0.6181,
+        0.7943
+      ],
+      "b_wilson": [
+        0.6396,
+        0.812
+      ],
+      "diskordant_nur_a": 14,
+      "diskordant_nur_b": 16,
+      "differenz": -0.0204,
+      "differenz_ki95": [
+        -0.1327,
+        0.0918
+      ],
+      "mcnemar_p": 0.8555,
+      "signifikant_005": false
+    },
+    "tor2_struktur": {
+      "a_anteil": 0.7041,
+      "b_anteil": 0.7347,
+      "a_wilson": [
+        0.6074,
+        0.7854
+      ],
+      "b_wilson": [
+        0.6396,
+        0.812
+      ],
+      "diskordant_nur_a": 13,
+      "diskordant_nur_b": 16,
+      "differenz": -0.0306,
+      "differenz_ki95": [
+        -0.1327,
+        0.0714
+      ],
+      "mcnemar_p": 0.7111,
+      "signifikant_005": false
+    },
+    "tor3_verbindungen": {
+      "a_anteil": 0.7143,
+      "b_anteil": 0.7347,
+      "a_wilson": [
+        0.6181,
+        0.7943
+      ],
+      "b_wilson": [
+        0.6396,
+        0.812
+      ],
+      "diskordant_nur_a": 14,
+      "diskordant_nur_b": 16,
+      "differenz": -0.0204,
+      "differenz_ki95": [
+        -0.1327,
+        0.0918
+      ],
+      "mcnemar_p": 0.8555,
+      "signifikant_005": false
+    },
+    "gueltig_at_1": {
+      "a_anteil": 0.3571,
+      "b_anteil": 0.3673,
+      "a_wilson": [
+        0.2693,
+        0.4557
+      ],
+      "b_wilson": [
+        0.2786,
+        0.4661
+      ],
+      "diskordant_nur_a": 19,
+      "diskordant_nur_b": 20,
+      "differenz": -0.0102,
+      "differenz_ki95": [
+        -0.1429,
+        0.1122
+      ],
+      "mcnemar_p": 1.0,
+      "signifikant_005": false
+    },
+    "gueltig_at_k": {
+      "a_anteil": 0.7041,
+      "b_anteil": 0.7347,
+      "a_wilson": [
+        0.6074,
+        0.7854
+      ],
+      "b_wilson": [
+        0.6396,
+        0.812
+      ],
+      "diskordant_nur_a": 13,
+      "diskordant_nur_b": 16,
+      "differenz": -0.0306,
+      "differenz_ki95": [
+        -0.1327,
+        0.0816
+      ],
+      "mcnemar_p": 0.7111,
+      "signifikant_005": false
+    },
+    "abgebrochen": {
+      "a_anteil": 0.0714,
+      "b_anteil": 0.0612,
+      "a_wilson": [
+        0.035,
+        0.1402
+      ],
+      "b_wilson": [
+        0.0284,
+        0.1272
+      ],
+      "diskordant_nur_a": 6,
+      "diskordant_nur_b": 5,
+      "differenz": 0.0102,
+      "differenz_ki95": [
+        -0.051,
+        0.0816
+      ],
+      "mcnemar_p": 1.0,
+      "signifikant_005": false
+    }
+  },
+  "jaccard": {
+    "typen_jaccard__unbedingt": {
+      "n": 98,
+      "a_mittel": 0.2929,
+      "b_mittel": 0.2852,
+      "differenz": 0.0077,
+      "differenz_ki95": [
+        -0.0465,
+        0.0616
+      ],
+      "a_besser": 38,
+      "b_besser": 32,
+      "vorzeichentest_p": 0.5504,
+      "signifikant_005": false,
+      "hauptmass": true
+    },
+    "typen_jaccard__beidseitig_gueltig": {
+      "n": 56,
+      "a_mittel": 0.4058,
+      "b_mittel": 0.3797,
+      "differenz": 0.026,
+      "differenz_ki95": [
+        -0.0143,
+        0.0666
+      ],
+      "a_besser": 24,
+      "b_besser": 16,
+      "vorzeichentest_p": 0.2682,
+      "signifikant_005": false,
+      "hauptmass": false
+    },
+    "kanten_jaccard__unbedingt": {
+      "n": 98,
+      "a_mittel": 0.0283,
+      "b_mittel": 0.0364,
+      "differenz": -0.0081,
+      "differenz_ki95": [
+        -0.0246,
+        0.0067
+      ],
+      "a_besser": 25,
+      "b_besser": 23,
+      "vorzeichentest_p": 0.8854,
+      "signifikant_005": false,
+      "hauptmass": true
+    },
+    "kanten_jaccard__beidseitig_gueltig": {
+      "n": 56,
+      "a_mittel": 0.0435,
+      "b_mittel": 0.0492,
+      "differenz": -0.0057,
+      "differenz_ki95": [
+        -0.0324,
+        0.0177
+      ],
+      "a_besser": 17,
+      "b_besser": 12,
+      "vorzeichentest_p": 0.4583,
+      "signifikant_005": false,
+      "hauptmass": false
+    }
+  },
+  "urteil": {
+    "tests_gesamt": 11,
+    "davon_signifikant_005": 0,
+    "kleinstes_p": 0.2682,
+    "lesart": "Kein Test trennt die beiden Staende. Das heisst NICHT, dass sie gleich gut sind -- die Konfidenzintervalle zeigen, welche Unterschiede diese Stichprobe schlicht nicht entscheiden kann."
+  }
+}

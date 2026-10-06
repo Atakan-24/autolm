@@ -1,0 +1,65 @@
+{
+  "name": "stufe4-b8-kontrollierte-mutationen",
+  "datum": "2026-09-12",
+  "zweck": "Ablation gegen V3: weniger Mutanten, kontrollierte Mutationstiefe und mehr Instruktionsvarianten pro Original",
+  "vergleichsbasis": {
+    "name": "stufe4-v3",
+    "datensatz": "daten/workflow3",
+    "modell": {
+      "dim": 256,
+      "schichten": 6,
+      "koepfe": 4,
+      "block": 512,
+      "batch": 16,
+      "seed": 1,
+      "parameter": 6966784
+    },
+    "mutanten_je_vorlage": 20,
+    "instruktions_varianten_je_original": 3
+  },
+  "kandidat": {
+    "datensatz": "daten/workflow_b8",
+    "datensatz_befehl": [
+      "python", "workflow/baue_datensatz.py",
+      "--mutanten-je-vorlage", "8",
+      "--mutation-profil", "gestaffelt",
+      "--mutation-max-ops", "3",
+      "--varianten-je-original", "6",
+      "--out", "daten/workflow_b8"
+    ],
+    "invarianten": [
+      "Der 90/5/5-Split nach Vorlagen-ID und Textgruppe ist bitgleich zu V3.",
+      "Mutanten existieren nur im Trainingssplit.",
+      "Eine gestaffelte Mutante hat exakt eine, zwei oder drei erfolgreiche Operationen; jede Ausgabe besteht die lokalen Tore."
+    ],
+    "training_befehl": [
+      "python", "kern/trainiere.py",
+      "--daten", "daten/workflow_b8/train.bin",
+      "--meta", "daten/workflow_b8/meta.json",
+      "--val-daten", "daten/workflow_b8/val.bin",
+      "--checkpoint-ordner", "daten/workflow_b8/ckpt",
+      "--maske",
+      "--schritte", "2400",
+      "--log-alle", "50",
+      "--checkpoint-alle", "200",
+      "--dim", "256",
+      "--schichten", "6",
+      "--koepfe", "4",
+      "--block", "512",
+      "--batch", "16",
+      "--seed", "1"
+    ],
+    "holdout_befehl": [
+      "python", "workflow/erzeuge.py",
+      "--checkpoints", "daten/workflow_b8/ckpt",
+      "--test", "daten/workflow_b8/test.jsonl",
+      "--tokenizer", "daten/workflow_b8/tokenizer.pkl",
+      "--k", "4",
+      "--hoechstens-token", "768",
+      "--modell-name", "autolm-workflow-7M-b8-schritt2400",
+      "--out", "bewertung/ergebnisse/stufe4-b8-test-schritt2400.json"
+    ]
+  },
+  "entscheidungsregel": "B8 wird nur als besser dokumentiert, wenn die n=98-Holdout-Messung mindestens V3 bei Gueltigkeit@1 und Typen-Jaccard erreicht und die Validierungskurve nicht schlechter endet. Andernfalls bleibt V3 die Baseline; die B8-Ablation wird mit ihren negativen Ergebnissen versioniert.",
+  "vergleichswerkzeug": "python workflow/vergleiche_lauefe.py --basis <v3-verlauf.jsonl> --kandidat <b8-verlauf.jsonl> --out <vergleich.json>"
+}

@@ -1,0 +1,60 @@
+Geraet: cpu
+Aufbau: dim=256, 6 Schichten, 4 Koepfe, block=512, batch=16, Vokabular=4096
+Daten: 1,599,603 Token aus daten/workflow_b8/train.bin
+Maske: 1,051,874 von 1,599,603 Token zaehlen zum Verlust
+Ziel: 2,400 Schritte (~19,660,800 Token)
+Parameter: 6,966,784
+Kein Checkpoint gefunden -- Start bei Schritt 0
+  Schritt       0 | Verlust 8.4706 | Val 8.3865 | 3.424s/Schritt
+  Schritt      50 | Verlust 6.7579 | Val 6.7091 | 3.654s/Schritt
+  Schritt     100 | Verlust 6.4438 | Val 6.4962 | 3.663s/Schritt
+  Schritt     150 | Verlust 5.7192 | Val 5.9676 | 3.661s/Schritt
+  Schritt     200 | Verlust 5.4118 | Val 5.5846 | 3.665s/Schritt
+  Schritt     250 | Verlust 5.0407 | Val 5.3260 | 3.658s/Schritt
+  Schritt     300 | Verlust 4.8007 | Val 5.1434 | 3.658s/Schritt
+  Schritt     350 | Verlust 4.7509 | Val 5.0356 | 3.656s/Schritt
+  Schritt     400 | Verlust 4.9298 | Val 4.9693 | 3.658s/Schritt
+  Schritt     450 | Verlust 4.5014 | Val 4.9088 | 3.657s/Schritt
+  Schritt     500 | Verlust 4.4730 | Val 4.8429 | 3.656s/Schritt
+  Schritt     550 | Verlust 4.2609 | Val 4.8021 | 3.659s/Schritt
+  Schritt     600 | Verlust 4.0055 | Val 4.7703 | 3.659s/Schritt
+  Schritt     650 | Verlust 4.2529 | Val 4.7589 | 3.658s/Schritt
+  Schritt     700 | Verlust 4.0325 | Val 4.7154 | 3.657s/Schritt
+  Schritt     750 | Verlust 4.0189 | Val 4.6797 | 3.658s/Schritt
+  Schritt     800 | Verlust 4.0173 | Val 4.6866 | 3.658s/Schritt
+  Schritt     850 | Verlust 4.0628 | Val 4.6630 | 3.657s/Schritt
+  Schritt     900 | Verlust 4.0067 | Val 4.6553 | 3.657s/Schritt
+  Schritt     950 | Verlust 3.5451 | Val 4.6586 | 3.659s/Schritt
+  Schritt   1,000 | Verlust 3.3897 | Val 4.6320 | 3.659s/Schritt
+  Schritt   1,050 | Verlust 3.6651 | Val 4.6205 | 3.659s/Schritt
+  Schritt   1,100 | Verlust 3.7500 | Val 4.6425 | 3.659s/Schritt
+  Schritt   1,150 | Verlust 3.5933 | Val 4.5903 | 3.659s/Schritt
+  Schritt   1,200 | Verlust 3.4659 | Val 4.6101 | 3.659s/Schritt
+  Schritt   1,250 | Verlust 3.5611 | Val 4.6229 | 3.659s/Schritt
+  Schritt   1,300 | Verlust 3.2693 | Val 4.6429 | 3.660s/Schritt
+  Schritt   1,350 | Verlust 3.2118 | Val 4.6169 | 3.660s/Schritt
+  Schritt   1,400 | Verlust 3.3783 | Val 4.6348 | 3.659s/Schritt
+  Schritt   1,450 | Verlust 3.3224 | Val 4.6337 | 3.660s/Schritt
+  Schritt   1,500 | Verlust 3.2218 | Val 4.6632 | 3.660s/Schritt
+  Schritt   1,550 | Verlust 3.0449 | Val 4.6607 | 3.660s/Schritt
+  Schritt   1,600 | Verlust 3.0767 | Val 4.6627 | 3.660s/Schritt
+  Schritt   1,650 | Verlust 3.1780 | Val 4.7123 | 3.661s/Schritt
+  Schritt   1,700 | Verlust 3.1247 | Val 4.7210 | 3.661s/Schritt
+  Schritt   1,750 | Verlust 2.7776 | Val 4.7581 | 3.661s/Schritt
+  Schritt   1,800 | Verlust 2.8966 | Val 4.7593 | 3.661s/Schritt
+  Schritt   1,850 | Verlust 2.9304 | Val 4.8120 | 3.661s/Schritt
+  Schritt   1,900 | Verlust 2.8295 | Val 4.8405 | 3.661s/Schritt
+  Schritt   1,950 | Verlust 2.6815 | Val 4.8442 | 3.661s/Schritt
+  Schritt   2,000 | Verlust 2.7369 | Val 4.8784 | 3.662s/Schritt
+  Schritt   2,050 | Verlust 2.7648 | Val 4.8885 | 3.663s/Schritt
+  Schritt   2,100 | Verlust 2.5208 | Val 4.9292 | 3.663s/Schritt
+  Schritt   2,150 | Verlust 2.6845 | Val 4.9360 | 3.663s/Schritt
+  Schritt   2,200 | Verlust 2.6080 | Val 4.9991 | 3.663s/Schritt
+  Schritt   2,250 | Verlust 2.5248 | Val 5.0453 | 3.664s/Schritt
+  Schritt   2,300 | Verlust 2.2161 | Val 5.0561 | 3.664s/Schritt
+  Schritt   2,350 | Verlust 2.4098 | Val 5.1091 | 3.665s/Schritt
+
+Fertig. 2,400 Schritte in 8798s.
+
+Token-IDs der ersten erzeugten Sequenz (Dekodieren braucht den Tokenizer):
+[0, 109, 2447, 1278, 3401, 3449, 482, 1417, 1546, 802, 917, 1878, 2305, 3577, 797, 947, 2305, 1828, 1623, 402, 2904, 1396, 1762, 560, 1283, 615, 3671, 1241, 402, 3238, 1595, 1048, 802, 1546, 2513, 952, 957, 2480, 531, 1432, 51, 581, 526, 603, 1283, 846, 361, 615, 895, 737, 729, 962, 1122, 3929, 3657, 337, 969, 390, 1432, 52, 337, 3555, 745, 483, 810, 650, 390, 1222, 464, 2077, 390, 3555, 441, 729, 3480, 464, 3236, 478, 1086, 412, 1086, 2108, 412, 1086, 48, 1992, 464, 2617, 4095, 628, 1209, 1269, 1861, 412, 1086, 2873, 593, 4095, 441, 1086, 4095]

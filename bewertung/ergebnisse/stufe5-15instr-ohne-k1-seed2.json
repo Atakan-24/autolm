@@ -1,0 +1,352 @@
+{
+ "zusammenfassung": {
+  "modell": "autolm-workflow",
+  "checkpoint_schritt": 1850,
+  "parameter": 6966784,
+  "n": 15,
+  "k": 1,
+  "temperatur": 0.7,
+  "top_k": 40,
+  "seed": 2,
+  "hoechstens_token": 768,
+  "checkpoint_quelle": "ckpt_best.pt",
+  "checkpoints": "daten\\workflow3\\ckpt_bestrun",
+  "beschraenkt": false,
+  "eingriffe": 0,
+  "tor0_kurzschrift": 0.4,
+  "tor1_json": 0.4,
+  "tor2_struktur": 0.2,
+  "tor3_verbindungen": 0.4,
+  "gueltig_at_1": 0.2,
+  "gueltig_at_k": 0.2,
+  "abgebrochen": 0.0,
+  "typen_jaccard_mittel": null,
+  "kanten_jaccard_mittel": null,
+  "erfundene_typen": {
+   "n8n-nodes-base.awsIameaviate": 1,
+   "n8n-nodes-base.awsTransform": 1,
+   "n8n-nodes-base.localFile": 1,
+   "n8n-nodes-base.loPSAnalysis": 1
+  },
+  "dauer_s": 41
+ },
+ "einzel": [
+  {
+   "id": "i01",
+   "instruktion": "Wenn ein neuer Lead in einem Formular ankommt, warte 24 Stunden und schick dann eine Erinnerungsmail.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n13"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.webhook@1\nn8n-nodes-base.jet@1\nn8n-nodes-base.clickUp@1\nn8n-nodes-base.html@1.2\nn8n-nodes-base.if@2.2\n@n8n/n8n-nodes-langchain.googleGemini@1\nn8n-nodes-base.@1.1\nn8n-nodes-base.splitInBatches@3\nn8n-nodes-base.if@2.2\nn8n-nodes-base.set@3.4\nn8n-nodes-base.set@3.4\nn8n-nodes-base.httpRequest@4.2\nn10 > n11\nn10 >1 n12\nn13 >1 n11\nn18 >1 n3\nn8 > n10\nn8 >1 n14\nn12 >1 n13\nn13 >1 n8\nn10 >1 n1\nn12 >2 n4\nn1 > n4\nn3 > n4\nn8 > n10\nn8 > n18\nn13 >1 n10\nn12 >1 n3\nn13 >1 n10\nn12 >1 n7\nn13 >3 n2\nn12 > n18\nn16 ai_languageModel> n17",
+   "abgebrochen": false
+  },
+  {
+   "id": "i02",
+   "instruktion": "Wenn eine neue Zeile in einer Google-Sheets-Tabelle auftaucht, sende eine Slack-Nachricht ins Team-Kanal.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": true,
+   "tor1_json": true,
+   "tor2_struktur": false,
+   "tor3_verbindungen": true,
+   "gueltig": false,
+   "erfundene_typen": [
+    "n8n-nodes-base.awsIameaviate"
+   ],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 12,
+   "probleme": [
+    "Tor 2: Node 1 (awsIameaviate): unbekannter Node-Typ 'n8n-nodes-base.awsIameaviate' -- existiert nicht in n8n 2.25.6"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.awsIameaviate@1.2\n@n8n/n8n-nodes-langchain.openAi@1.8\nn8n-nodes-base.set@3.4\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.code@2\nn8n-nodes-base.switch@3.2\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.merge@3.2\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.wait@1.1\nn4 > n6\nn4 >1 n5\nn4 >1 n10\nn1 > n8\nn8 > n10\nn8 > n12\nn12 > n6\nn12 > n7\nn6 > n7\nn7 > n8\nn10 > n11\nn9 > n10",
+   "abgebrochen": false
+  },
+  {
+   "id": "i03",
+   "instruktion": "Jeden Montag um 9 Uhr: hole Daten von einer HTTP-API ab und speichere sie in Airtable.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n9"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.set@3.4\n@n8n/n8n-nodes-langchain.openAi@1.8\nn8n-nodes-base.splitOut@1\nn8n-nodes-base.microsoftSql@2.5\nn8n-nodes-base.googleSheets@4.5\n@n8n/n8n-nodes-langchain.openAi@1.8\n@n8n/n8n-nodes-langchain.openAi@1.8\nn8n-nodes-base.wait@1.1\nn5 > n1\nn2 > n7\nn6 > n3\nn5 > n6\nn5 >1 n7\nn4 > n5\nn7 > n8\nn9 > n10\nn10 > n11\nn9 > n10\nn6 > n7",
+   "abgebrochen": false
+  },
+  {
+   "id": "i04",
+   "instruktion": "Wenn eine Webhook-Anfrage reinkommt, prüfe ob ein Feld 'status' gleich 'urgent' ist, und wenn ja, schick eine E-Mail.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: unlesbare Zeile: 'n1158'"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.webhook@1\nn8n-nodes-base.code@2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.if@2.2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.webhook@2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.googleSheets@4.6\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.code@2\nn8n-nodes-base.switch@3.2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.webhook@2\nn8n-nodes-base.switch@3.2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.if@2.2\nn8n-nodes-base.if@2.2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.googleSheets@4.6\nn8n-nodes-base.code@2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.if@2.2\nn16 > n26\nn41 > n43\nn47 >1 n45\nn32 > n28\nn29 >2 n11\nn21 >3 n27\nn33 >4 n3545\nn34 >4 n35\nn16 >6 n357\nn44 >4 n5\nn30 > n39\nn1158\nn34 > n44\nn21 > n6\nn16 >1 n12\nn48 >3 n46\nn37 > n39\nn43 >1 n42\nn33 >1 n41\nn42 > n38\nn8 >1 n36\nn44 > n38\nn48 >2 n16\nn15 > n39\nn47 >3 n15\nn34 >3 n5\nn40 >1 n42\nn36 > n32\nn47 >4 n6\nn41 >4 n4\nn35 >5 n36\nn34 >2 n345434\nn39 >1454\nn50 >3 n41\nn34 >17 n5\nn44 >10\nn43 >14 n58\nn34 >12 n4\nn51 > n50\nn35 >17 n58\nn47 > n45\nn36 >15654\nn35 >1 n45\nn32 > n46\nn46 > n37\nn7 >2 n16\nn42 >3 n56148\nn43 >13 n5454\nn54 >8 n4\nn43 >1 n41\nn37 > n38\nn39 > n40\nn41 >1 n4544\nn43 > n32\nn44 > n45\nn43 >1 n45\nn44 > n75\nn44 >1 n44\nn47 > n105\nn58 >1 n64\nn54 > n56\nn47 > n48\nn51 > n50\nn22 > n39\nn46 > n47\nn85 > n71\nn36 > n31\nn43 > n34\nn52 > n53\nn43 > n44\nn51 > n53\nn43 > n52\nn55 > n654\nn48 > n49\nn39 > n38\nn38 > n37\nn34 > n84\nn48 > n47\nn43 >1 n41\nn46 > n44\nn40 > n31\nn22 > n39\nn66 > n20\nn39 > n41\nn30 > n20\nn33 >1 n554\nn56 > n57\nn26 > n46\nn54 > n54\nn40 > n47\nn26 > n19\nn48 > n49\nn21 > n29\nn54 >1 n54\nn43 > n32\nn49 > n40\nn26 > n55\nn65\nn58 > n23\nn55 > n55\nn56 ai_languageModel> n54\nn7 ai_languageModel> n44\nn34 ai_outputParser> n45\nn43 > n52\nn29 ai_languageModel> n44\nn21 ai_languageModel> n44\nn56 ai_languageModel> n63\nn54 ai_languageModel> n52\nn62 ai_languageModel> n64\nn55 ai_languageModel> n55\nn47 ai_outputParser> n42\nn55 ai_languageModel> n53\nn11 ai_outputParser> n18\nn44 ai_embedding> n65\nn55 ai_languageModel> n59\nn115\nn44 ai_languageModel> n54\nn43 ai_languageModel> n75\nn54 ai_languageModel> n114\nn60 ai_languageModel> n54",
+   "abgebrochen": false
+  },
+  {
+   "id": "i05",
+   "instruktion": "Wenn ein neuer Kontakt in HubSpot angelegt wird, füge ihn zu einer Mailchimp-Liste hinzu.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": true,
+   "tor1_json": true,
+   "tor2_struktur": false,
+   "tor3_verbindungen": true,
+   "gueltig": false,
+   "erfundene_typen": [
+    "n8n-nodes-base.awsTransform",
+    "n8n-nodes-base.localFile"
+   ],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 7,
+   "probleme": [
+    "Tor 2: Node 1 (awsTransform): unbekannter Node-Typ 'n8n-nodes-base.awsTransform' -- existiert nicht in n8n 2.25.6",
+    "Tor 2: Node 2 (localFile): unbekannter Node-Typ 'n8n-nodes-base.localFile' -- existiert nicht in n8n 2.25.6"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.googleTranslate@2\nn8n-nodes-base.awsTransform@1\nn8n-nodes-base.localFile@1\n@n8n/n8n-nodes-langchain.documentDefaultDataLoader@1\n@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter@1\nn8n-nodes-base.googleContacts@1\nn8n-nodes-base.set@3.4\nn1 > n4\nn1 > n5\nn5 > n2\nn1 > n3\nn2 > n1",
+   "abgebrochen": false
+  },
+  {
+   "id": "i06",
+   "instruktion": "Rufe stündlich eine HTTP-API ab, filtere Ergebnisse mit einem Code-Node und speichere sie in einer Google-Sheets-Tabelle.",
+   "versuche": 1,
+   "gueltig_at_1": true,
+   "gueltig_at_k": true,
+   "tor0_kurzschrift": true,
+   "tor1_json": true,
+   "tor2_struktur": true,
+   "tor3_verbindungen": true,
+   "gueltig": true,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 4,
+   "probleme": [],
+   "kurzschrift": "wf\nn8n-nodes-base.set@3.4\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.webhook@2\nn8n-nodes-base.set@3.4\nn3 > n1\nn2 > n3\nn3 > n1",
+   "abgebrochen": false
+  },
+  {
+   "id": "i07",
+   "instruktion": "Wenn eine Rechnung in Stripe bezahlt wird, aktualisiere den Status in Airtable und schick eine Bestätigungsmail.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n10"
+   ],
+   "kurzschrift": "wf\n@n8n/n8n-nodes-langchain.memoryManager@1.1\nn8n-nodes-base.oracleDatabaseCloudStorageTool@1\nn8n-nodes-base.googleBooksTool@1\nn8n-nodes-base.googleTranslateamsHueTool@1\nn8n-nodes-base.philipsHueTool@1\nn8n-nodes-base.philipsHueTool@1\nn8n-nodes-base.philipsHueTool@1\nn8n-nodes-base.philipsHueTool@1\nn8n-nodes-base.philipsHueTool@1\nn2 ai_tool> n1\nn5 ai_tool> n1\nn7 ai_tool> n1\nn8 ai_tool> n1\nn10 ai_tool> n1\nn3 ai_tool> n1\nn7 ai_tool> n1\nn2 ai_tool> n1\nn4 ai_tool> n1\nn5 ai_tool> n1\nn6 ai_tool> n1",
+   "abgebrochen": false
+  },
+  {
+   "id": "i08",
+   "instruktion": "Manuell gestartet: lies eine CSV-Datei ein, wandle jede Zeile in einen Airtable-Datensatz um.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n27"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.webhook@2\nn8n-nodes-base.if@2.2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.if@2.2\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.if@2.2\nn8n-nodes-base.webhook@2\nn8n-nodes-base.microsoftTeams@2\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.code@2\nn8n-nodes-base.switch@3.2\nn8n-nodes-base.set@3.4\nn8n-nodes-base.set@3.4\nn8n-nodes-base.set@3.4\nn8n-nodes-base.set@3.4\nn8n-nodes-base.respondToWebhook@1.3\nn8n-nodes-base.if@2.2\nn8n-nodes-base.noOp@1\nn11 >1 n12\nn1 > n27\nn6 > n1\nn6 >1 n4\nn6 >1 n10\nn2 > n1\nn2 >1 n16\nn3 >1 n12\nn9 > n10\nn12 > n13\nn1 > n2\nn6 > n7\nn10 > n11\nn8 > n9",
+   "abgebrochen": false
+  },
+  {
+   "id": "i09",
+   "instruktion": "Wenn eine neue GitHub-Issue erstellt wird, poste eine Nachricht in einem Slack-Kanal.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n12"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.github@1\nn8n-nodes-base.github@1\nn8n-nodes-base.github@1\nn8n-nodes-base.github@1\nn8n-nodes-base.github@1\nn8n-nodes-base.github@1\nn8n-nodes-base.github@1\nn8n-nodes-base.linear@1\nn8n-nodes-base.github@1\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.code@2\nn12 > n5\nn12 >1 n13\nn6 > n7\nn2 > n4\nn5 > n9\nn5 > n10\nn5 >1 n3\nn1 > n4\nn2 > n8\nn7 > n3\nn3 > n11\nn6 > n11\nn9 > n1\nn1 > n11\nn3 > n4",
+   "abgebrochen": false
+  },
+  {
+   "id": "i10",
+   "instruktion": "Jeden Tag um Mitternacht: exportiere Daten aus Airtable und schick sie per E-Mail als Anhang.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n3"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.scheduleTrigger@1.2\nn8n-nodes-base.set@3.4\nn1 > n2\nn2 > n3",
+   "abgebrochen": false
+  },
+  {
+   "id": "i11",
+   "instruktion": "Wenn ein Formular abgeschickt wird, speichere die Antwort in Google Sheets und schick eine Slack-Benachrichtigung.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n6"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.formTrigger@2.2\nn8n-nodes-base.if@2.2\nn8n-nodes-base.merge@3.1\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.code@2\nn1 > n6\nn2 > n6\nn2 > n7\nn2 > n5\nn6 > n1\nn1 > n4\nn4 > n5",
+   "abgebrochen": false
+  },
+  {
+   "id": "i12",
+   "instruktion": "Wenn eine Mail mit dem Betreff 'Support' ankommt, lege automatisch ein Ticket in Trello an.",
+   "versuche": 1,
+   "gueltig_at_1": true,
+   "gueltig_at_k": true,
+   "tor0_kurzschrift": true,
+   "tor1_json": true,
+   "tor2_struktur": true,
+   "tor3_verbindungen": true,
+   "gueltig": true,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 5,
+   "probleme": [],
+   "kurzschrift": "wf\nn8n-nodes-base.webhook@2\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.webhook@2\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.set@3.4\nn5 > n3\nn4 > n2\nn3 > n2\nn3 >1 n2\nn1 > n5",
+   "abgebrochen": false
+  },
+  {
+   "id": "i13",
+   "instruktion": "Wenn ein neuer Kalendereintrag in Google Calendar erstellt wird, sende eine Erinnerungsmail einen Tag vorher.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": true,
+   "tor1_json": true,
+   "tor2_struktur": false,
+   "tor3_verbindungen": true,
+   "gueltig": false,
+   "erfundene_typen": [
+    "n8n-nodes-base.loPSAnalysis"
+   ],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 9,
+   "probleme": [
+    "Tor 2: Node 0 (loPSAnalysis): unbekannter Node-Typ 'n8n-nodes-base.loPSAnalysis' -- existiert nicht in n8n 2.25.6"
+   ],
+   "kurzschrift": "wf\nn8n-nodes-base.loPSAnalysis@1\nn8n-nodes-base.oracleDatabase@1\nn8n-nodes-base.set@3.4\n@n8n/n8n-nodes-langchain.openAi@1\nn8n-nodes-base.oracleDatabase@1\nn8n-nodes-base.lemlistTool@2\nn8n-nodes-base.discordTool@2\n@n8n/n8n-nodes-langchain.mcpTrigger@1\nn8n-nodes-base.humanticAiTool@1\nn3 ai_tool> n1\nn2 ai_tool> n1\nn4 ai_tool> n1\nn6 ai_tool> n1\nn5 ai_tool> n1\nn5 ai_tool> n1\nn7 ai_tool> n1\nn3 ai_tool> n1\nn2 ai_tool> n1",
+   "abgebrochen": false
+  },
+  {
+   "id": "i14",
+   "instruktion": "Ruft alle 15 Minuten eine HTTP-API ab und schickt bei einer Statusänderung eine Slack-Nachricht.",
+   "versuche": 1,
+   "gueltig_at_1": false,
+   "gueltig_at_k": false,
+   "tor0_kurzschrift": false,
+   "tor1_json": false,
+   "tor2_struktur": false,
+   "tor3_verbindungen": false,
+   "gueltig": false,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 0,
+   "probleme": [
+    "Tor 0: Kante nutzt unbekannten Knoten n15"
+   ],
+   "kurzschrift": "wf\n@n8n/n8n-nodes-langchain.mcpTrigger@1\nn8n-nodes-base.salesmoneeminderTool@1\nn8n-nodes-base.beAdmoneAdmySql@2.5\nn8n-nodes-base.googleSheets@4.6\n@n8n/n8n-nodes-langchain.lmChatOpenRouter@1\nn8n-nodes-base.if@2.2\n@n8n/n8n-nodes-langchain.chatTrigger@1.1\nn8n-nodes-base.set@3.4\n@n8n/n8n-nodes-langchain.agent@2\nn8n-nodes-base.if@2.2@1.1\nn9 ai_languageModel> n1\nn8 ai_tool> n15\nn11 ai_memory> n15\nn10 ai_tool> n15\nn11 ai_tool> n15\nn11 ai_tool> n15\nn14 ai_tool> n15\nn13 ai_tool> n15\nn5 ai_tool> n15\nn8 ai_tool> n15\nn2 ai_tool> n15\nn13 ai_tool> n15\nn5 ai_tool> n15\nn19 ai_tool> n15\nn19 ai_tool> n15\nn11 ai_tool> n15\nn14 ai_tool> n15\nn6 ai_tool> n15\nn8 ai_tool> n15",
+   "abgebrochen": false
+  },
+  {
+   "id": "i15",
+   "instruktion": "Wenn ein neuer Eintrag in Airtable erstellt wird, sende die Daten per HTTP-Request an ein externes System.",
+   "versuche": 1,
+   "gueltig_at_1": true,
+   "gueltig_at_k": true,
+   "tor0_kurzschrift": true,
+   "tor1_json": true,
+   "tor2_struktur": true,
+   "tor3_verbindungen": true,
+   "gueltig": true,
+   "erfundene_typen": [],
+   "typen_jaccard": null,
+   "kanten_jaccard": null,
+   "knoten": 3,
+   "probleme": [],
+   "kurzschrift": "wf\nn8n-nodes-base.httpRequest@4.2\nn8n-nodes-base.webhook@2\nn8n-nodes-base.httpRequest@4.2\nn1 > n2",
+   "abgebrochen": false
+  }
+ ]
+}

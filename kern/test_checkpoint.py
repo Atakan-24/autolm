@@ -210,11 +210,66 @@ def test_leerer_start_ohne_checkpoint():
     _aufraeumen()
 
 
+
+def test_bestes_checkpoint():
+    """
+    Best-Val-Checkpoint: speichere_bestes() haelt den NIEDRIGSTEN Val-Verlust
+    in ckpt_best.pt fest und laesst sich schlechtere Werte NICHT unterschieben.
+    Deckt genau die Luecke, an der die zwei Stufe-4-Laeufe ihren besten Stand
+    (Schritt ~1.150/1.850) verloren, weil nur der Endstand (2.400) uebrig blieb.
+    """
+    import torch  # lokal -- die anderen Tests laufen als Subprozess
+    sys.path.insert(0, str(HIER))
+    from modell import MiniGPT
+    from checkpoint import Checkpointer
+
+    ordner = HIER / "_test_best_lauf"
+    if ordner.exists():
+        shutil.rmtree(ordner)
+    torch.manual_seed(0)
+    modell = MiniGPT(64, dim=32, koepfe=2, schichten=2, block=16)
+    opt = torch.optim.AdamW(modell.parameters(), lr=1e-3)
+    ckpt = Checkpointer(ordner)
+
+    # Val faellt bis Schritt 30, steigt dann wieder (klassische Ueberanpassung).
+    verlaeufe = [(10, 4.0), (20, 3.2), (30, 2.9), (40, 3.5), (50, 3.8)]
+    geschrieben = []
+    for schritt, vv in verlaeufe:
+        neu = ckpt.speichere_bestes(modell, opt, schritt, schritt * 16, vv)
+        geschrieben.append(neu)
+
+    assert geschrieben == [True, True, True, False, False], (
+        f"Best haette nur bei fallendem Val schreiben duerfen, war: {geschrieben}")
+    assert (ordner / "ckpt_best.pt").exists(), "ckpt_best.pt fehlt"
+    assert abs(ckpt.bester_val() - 2.9) < 1e-9, f"bester_val falsch: {ckpt.bester_val()}"
+
+    # Frisches Modell laden -> Best-Schritt und Best-Val kommen zurueck.
+    modell2 = MiniGPT(64, dim=32, koepfe=2, schichten=2, block=16)
+    schritt, bval = ckpt.lade_bestes(modell2)
+    assert schritt == 30, f"Best-Schritt falsch: {schritt}"
+    assert abs(bval - 2.9) < 1e-9, f"Best-Val falsch: {bval}"
+
+    # Gewichte wirklich uebernommen (nicht die Zufallsinitialisierung von modell2).
+    p1 = next(modell.parameters())
+    p2 = next(modell2.parameters())
+    assert torch.allclose(p1, p2), "lade_bestes hat die Gewichte nicht gesetzt"
+
+    # Die rotierenden Slots bleiben unberuehrt -- Best ist eine eigene Datei.
+    leer = Checkpointer(ordner).lade_neuesten(
+        MiniGPT(64, dim=32, koepfe=2, schichten=2, block=16),
+        torch.optim.AdamW(modell2.parameters()))
+    assert leer == (0, 0), f"Best-Speichern darf keinen rotierenden Slot anlegen: {leer}"
+
+    shutil.rmtree(ordner)
+    print("  Best-Val-Checkpoint (nur bei Verbesserung, laedt korrekt): OK")
+
+
 if __name__ == "__main__":
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     fehler = 0
     for name, fn in [("test_leerer_start_ohne_checkpoint", test_leerer_start_ohne_checkpoint),
+                      ("test_bestes_checkpoint", test_bestes_checkpoint),
                       ("test_kill_und_resume", test_kill_und_resume)]:
         try:
             fn()
