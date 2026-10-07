@@ -1,5 +1,10 @@
 # AutoLM
 
+A language-model engineering project built from scratch: a transformer, tokenizer, training pipeline and an evaluation harness for n8n workflow generation.
+
+**Portfolio focus:** model implementation, training experiments, measurable workflow validation and documented failure analysis. This is experimental work; the detailed German documentation below records completed stages, measured results and remaining limitations.
+
+
 **Ein Sprachmodell von Grund auf — von zufälligen Gewichten bis zu einem
 Modell, das gegen GPT-4 und Claude auf einer maschinell prüfbaren Aufgabe
 gemessen wird.**
