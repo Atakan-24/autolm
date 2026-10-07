@@ -1,30 +1,8 @@
-"""
-DAS MODELL -- herausgeloest aus schritte/04_transformer.py.
+"""Decoder-only Transformer fuer Training und Experimente.
 
-WARUM HERAUSGELOEST: ab Schritt 5 brauchen Pretraining, Ablation,
-Skalierungskurve und Interpretierbarkeit dasselbe Modell. Vier Kopien
-davon liefen garantiert auseinander -- und dann misst die Ablation ein
-anderes Modell als das, was trainiert wurde.
-
-`schritte/04_transformer.py` bleibt als LEHRDATEI unveraendert stehen:
-dort ist jede Zeile erklaert. Hier steht die Fassung, mit der gearbeitet
-wird.
-
-ZWEI ATTENTION-PFADE, EIN ERGEBNIS
-----------------------------------
-    MehrKoepfe         Lehrpfad -- eine Python-Schleife ueber die Koepfe,
-                       je Kopf eigene Linear-Schichten. Gut lesbar,
-                       langsam: jeder Kopf ist ein eigener Kernel-Aufruf.
-
-    MehrKoepfeSchnell  Ein einziges fusioniertes QKV-Linear plus
-                       F.scaled_dot_product_attention. Dasselbe Ergebnis,
-                       deutlich weniger Aufrufe.
-
-`test_qkv_gleichheit.py` weist nach, dass beide bei gleichen Gewichten auf
-1e-5 dasselbe liefern. OHNE DIESEN NACHWEIS waere der schnelle Pfad
-wertlos: eine Beschleunigung, die nebenbei das Ergebnis aendert, ist keine
-Beschleunigung, sondern ein Fehler mit Stoppuhr.
-"""
+MehrKoepfe ist der explizite Referenzpfad. MehrKoepfeSchnell nutzt fusionierte
+QKV-Projektion und PyTorch SDPA. test_qkv_gleichheit.py vergleicht beide bei
+gleichen Gewichten. Die Lehrdateien unter schritte/ bleiben getrennt."""
 
 import torch
 import torch.nn as nn
@@ -58,6 +36,8 @@ class MehrKoepfe(nn.Module):
 
     def __init__(self, anzahl, dim, block):
         super().__init__()
+        if anzahl <= 0 or dim % anzahl != 0:
+            raise ValueError('dim muss durch eine positive Kopfzahl teilbar sein')
         self.anzahl = anzahl
         self.dim = dim
         self.koepfe = nn.ModuleList([Kopf(dim, dim // anzahl, block) for _ in range(anzahl)])
@@ -93,7 +73,8 @@ class MehrKoepfeSchnell(nn.Module):
 
     def __init__(self, anzahl, dim, block):
         super().__init__()
-        assert dim % anzahl == 0, "dim muss durch die Kopfzahl teilbar sein"
+        if anzahl <= 0 or dim % anzahl != 0:
+            raise ValueError('dim muss durch eine positive Kopfzahl teilbar sein')
         self.anzahl = anzahl
         self.dim = dim
         self.qkv = nn.Linear(dim, 3 * dim, bias=False)
@@ -232,6 +213,10 @@ class MiniGPT(nn.Module):
 
     @torch.no_grad()
     def erzeuge(self, idx, anzahl, temperatur=0.8, top_k=None):
+        if temperatur <= 0 or not torch.isfinite(torch.tensor(temperatur)):
+            raise ValueError('temperatur muss positiv und endlich sein')
+        if top_k is not None and (type(top_k) is not int or top_k <= 0):
+            raise ValueError('top_k muss eine positive ganze Zahl sein')
         for _ in range(anzahl):
             logits, _ = self(idx[:, -self.block:])
             logits = logits[:, -1, :] / temperatur

@@ -1,0 +1,4 @@
+# CPU tests cover model/tokenizer equivalence, resume integrity and workflow validation.
+[tool.pytest.ini_options]
+testpaths = ["kern", "workflow"]
+pythonpath = [".", "kern", "bewertung"]
