@@ -1,7 +1,17 @@
-"""Kill-und-Resume-Test mit einem kleinen CPU-Training.
+"""
+DER KILL-UND-RESUME-TEST.
 
-Prueft Wiederaufnahme und lueckenlose Fortschrittslogs nach einem Prozessabbruch.
-Exakte Gewichts-/RNG-Kontinuitaet prueft test_checkpoint_integrity.py separat."""
+Startet ein winziges Training, TOETET DEN PROZESS MITTEN IM LAUF (nicht
+simuliert -- ein echter os.kill auf einen echten Subprozess), startet neu
+und prueft: setzt die Loss-Kurve fort, oder springt sie?
+
+Ein Springen waere der Beweis, dass Datenposition oder Optimizer-State
+NICHT wirklich wiederhergestellt wurden -- selbst wenn "es laeuft danach
+weiter" stimmt, waere das Training dann nicht dasselbe, das ohne Abbruch
+gelaufen waere.
+
+    python kern/test_checkpoint.py
+"""
 
 import json
 import os
@@ -51,7 +61,7 @@ for i in range(schritt, 200):
     verlust_log.append(verlust.item())
 
     if i % 10 == 0:
-        ckpt.speichere(modell, opt, i + 1, pos, verlust_log)
+        ckpt.speichere(modell, opt, i, pos, verlust_log)
         print(f"SCHRITT {i} VERLUST {verlust.item():.6f} POS {pos}", flush=True)
 
     time.sleep(0.05)  # macht das Zeitfenster fuer den Kill zuverlaessig
@@ -141,7 +151,7 @@ def test_kill_und_resume():
             "nicht gefunden oder nicht gelesen. Das waere kein Resume, "
             "sondern ein Neustart."
         )
-        assert start_schritt <= letzter_schritt_vor_kill + 1, (
+        assert start_schritt <= letzter_schritt_vor_kill, (
             f"Resume startet NACH dem letzten gesicherten Schritt "
             f"({start_schritt} > {letzter_schritt_vor_kill}) -- das kann "
             f"nur bedeuten, dass ungesicherter Fortschritt erfunden wurde."
