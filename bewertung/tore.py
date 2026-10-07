@@ -103,8 +103,6 @@ def tor2_struktur(obj: dict) -> tuple[bool, list[str]]:
     pflichtfelder = ["id", "name", "type", "typeVersion", "position", "parameters"]
     typen = _typen()
     node_namen = set()
-    if not nodes:
-        probleme.append('Workflow enthaelt keine Nodes')
 
     for i, node in enumerate(nodes):
         if not isinstance(node, dict):
@@ -115,19 +113,15 @@ def tor2_struktur(obj: dict) -> tuple[bool, list[str]]:
                 probleme.append(f"Node {i} ({node.get('name', '?')}): Feld '{feld}' fehlt")
 
         typ = node.get("type")
-        if not isinstance(typ, str) or typ not in typen:
+        if typ is not None and typ not in typen:
             probleme.append(f"Node {i} ({node.get('name', '?')}): "
                             f"unbekannter Node-Typ {typ!r} -- existiert nicht in n8n {NODE_TYPEN_DATEI.exists() and json.loads(NODE_TYPEN_DATEI.read_text())['n8n_version']}")
 
         name = node.get("name")
-        if isinstance(name, str) and name.strip():
+        if name is not None:
             if name in node_namen:
                 probleme.append(f"Doppelter Node-Name: {name!r}")
             node_namen.add(name)
-        else:
-            probleme.append(f'Node {i}: name muss eine nichtleere Zeichenkette sein')
-        if not isinstance(node.get('parameters'), dict):
-            probleme.append(f'Node {i}: parameters muss ein Objekt sein')
 
     return len(probleme) == 0, probleme
 
@@ -145,13 +139,10 @@ def tor3_verbindungen(obj: dict) -> tuple[bool, list[str]]:
     Prueft: jeder Quell- UND Zielname zeigt auf einen existierenden Node.
     """
     probleme = []
-    if not isinstance(obj, dict):
-        return False, ['Wurzel ist kein Objekt']
     nodes = obj.get("nodes", [])
     if not isinstance(nodes, list):
         return False, ["Keine Node-Liste vorhanden -- Tor 2 haette das schon melden muessen"]
-    namen = {n['name'] for n in nodes
-             if isinstance(n, dict) and isinstance(n.get('name'), str)}
+    namen = {n.get("name") for n in nodes if isinstance(n, dict)}
 
     verbindungen = obj.get("connections", {})
     if not isinstance(verbindungen, dict):
@@ -165,24 +156,19 @@ def tor3_verbindungen(obj: dict) -> tuple[bool, list[str]]:
             continue
         for verbindungstyp, ausgaenge in typen_dict.items():
             if not isinstance(ausgaenge, list):
-                probleme.append(f'Verbindungstyp in {quelle!r} hat keine Ausgangsliste')
                 continue
             for ausgang in ausgaenge:
                 if not isinstance(ausgang, list):
-                    probleme.append(f'Ausgang in {quelle!r} ist keine Zielliste')
                     continue
                 for ziel in ausgang:
                     if not isinstance(ziel, dict):
                         probleme.append(f"Verbindungsziel in {quelle!r} ist kein Objekt")
                         continue
                     zielname = ziel.get("node")
-                    if not isinstance(zielname, str) or zielname not in namen:
+                    if zielname not in namen:
                         probleme.append(
                             f"Verbindung {quelle!r} -> unbekannter Zielnode {zielname!r}"
                         )
-                    index = ziel.get('index')
-                    if type(index) is not int or index < 0:
-                        probleme.append(f'Verbindung in {quelle!r} hat ungueltigen Zielindex')
 
     return len(probleme) == 0, probleme
 

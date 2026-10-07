@@ -192,27 +192,23 @@ def bewerte_stapel(kandidaten: list[dict]) -> dict:
 
 def bootstrap_konfidenzintervall(erfolge: int, n: int, wiederholungen: int = 10000,
                                   seed: int = 0) -> tuple[float, float]:
-    """Compatibility name; now uses Wilson, without resampling or RNG changes.
-
-    A percentile bootstrap gives [1, 1] for 15/15 successes. That is not a
-    useful estimate of uncertainty. The historical optional arguments are
-    retained for callers; new code should call wilson_konfidenzintervall.
     """
-    return wilson_konfidenzintervall(erfolge, n)
-
-
-def wilson_konfidenzintervall(erfolge: int, n: int) -> tuple[float, float]:
-    """95% binomial Wilson interval; not a claim about unseen task families."""
-    import math
-
-    if type(n) is not int or type(erfolge) is not int or n <= 0 or not 0 <= erfolge <= n:
-        raise ValueError('Erfolge und Stichprobengroesse sind ungueltig')
-    z = 1.959963984540054
-    p = erfolge / n
-    denominator = 1 + z * z / n
-    centre = (p + z * z / (2 * n)) / denominator
-    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / denominator
-    return max(0.0, centre - half), min(1.0, centre + half)
+    95-%-Bootstrap-Konfidenzintervall auf einer Quote -- dieselbe Methodik
+    wie tgcrm/scripts/ml/baseline.py. Bei kleinem n (z.B. 20 Testkandidaten)
+    ist eine nackte Prozentzahl irrefuehrend praezise; das Intervall zeigt,
+    wie viel Unsicherheit tatsaechlich drinsteckt.
+    """
+    import random
+    random.seed(seed)
+    proben = [1] * erfolge + [0] * (n - erfolge)
+    quoten = []
+    for _ in range(wiederholungen):
+        stich = [random.choice(proben) for _ in range(n)]
+        quoten.append(sum(stich) / n)
+    quoten.sort()
+    unten = quoten[int(0.025 * wiederholungen)]
+    oben = quoten[int(0.975 * wiederholungen)]
+    return unten, oben
 
 
 def main():
@@ -236,7 +232,7 @@ def main():
     print("-" * 95)
     for modell, z in ergebnis["je_modell"].items():
         erfolge = round(z["gueltigkeitsquote_alle_vier"] * z["n"])
-        unten, oben = wilson_konfidenzintervall(erfolge, z["n"])
+        unten, oben = bootstrap_konfidenzintervall(erfolge, z["n"])
         print(f"{modell:<20} | {z['n']:>4} | {z['tor1_json_quote']*100:>5.0f}% | "
               f"{z['tor2_struktur_quote']*100:>5.0f}% | {z['tor3_verbindungen_quote']*100:>5.0f}% | "
               f"{z['tor4_import_quote']*100:>5.0f}% | {z['gueltigkeitsquote_alle_vier']*100:>7.0f}% | "
