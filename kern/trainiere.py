@@ -193,7 +193,8 @@ def main():
             verlauf.flush()
 
         if schritt % args.checkpoint_alle == 0 and schritt > start_schritt:
-            ckpt.speichere(modell, optimierer, schritt, position, verlust_log)
+            # Resume starts at the next update; the current update is complete.
+            ckpt.speichere(modell, optimierer, schritt + 1, position, verlust_log)
             verlust_log = []
 
     ckpt.speichere(modell, optimierer, schritte, position, verlust_log or [0.0])

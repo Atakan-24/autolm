@@ -1,36 +1,9 @@
-"""
-ABSTURZSICHERES CHECKPOINTING.
+"""Checkpoint-Speicherung mit zwei rotierenden Slots.
 
-Der Teil, der ueber Erfolg oder Totalverlust entscheidet. Colab-Sitzungen
-brechen ohne Vorwarnung ab (Zeitlimit, Verbindungsabbruch, Kontingent
-erschoepft). Ohne diese Datei waere ein 3-Stunden-Trainingslauf beim
-Abbruch in Minute 179 komplett verloren.
-
-VIER ENTSCHEIDUNGEN, JEDE MIT EINEM ECHTEN FEHLERFALL DAHINTER:
-
-1. ATOMAR SCHREIBEN (temp-Datei + os.replace), NIE IN-PLACE.
-   Ein Kill mitten im torch.save() liesse eine halb geschriebene, kaputte
-   Datei zurueck -- und genau die waere dann der EINZIGE Checkpoint.
-
-2. ZWEI ROTIERENDE SLOTS statt einem.
-   os.replace() ist auf dem LOKALEN Dateisystem atomar. Auf Google Drive
-   (FUSE-Schicht, wie Colab es einhaengt) gilt diese Garantie NICHT mehr
-   zwingend. Mit zwei Slots ueberlebt mindestens einer jeden denkbaren
-   Fehlschlag mitten im Schreiben.
-
-3. OPTIMIZER-STATE, RNG-ZUSTAENDE UND DATENPOSITION gehoeren mit in den
-   Checkpoint, nicht nur die Modellgewichte. Ohne die Datenposition faengt
-   ein Resume wieder bei Token 0 an -- das Training liefe nicht laenger,
-   es liefe im Kreis. AdamW braucht seine Momente, sonst beginnt jede
-   Stellschraube nach dem Resume wieder bei "erster Schritt".
-
-4. PRUEFSUMME MITSPEICHERN. Eine Datei, die vollstaendig geschrieben wurde,
-   aber Bitfehler beim Uebertragen zu/von Drive hat, faellt sonst erst beim
-   Laden auf -- oder gar nicht, und das Training liefe mit stillschweigend
-   kaputten Gewichten weiter.
-
-    python kern/test_checkpoint.py    -- Kill-und-Resume-Test
-"""
+Modell, Optimierer, CPU-Zufallszustaende und Datenposition werden gemeinsam
+gespeichert. Temp-Dateien ersetzen bestehende Dateien; Pruefsummen erlauben
+verifizierten Rueckfall. Beschaedigte Metadaten bleiben ein Fehler.
+Nur eigene, vertrauenswuerdige Checkpoints laden: torch.load nutzt Pickle."""
 
 import hashlib
 import json
@@ -83,10 +56,11 @@ class Checkpointer:
         meta["schritt"] = schritt
         meta["datenposition"] = datenposition
         meta["pruefsumme"] = pruefsumme
+        meta.setdefault("slot_pruefsummen", {})[str(naechster_slot)] = pruefsumme
         meta["zeit"] = inhalt["zeit"]
         self._speichere_meta(meta)
 
-        if verlust_log is not None:
+        if verlust_log:
             with open(self.ordner / f"{self.praefix}_verlust.jsonl", "a", encoding="utf8") as f:
                 f.write(json.dumps({"schritt": schritt, "verlust": verlust_log[-1]}) + "\n")
 
@@ -100,27 +74,27 @@ class Checkpointer:
         """
         meta = self._lade_meta()
         slot = meta.get("guter_slot")
-        if slot is None:
+        if not meta:
             return 0, 0
-
-        pfad = self._slot_pfad(slot)
-        if not pfad.exists():
-            return 0, 0
-
-        # Pruefsumme VOR dem Laden pruefen -- ein Bitfehler soll nicht erst
-        # als kryptischer torch.load-Fehler auffallen, sondern klar benannt
-        # sein, mit der Moeglichkeit, auf den anderen Slot auszuweichen.
-        if self._pruefsumme(pfad) != meta.get("pruefsumme"):
-            anderer = self._slot_pfad(1 - slot)
-            if anderer.exists():
-                print(f"WARNUNG: Checkpoint in Slot {slot} hat falsche Pruefsumme "
-                      f"-- weiche auf Slot {1 - slot} aus.")
-                pfad = anderer
-            else:
-                raise RuntimeError(
-                    f"Checkpoint {pfad} ist beschaedigt (Pruefsumme stimmt nicht) "
-                    f"und es gibt keinen zweiten Slot zum Ausweichen."
-                )
+        if type(slot) is not int or slot not in (0, 1):
+            raise RuntimeError('Checkpoint-Metadaten enthalten keinen gueltigen Slot')
+        checksums = meta.get('slot_pruefsummen', {})
+        if not isinstance(checksums, dict):
+            raise RuntimeError('Checkpoint-Pruefsummen sind beschaedigt')
+        # Legacy metadata verifies only the latest slot. Never deserialize
+        # an unchecked fallback just because it exists.
+        checksums = {str(slot): meta.get('pruefsumme'), **checksums}
+        pfad = None
+        for kandidat in (slot, 1 - slot):
+            datei = self._slot_pfad(kandidat)
+            expected = checksums.get(str(kandidat))
+            if datei.exists() and expected and self._pruefsumme(datei) == expected:
+                pfad = datei
+                if kandidat != slot:
+                    print(f'WARNUNG: verwende verifizierten Ersatz-Slot {kandidat}')
+                break
+        if pfad is None:
+            raise RuntimeError('Kein Checkpoint mit gueltiger Pruefsumme verfuegbar')
 
         # weights_only=False: seit PyTorch 2.6 ist die Vorgabe True, was das
         # Laden von numpy-RNG-Zustaenden blockiert (Sicherheitsmassnahme
@@ -148,7 +122,15 @@ class Checkpointer:
 
     def _lade_meta(self) -> dict:
         if self.meta_datei.exists():
-            return json.loads(self.meta_datei.read_text(encoding="utf8"))
+            try:
+                meta = json.loads(self.meta_datei.read_text(encoding="utf8"))
+            except (OSError, ValueError) as exc:
+                raise RuntimeError('Checkpoint-Metadaten sind nicht lesbar') from exc
+            if not isinstance(meta, dict) or not meta:
+                raise RuntimeError('Checkpoint-Metadaten sind kein gueltiges Objekt')
+            return meta
+        if any(self._slot_pfad(i).exists() for i in (0, 1)):
+            raise RuntimeError('Checkpoint-Dateien vorhanden, aber Metadaten fehlen')
         return {}
 
     def _speichere_meta(self, meta: dict):
